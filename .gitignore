@@ -1,3 +1,6 @@
+dont_track_on_git
+staff/tmp
+
 *.rbc
 capybara-*.html
 .rspec
