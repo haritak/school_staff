@@ -1,5 +1,6 @@
 dont_track_on_git
 staff/tmp
+**/*swp
 
 *.rbc
 capybara-*.html
