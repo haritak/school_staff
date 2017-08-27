@@ -25,5 +25,10 @@
   <%= @lesson.school_grade_specialty.description %>
 </p>
 
+<p>
+  <strong>Reference:</strong>
+  <%= @lesson.reference %>
+</p>
+
 <%= link_to 'Edit', edit_lesson_path(@lesson) %> |
 <%= link_to 'Back', lessons_path %>

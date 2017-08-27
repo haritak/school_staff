@@ -40,6 +40,11 @@
     include_blank: false, prompt:true %>
   </div>
 
+  <div class="field">
+    <%= form.label :reference %>
+    <%= form.text_field :reference, id: :lesson_reference %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
