@@ -1,0 +1,2 @@
+module LessonAssignmentsHelper
+end

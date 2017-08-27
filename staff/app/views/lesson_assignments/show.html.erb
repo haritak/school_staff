@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Lesson:</strong>
+  <%= @lesson_assignment.lesson %>
+</p>
+
+<p>
+  <strong>Specialty:</strong>
+  <%= @lesson_assignment.specialty %>
+</p>
+
+<p>
+  <strong>Priority:</strong>
+  <%= @lesson_assignment.priority %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @lesson_assignment.reference %>
+</p>
+
+<%= link_to 'Edit', edit_lesson_assignment_path(@lesson_assignment) %> |
+<%= link_to 'Back', lesson_assignments_path %>

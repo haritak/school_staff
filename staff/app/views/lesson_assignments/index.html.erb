@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Lesson Assignments</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Lesson</th>
+      <th>Specialty</th>
+      <th>Priority</th>
+      <th>Reference</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lesson_assignments.each do |lesson_assignment| %>
+      <tr>
+        <td><%= lesson_assignment.lesson %></td>
+        <td><%= lesson_assignment.specialty %></td>
+        <td><%= lesson_assignment.priority %></td>
+        <td><%= lesson_assignment.reference %></td>
+        <td><%= link_to 'Show', lesson_assignment %></td>
+        <td><%= link_to 'Edit', edit_lesson_assignment_path(lesson_assignment) %></td>
+        <td><%= link_to 'Destroy', lesson_assignment, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Lesson Assignment', new_lesson_assignment_path %>

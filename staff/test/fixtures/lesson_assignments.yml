@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  lesson: one
+  specialty: one
+  priority: 1
+  reference: MyText
+
+two:
+  lesson: two
+  specialty: two
+  priority: 1
+  reference: MyText
