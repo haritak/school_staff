@@ -1,0 +1,27 @@
+<%= form_with(model: lesson_type, local: true) do |form| %>
+  <% if lesson_type.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(lesson_type.errors.count, "error") %> prohibited this lesson_type from being saved:</h2>
+
+      <ul>
+      <% lesson_type.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :code %>
+    <%= form.text_field :code, id: :lesson_type_code %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :lesson_type_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :lessons
+  resources :lesson_types
   resources :school_grade_specialties
   resources :school_grades
   resources :schoolyears
