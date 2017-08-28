@@ -6,6 +6,12 @@
 #
 #
 #
+#
+
+
+puts "Reminder: School classes (Α, Β, Γ) have to be created manually"
+puts "Hit enter to continue"
+gets
 
 school_grade_specialties = [
   ["Α", "Α_Γενικής Παιδείας", "Α"],
