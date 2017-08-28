@@ -1,5 +1,6 @@
 class CreateSchoolGradeSpecialtiesAgain < ActiveRecord::Migration[5.1]
   def change
+    drop_table :school_grade_specialties
     create_table :school_grade_specialties do |t|
       t.string :code
       t.string :description
