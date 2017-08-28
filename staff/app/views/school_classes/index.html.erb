@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>School Classes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Schoolyear</th>
+      <th>School</th>
+      <th>School grade specialty</th>
+      <th>Number</th>
+      <th>Capacity</th>
+      <th colspan="4"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @school_classes.each do |school_class| %>
+      <tr>
+        <td><%= "#{school_class.schoolyear.startingyear}-#{school_class.schoolyear.startingyear+1}" %></td>
+        <td><%= school_class.school.title %></td>
+        <td><%= school_class.school_grade_specialty.description %></td>
+        <td><%= school_class.number %></td>
+        <td><%= school_class.capacity %></td>
+        <td><%= link_to 'Show', school_class %></td>
+        <td><%= link_to 'Edit', edit_school_class_path(school_class) %></td>
+        <td><%= link_to 'Duplicate', duplicate_school_class_path(school_class) %></td>
+        <td><%= link_to 'Destroy', school_class, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New School Class', new_school_class_path %>

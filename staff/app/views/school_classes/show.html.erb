@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Schoolyear:</strong>
+  <%= "#{@school_class.schoolyear.startingyear}-#{@school_class.schoolyear.startingyear+1}" %>
+</p>
+
+<p>
+  <strong>School:</strong>
+  <%= @school_class.school.title %>
+</p>
+
+<p>
+  <strong>School grade specialty:</strong>
+  <%= "#{@school_class.school_grade_specialty.code} - #{@school_class.school_grade_specialty.description}" %>
+</p>
+
+<p>
+  <strong>Number:</strong>
+  <%= @school_class.number %>
+</p>
+
+<p>
+  <strong>Capacity:</strong>
+  <%= @school_class.capacity %>
+</p>
+
+<%= link_to 'Edit', edit_school_class_path(@school_class) %> |
+<%= link_to 'Back', school_classes_path %>

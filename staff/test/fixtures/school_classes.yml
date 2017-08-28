@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  schoolyear: one
+  school: one
+  school_grade_specialty: one
+  number: 1
+  capacity: 1
+
+two:
+  schoolyear: two
+  school: two
+  school_grade_specialty: two
+  number: 1
+  capacity: 1
