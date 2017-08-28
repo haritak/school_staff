@@ -7,6 +7,11 @@
 #
 reference =  "29071 9 Αυγούστου 2017 ΤΕΥΧΟΣ ΔΕΥΤΕΡΟ Αρ. Φύλλου 2797"
 
+# First array : lesson data
+# Second array : first priority of assignemnts (priority 100, 101 ...)
+# Third array : second priority of assignemnts (priority 200, 201 ...)
+# Fourth array : third priority of assignemnts (priority 300, 301 ...)
+
 lesson_assignments = 
   [
     [ ["Α", "Νέα Ελληνικά"], ["ΠΕ02"], [] , []],
