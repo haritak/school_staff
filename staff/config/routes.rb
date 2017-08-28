@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :school_classes
   resources :lesson_assignments
   resources :lessons
   resources :lesson_types
@@ -8,5 +9,14 @@ Rails.application.routes.draw do
   resources :schools
   resources :specialties
   resources :teacher_working_classes
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  # For details on the DSL available within this file, see 
+  # http://guides.rubyonrails.org/routing.html
+  #
+  resources :school_classes do
+    member do
+      get 'duplicate'
+    end
+  end
+
+
 end

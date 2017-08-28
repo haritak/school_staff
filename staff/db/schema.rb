@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828135405) do
+ActiveRecord::Schema.define(version: 20170828184624) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -44,6 +44,19 @@ ActiveRecord::Schema.define(version: 20170828135405) do
     t.index ["abbr"], name: "index_lessons_on_abbr", unique: true
     t.index ["lesson_type_id"], name: "index_lessons_on_lesson_type_id"
     t.index ["school_grade_specialty_id"], name: "index_lessons_on_school_grade_specialty_id"
+  end
+
+  create_table "school_classes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "schoolyear_id"
+    t.bigint "school_id"
+    t.bigint "school_grade_specialty_id"
+    t.integer "number"
+    t.integer "capacity"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_grade_specialty_id"], name: "index_school_classes_on_school_grade_specialty_id"
+    t.index ["school_id"], name: "index_school_classes_on_school_id"
+    t.index ["schoolyear_id"], name: "index_school_classes_on_schoolyear_id"
   end
 
   create_table "school_grade_specialties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -97,5 +110,8 @@ ActiveRecord::Schema.define(version: 20170828135405) do
 
   add_foreign_key "lesson_assignments", "lessons"
   add_foreign_key "lesson_assignments", "specialties"
+  add_foreign_key "school_classes", "school_grade_specialties"
+  add_foreign_key "school_classes", "schools"
+  add_foreign_key "school_classes", "schoolyears"
   add_foreign_key "school_grade_specialties", "school_grades"
 end
