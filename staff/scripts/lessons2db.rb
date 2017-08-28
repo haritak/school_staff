@@ -5,6 +5,10 @@
 #
 #
 #
+puts "Lesson Types have to be entered manually (Θ Θεωρητικό, Ε Εργαστηριακό)"
+puts "Hit enter to continue"
+gets
+
 def create_abbr( string )
   return string if string.length<8
   a = string.split
