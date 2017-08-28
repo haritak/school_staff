@@ -764,18 +764,19 @@ lesson_assignments.each do |la|
   lesson_type = LessonType.find_by( code: lesson_type )
   school_grade_specialty = SchoolGradeSpecialty.find_by( code: lesson[0] )
   theLesson = Lesson.find_by( lesson_type: lesson_type, 
-                          school_grade_specialty: school_grade_specialty,
-                          description: lesson[1])
+                             school_grade_specialty: school_grade_specialty,
+                             description: lesson[1])
   #priority 1 -> 100, 101, 102, ...
-  if la[1]
-    la[1].each_with_index do |spec, index|
-      priority = 100 + index
+  [ la[1], la[2], la[3]].each_with_index do |la, level|
+    next if not la
+    la.each_with_index do |spec, index|
+      priority = 100 + level*100 + index
       theSpecialty = Specialty.find_by( code: spec)
       begin
-      LessonAssignment.create( lesson: theLesson,
-                              specialty: theSpecialty,
-                              priority: priority,
-                              reference: reference )
+        LessonAssignment.create( lesson: theLesson,
+                                specialty: theSpecialty,
+                                priority: priority,
+                                reference: reference )
       rescue ActiveRecord::RecordNotUnique => e
         puts "Assignment #{theLesson.description} - #{theSpecialty.code} already exists"
       end
