@@ -766,7 +766,21 @@ lesson_assignments.each do |la|
   theLesson = Lesson.find_by( lesson_type: lesson_type, 
                           school_grade_specialty: school_grade_specialty,
                           description: lesson[1])
-  raise "Not found lesson #{lesson[1]}, #{lesson_type.code}, #{school_grade_specialty.code}" if not theLesson
+  #priority 1 -> 100, 101, 102, ...
+  if la[1]
+    la[1].each_with_index do |spec, index|
+      priority = 100 + index
+      theSpecialty = Specialty.find_by( code: spec)
+      begin
+      LessonAssignment.create( lesson: theLesson,
+                              specialty: theSpecialty,
+                              priority: priority,
+                              reference: reference )
+      rescue ActiveRecord::RecordNotUnique => e
+        puts "Assignment #{theLesson.description} - #{theSpecialty.code} already exists"
+      end
+    end
+  end
 end
 
 
