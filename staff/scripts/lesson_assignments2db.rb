@@ -460,7 +460,7 @@ lesson_assignments =
  []
 ],
 [["ΓΜΚ", "Στοιχεία Ψύξης - Κλιματισμού",
-], ["ΠΕ12.04", "ΠΕ12.07","ΠΕ12.11", "ΠΕ17.02", "ΠΕ17.06", "ΤΕ04.04" ],
+], ["ΠΕ12.04", "ΠΕ12.07","ΠΕ12.11", "ΠΕ17.02", "ΠΕ17.06", "ΤΕ01.04" ],
 ["ΠΕ17.12", "ΠΕ18.18", "ΠΕ18.31", "ΠΕ18.32", "ΤΕ01.02"],
 []
 ],
@@ -504,7 +504,7 @@ lesson_assignments =
     "ΠΕ18.15","ΠΕ18.18", "ΠΕ18.31", "ΠΕ18.32",
     "ΤΕ01.03",
 ],
-["ΤΕ01.02", "ΤΕ01.06", "ΤΕ01",07],
+["ΤΕ01.02", "ΤΕ01.06", "ΤΕ01.07"],
 []
 ],
 [["ΓΗΝ", "Ψηφιακά Συστήματα"],
@@ -733,3 +733,40 @@ lesson_assignments.each do |la|
                           description: lesson[1])
   raise "Not found lesson #{lesson[1]}, #{lesson_type.code}, #{school_grade_specialty.code}" if not theLesson
 end
+
+def check_specialties(specialties)
+  return if not specialties
+  specialties.each do |specialty|
+    raise "Not found #{specialty}" if not Specialty.find_by( code: specialty )
+  end
+end
+
+puts "Checking specialties"
+lesson_assignments.each do |la|
+  #begin
+    check_specialties(la[1])
+    check_specialties(la[2])
+    check_specialties(la[3])
+  #rescue => e
+    #puts e
+    #p la
+    #puts "----"
+  #end
+end
+
+puts "Ready to store assignments to database."
+puts "Press enter to continue"
+
+gets
+lesson_assignments.each do |la|
+  lesson = la[0]
+  lesson_type = get_lesson_type( lesson )
+  lesson_type = LessonType.find_by( code: lesson_type )
+  school_grade_specialty = SchoolGradeSpecialty.find_by( code: lesson[0] )
+  theLesson = Lesson.find_by( lesson_type: lesson_type, 
+                          school_grade_specialty: school_grade_specialty,
+                          description: lesson[1])
+  raise "Not found lesson #{lesson[1]}, #{lesson_type.code}, #{school_grade_specialty.code}" if not theLesson
+end
+
+
