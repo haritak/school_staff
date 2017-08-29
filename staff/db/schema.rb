@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829055908) do
+ActiveRecord::Schema.define(version: 20170829063835) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -114,6 +114,16 @@ ActiveRecord::Schema.define(version: 20170829055908) do
     t.index ["code"], name: "index_specialties_on_code", unique: true
   end
 
+  create_table "teacher_specialties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "teacher_id"
+    t.bigint "specialty_id"
+    t.integer "priority"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["specialty_id"], name: "index_teacher_specialties_on_specialty_id"
+    t.index ["teacher_id"], name: "index_teacher_specialties_on_teacher_id"
+  end
+
   create_table "teacher_working_classes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "description"
     t.datetime "created_at", null: false
@@ -137,6 +147,8 @@ ActiveRecord::Schema.define(version: 20170829055908) do
   add_foreign_key "school_classes", "schools"
   add_foreign_key "school_classes", "schoolyears"
   add_foreign_key "school_grade_specialties", "school_grades"
+  add_foreign_key "teacher_specialties", "specialties"
+  add_foreign_key "teacher_specialties", "teachers"
   add_foreign_key "teachers", "people"
   add_foreign_key "teachers", "schools"
 end

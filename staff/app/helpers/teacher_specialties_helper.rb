@@ -1,0 +1,2 @@
+module TeacherSpecialtiesHelper
+end
