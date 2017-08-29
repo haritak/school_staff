@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :people
   resources :school_classes
   resources :lesson_assignments
   resources :lessons
@@ -17,6 +18,8 @@ Rails.application.routes.draw do
       get 'duplicate'
     end
   end
+
+  get '/requirements', to: 'personel_processor#requirements'
 
 
 end
