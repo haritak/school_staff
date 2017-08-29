@@ -69,6 +69,6 @@ class SchoolGradeSpecialtiesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_grade_specialty_params
-      params.require(:school_grade_specialty).permit(:code, :description, :school_grade_id)
+      params.require(:school_grade_specialty).permit(:code, :description, :school_grade_id, :required_hours)
     end
 end

@@ -26,6 +26,11 @@
     <%= form.text_field :school_grade_id, id: :school_grade_specialty_school_grade_id %>
   </div>
 
+  <div class="field">
+    <%= form.label :required_hours %>
+    <%= form.number_field :required_hours, id: :school_grade_specialty_required_hours %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

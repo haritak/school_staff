@@ -12,7 +12,12 @@
 
 <p>
   <strong>School Grade:</strong>
-  <%= @school_grade_specialty.school_grade %>
+  <%= @school_grade_specialty.school_grade.description %>
+</p>
+
+<p>
+  <strong>Required Hours:</strong>
+  <%= @school_grade_specialty.required_hours %>
 </p>
 
 <%= link_to 'Edit', edit_school_grade_specialty_path(@school_grade_specialty) %> |
