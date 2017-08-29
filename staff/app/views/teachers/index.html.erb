@@ -9,6 +9,7 @@
       <th>School</th>
       <th>Date in school</th>
       <th>Date employed</th>
+      <th>Teaching hours</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,10 +17,11 @@
   <tbody>
     <% @teachers.each do |teacher| %>
       <tr>
-        <td><%= teacher.person %></td>
-        <td><%= teacher.school %></td>
+        <td><%= teacher.person.last_name %></td>
+        <td><%= teacher.school.title %></td>
         <td><%= teacher.date_in_school %></td>
         <td><%= teacher.date_employed %></td>
+        <td><%= teacher.teaching_hours %></td>
         <td><%= link_to 'Show', teacher %></td>
         <td><%= link_to 'Edit', edit_teacher_path(teacher) %></td>
         <td><%= link_to 'Destroy', teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>

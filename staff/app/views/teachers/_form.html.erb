@@ -13,12 +13,16 @@
 
   <div class="field">
     <%= form.label :person_id %>
-    <%= form.text_field :person_id, id: :teacher_person_id %>
+    <%= form.collection_select :person_id,
+    Person.order(:last_name), :id, :last_name, 
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
     <%= form.label :school_id %>
-    <%= form.text_field :school_id, id: :teacher_school_id %>
+    <%= form.collection_select :school_id,
+    School.order(:title), :id, :title, 
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
@@ -29,6 +33,11 @@
   <div class="field">
     <%= form.label :date_employed %>
     <%= form.date_select :date_employed, id: :teacher_date_employed %>
+  </div>
+
+  <div class="field">
+    <%= form.label :teaching_hours %>
+    <%= form.number_field :teaching_hours, id: :teacher_teaching_hours %>
   </div>
 
   <div class="actions">
