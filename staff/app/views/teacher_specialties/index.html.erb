@@ -15,8 +15,8 @@
   <tbody>
     <% @teacher_specialties.each do |teacher_specialty| %>
       <tr>
-        <td><%= teacher_specialty.teacher %></td>
-        <td><%= teacher_specialty.specialty %></td>
+        <td><%= teacher_specialty.teacher.person.last_name %></td>
+        <td><%= teacher_specialty.specialty.code %></td>
         <td><%= teacher_specialty.priority %></td>
         <td><%= link_to 'Show', teacher_specialty %></td>
         <td><%= link_to 'Edit', edit_teacher_specialty_path(teacher_specialty) %></td>

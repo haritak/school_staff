@@ -13,12 +13,16 @@
 
   <div class="field">
     <%= form.label :teacher_id %>
-    <%= form.text_field :teacher_id, id: :teacher_specialty_teacher_id %>
+    <%= form.collection_select :teacher_id,
+    Teacher.order(:id), :id, :teacher_name, 
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
     <%= form.label :specialty_id %>
-    <%= form.text_field :specialty_id, id: :teacher_specialty_specialty_id %>
+    <%= form.collection_select :specialty_id,
+    Specialty.order(:code), :id, :code, 
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
