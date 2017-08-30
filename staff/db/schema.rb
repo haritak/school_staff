@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830041506) do
+ActiveRecord::Schema.define(version: 20170830170122) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -74,11 +74,11 @@ ActiveRecord::Schema.define(version: 20170830041506) do
 
   create_table "school_course_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "school_course_id"
-    t.bigint "teacher_id"
+    t.bigint "school_teacher_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["school_course_id"], name: "index_school_course_teachers_on_school_course_id"
-    t.index ["teacher_id"], name: "index_school_course_teachers_on_teacher_id"
+    t.index ["school_teacher_id"], name: "index_school_course_teachers_on_school_teacher_id"
   end
 
   create_table "school_courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -181,7 +181,7 @@ ActiveRecord::Schema.define(version: 20170830041506) do
   add_foreign_key "school_classes", "schools"
   add_foreign_key "school_classes", "schoolyears"
   add_foreign_key "school_course_teachers", "school_courses"
-  add_foreign_key "school_course_teachers", "teachers"
+  add_foreign_key "school_course_teachers", "school_teachers"
   add_foreign_key "school_courses", "lessons"
   add_foreign_key "school_courses", "school_classes"
   add_foreign_key "school_grade_specialties", "school_grades"
