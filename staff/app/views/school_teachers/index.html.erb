@@ -16,8 +16,8 @@
     <% @school_teachers.each_with_index do |school_teacher,idx| %>
       <% idx+=1 %>
       <tr>
-        <td><%= idx %>.<%= school_teacher.teacher %></td>
-        <td><%= school_teacher.school %></td>
+        <td><%= idx %>.<%= school_teacher.teacher.full_name %></td>
+        <td><%= school_teacher.school.title %></td>
         <td><%= school_teacher.disposal_duration %></td>
         <td><%= link_to 'Show', school_teacher %></td>
         <td><%= link_to 'Edit', edit_school_teacher_path(school_teacher) %></td>
