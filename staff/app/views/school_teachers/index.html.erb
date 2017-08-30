@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>School Teachers</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Teacher</th>
+      <th>School</th>
+      <th>Disposal duration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @school_teachers.each_with_index do |school_teacher,idx| %>
+      <% idx+=1 %>
+      <tr>
+        <td><%= idx %>.<%= school_teacher.teacher %></td>
+        <td><%= school_teacher.school %></td>
+        <td><%= school_teacher.disposal_duration %></td>
+        <td><%= link_to 'Show', school_teacher %></td>
+        <td><%= link_to 'Edit', edit_school_teacher_path(school_teacher) %></td>
+        <td><%= link_to 'Destroy', school_teacher, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New School Teacher', new_school_teacher_path %>

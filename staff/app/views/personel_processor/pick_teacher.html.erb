@@ -1,0 +1,11 @@
+<h1> Select Teacher </h1>
+
+<ol>
+<% @teachers.each do |st| %>
+  <li>
+    <%= link_to "#{st.teacher.full_name} #{st.teacher.teaching_hours}Ω",
+      pick_lessons_for_path( st.teacher.id, st.school.id )
+    %>
+  </li>
+<% end %>
+</ol>

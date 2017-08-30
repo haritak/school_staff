@@ -1,0 +1,51 @@
+<h1><%= @teacher.full_name %> </h1>
+
+<% @specialties.each do |specialty| %>
+  <%= "#{specialty.code} #{specialty.description}" %><br/>
+<% end %>
+
+<h2>Selected courses</h2>
+
+<% @current_courses.each do |course| %>
+  <%= "#{course}" %><br/>
+<% end %>
+
+<h2>Available courses</h2>
+
+<%
+    total_hours = 0
+@available_courses.each do |course| 
+  total_hours += course[2].hours
+end
+ %>
+
+<h3>Συνολικές διαθέσιμες ώρες: <%= total_hours %></h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Τμήμα</th>
+      <th>Μάθημα</th>
+      <th>Ώρες</th>
+      <th>Προτεραιότητα</th>
+    </tr>
+  </thead>
+
+  <tbody>
+<% @available_courses.each do |course|
+  class_grade = course[0]
+  class_number = course[1]
+  class_name = "#{class_grade.description}-#{class_number}"
+  theLesson = course[2]
+  priority = course[3]
+%>
+      <tr>
+
+        <td><%= class_name %></td>
+        <td><%= theLesson.description %></td>
+        <td><%= theLesson.hours %></td>
+        <td><%= priority %></td>
+      </tr>
+<% end %>
+  </tbody>
+</table>

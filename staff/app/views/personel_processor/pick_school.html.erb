@@ -1,0 +1,11 @@
+<h1> Select School </h1>
+
+<ul>
+<% @schools.each do |school| %>
+  <li>
+    <%= link_to "#{school.code} #{school.title}",
+      pick_teacher_for_path( school.id )
+    %>
+  </li>
+<% end %>
+</ul>

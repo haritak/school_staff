@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  teacher: one
+  school: one
+  disposal_duration: 1
+
+two:
+  teacher: two
+  school: two
+  disposal_duration: 1

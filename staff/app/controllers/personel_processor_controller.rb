@@ -45,19 +45,7 @@ class PersonelProcessorController < ApplicationController
       left[3] <=> right[3]
     end
 
-    courses = []
-    all_courses.each do |course|
-      class_grade = course[0]
-      class_number = course[1]
-      class_name = "#{class_grade.description}-#{class_number}"
-      theLesson = course[2]
-      priority = course[3]
-
-      course = "#{class_name}, #{theLesson.description}, Ανάθεση: #{priority}"
-      courses << course
-    end
-
-    courses
+    return all_courses
   end
 
   def get_lessons_for( grade, specialties )

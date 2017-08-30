@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>School Courses</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>School class</th>
+      <th>Lesson</th>
+      <th>Duration</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @school_courses.each do |school_course| %>
+      <tr>
+        <td><%= school_course.school_class %></td>
+        <td><%= school_course.lesson %></td>
+        <td><%= school_course.duration %></td>
+        <td><%= link_to 'Show', school_course %></td>
+        <td><%= link_to 'Edit', edit_school_course_path(school_course) %></td>
+        <td><%= link_to 'Destroy', school_course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New School Course', new_school_course_path %>
