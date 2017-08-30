@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  resources :school_teachers
+  resources :school_course_teachers
+  resources :school_courses
   resources :teacher_specialties
   resources :teachers
   resources :people
@@ -21,7 +24,14 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/requirements', to: 'personel_processor#requirements'
+  get '/pick_school', to: 'personel_processor#pick_school'
+  get '/pick_teacher/:school_id', 
+    to: 'personel_processor#pick_teacher',
+    as: "pick_teacher_for"
+
+  get '/pick_lessons/:teacher_id/show_status/:school_id', 
+    to: 'personel_processor#show_status',
+    as: 'pick_lessons_for'
 
 
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170829193222) do
+ActiveRecord::Schema.define(version: 20170830041506) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -72,6 +72,25 @@ ActiveRecord::Schema.define(version: 20170829193222) do
     t.index ["schoolyear_id"], name: "index_school_classes_on_schoolyear_id"
   end
 
+  create_table "school_course_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_course_id"
+    t.bigint "teacher_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_course_id"], name: "index_school_course_teachers_on_school_course_id"
+    t.index ["teacher_id"], name: "index_school_course_teachers_on_teacher_id"
+  end
+
+  create_table "school_courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_class_id"
+    t.bigint "lesson_id"
+    t.integer "duration", default: 1, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_school_courses_on_lesson_id"
+    t.index ["school_class_id"], name: "index_school_courses_on_school_class_id"
+  end
+
   create_table "school_grade_specialties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code"
     t.string "description"
@@ -89,6 +108,17 @@ ActiveRecord::Schema.define(version: 20170829193222) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_school_grades_on_code", unique: true
+  end
+
+  create_table "school_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "teacher_id"
+    t.bigint "school_id"
+    t.integer "disposal_duration"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_teachers_on_school_id"
+    t.index ["teacher_id", "school_id"], name: "school_teachers_uniqness", unique: true
+    t.index ["teacher_id"], name: "index_school_teachers_on_teacher_id"
   end
 
   create_table "schools", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -150,7 +180,13 @@ ActiveRecord::Schema.define(version: 20170829193222) do
   add_foreign_key "school_classes", "school_grade_specialties"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "school_classes", "schoolyears"
+  add_foreign_key "school_course_teachers", "school_courses"
+  add_foreign_key "school_course_teachers", "teachers"
+  add_foreign_key "school_courses", "lessons"
+  add_foreign_key "school_courses", "school_classes"
   add_foreign_key "school_grade_specialties", "school_grades"
+  add_foreign_key "school_teachers", "schools"
+  add_foreign_key "school_teachers", "teachers"
   add_foreign_key "teacher_specialties", "specialties"
   add_foreign_key "teacher_specialties", "teachers"
   add_foreign_key "teachers", "people"
