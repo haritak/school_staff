@@ -1,14 +1,29 @@
 <h1><%= @teacher.full_name %> </h1>
-
+<strong>
+<p>
 <% @specialties.each do |specialty| %>
   <%= "#{specialty.code} #{specialty.description}" %><br/>
 <% end %>
+</p>
+<p><%= @teacher.teaching_hours%> διδακτικές 
+ώρες για το <%= @teacher.school.title %></p>
+</strong>
+
 
 <h2>Selected courses</h2>
 
+<% selected_courses_hours = 0 %>
 <% @current_courses.each do |course| %>
-  <%= "#{course}" %><br/>
+  <%= "[X]-" +
+    "#{course.school_course.school_class.school_grade_specialty.description}-" +
+      "#{course.school_course.school_class.number}" +
+      " #{course.school_course.lesson.description}"
+%><br/>
+  <% selected_courses_hours += course.school_course.duration %>
 <% end %>
+<p>
+Συνολικές επιλεγμένες ώρες : <%= selected_courses_hours %>
+</p>
 
 <h2>Available courses</h2>
 
@@ -21,12 +36,16 @@ end
 
 <h3>Συνολικές διαθέσιμες ώρες: <%= total_hours %></h3>
 
+<%= form_tag register_these_lessons_for_path do %>
+
 <table>
   <thead>
     <tr>
       <th>Τμήμα</th>
       <th>Μάθημα</th>
       <th>Ώρες</th>
+      <th>Διδάσκων</th>
+      <th>Επιλογή</th>
       <th>Προτεραιότητα</th>
     </tr>
   </thead>
@@ -38,14 +57,31 @@ end
   class_name = "#{class_grade.description}-#{class_number}"
   theLesson = course[2]
   priority = course[3]
+  registered_courses = course[4]
 %>
       <tr>
 
         <td><%= class_name %></td>
         <td><%= theLesson.description %></td>
         <td><%= theLesson.hours %></td>
+        <td>
+          <% 
+            if registered_courses.length > 0 
+              registered_courses.each do |course|
+            %>
+          <%=course.teacher.full_name%> <br/>
+          <%
+              end
+            end
+          %>
+        </td>
+        <td><%= check_box_tag "register_me #{class_grade.id} #{class_number} #{theLesson.id}",
+          "#{class_grade.id} #{class_number} #{theLesson.id}", false %></td>
         <td><%= priority %></td>
       </tr>
 <% end %>
   </tbody>
 </table>
+
+<%= submit_tag 'Καταχώρηση' %>
+<% end %>

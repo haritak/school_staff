@@ -26,6 +26,41 @@ class PersonelProcessorController < ApplicationController
     @available_courses = get_available_courses_for( @teacher, @school )
   end
 
+  def register_lessons
+    teacher_id = params[:teacher_id]
+    school_id = params[:school_id]
+
+    params.each do |p|
+      if p.start_with? "register_me"
+        parts = p.split
+        class_grade_id = parts[1].to_i
+        class_number = parts[2].to_i
+        lesson_id = parts[3].to_i
+
+        theTeacher = Teacher.find( teacher_id )
+        theSchool = School.find( school_id )
+        theGrade = SchoolGradeSpecialty.find( class_grade_id )
+        theClass = SchoolClass.find_by( school_grade_specialty: theGrade,
+                                       number: class_number )
+        theLesson = Lesson.find( lesson_id )
+
+        theSchoolCource = SchoolCourse.find_by( school_class: theClass,
+                                               lesson: theLesson)
+        if not theSchoolCource
+          theSchoolCource = SchoolCourse.create( school_class: theClass,
+                                                duration: theLesson.hours,
+                                                lesson: theLesson)
+        end
+
+        SchoolCourseTeacher.create( school_course: theSchoolCource,
+                                   teacher: theTeacher ) #TODO : Should be school_teacher
+          SchoolCourse.create
+      end
+    end
+
+    redirect_to pick_lessons_for_path( teacher_id, school_id)
+  end
+
   def get_available_courses_for( someteacher, someschool )
 
     all_classes_at_school = SchoolClass.where( school: someschool )
@@ -38,7 +73,18 @@ class PersonelProcessorController < ApplicationController
 
       lessons = get_lessons_for( class_grade, all_teacher_specialties )
       lessons.each do |lesson|
-        all_courses << [ class_grade, class_number, lesson[0], lesson[1] ]
+        school_class = SchoolClass.find_by( school_grade_specialty: class_grade,
+                                           number: class_number )
+        school_course = SchoolCourse.find_by( school_class: school_class,
+                                             lesson: lesson )
+        already_registered = SchoolCourseTeacher.where(
+          school_course: school_course ).to_a
+        all_courses << [ class_grade, 
+                         class_number, 
+                         lesson[0],  #lesson
+                         lesson[1],  #lesson assignment priority
+                         already_registered
+        ]
       end
     end
     all_courses.sort! do |left, right|

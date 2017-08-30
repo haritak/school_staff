@@ -33,5 +33,9 @@ Rails.application.routes.draw do
     to: 'personel_processor#show_status',
     as: 'pick_lessons_for'
 
+  post '/pick_lessons/:teacher_id/register/:school_id',
+    to: 'personel_processor#register_lessons',
+    as: 'register_these_lessons_for'
+
 
 end
