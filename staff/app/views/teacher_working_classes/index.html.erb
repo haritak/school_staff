@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Teacher Working Classes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teacher_working_classes.each do |twc| %>
+      <tr>
+        <td><%= twc.description %></td>
+        <td><%= link_to 'Show', twc %></td>
+        <td><%= link_to 'Edit', edit_teacher_working_class_path(twc) %></td>
+        <td><%= link_to 'Destroy', twc, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Teacher Working Class', new_teacher_working_class_path %>
