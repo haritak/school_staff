@@ -4,7 +4,7 @@
 <% @teachers.each do |st| %>
   <li>
     <%= link_to "#{st.teacher.full_name} #{st.teacher.teaching_hours}Ω",
-      pick_lessons_for_path( st.teacher.id, st.school.id )
+      pick_lessons_for_path( st.id, st.school.id )
     %>
   </li>
 <% end %>

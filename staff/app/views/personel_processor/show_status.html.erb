@@ -69,7 +69,7 @@ end
             if registered_courses.length > 0 
               registered_courses.each do |course|
             %>
-          <%=course.teacher.full_name%> <br/>
+          <%=course.school_teacher.teacher.full_name%> <br/>
           <%
               end
             end

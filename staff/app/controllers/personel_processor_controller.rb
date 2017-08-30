@@ -12,7 +12,8 @@ class PersonelProcessorController < ApplicationController
   def show_status
     teacher_id = params[ :teacher_id ]
     school_id = params[ :school_id ]
-    @teacher = Teacher.find( teacher_id )
+    @school_teacher = SchoolTeacher.find( teacher_id )
+    @teacher = @school_teacher.teacher
     @school = School.find( school_id )
 
     tmp =  TeacherSpecialty.where( teacher: @teacher ).to_a
@@ -22,7 +23,7 @@ class PersonelProcessorController < ApplicationController
       @specialties << ts.specialty
     end
 
-    @current_courses = SchoolCourseTeacher.where( teacher: @teacher ).to_a
+    @current_courses = SchoolCourseTeacher.where( school_teacher: @school_teacher ).to_a
     @available_courses = get_available_courses_for( @teacher, @school )
   end
 
@@ -37,7 +38,7 @@ class PersonelProcessorController < ApplicationController
         class_number = parts[2].to_i
         lesson_id = parts[3].to_i
 
-        theTeacher = Teacher.find( teacher_id )
+        theTeacher = SchoolTeacher.find( teacher_id )
         theSchool = School.find( school_id )
         theGrade = SchoolGradeSpecialty.find( class_grade_id )
         theClass = SchoolClass.find_by( school_grade_specialty: theGrade,
@@ -53,7 +54,7 @@ class PersonelProcessorController < ApplicationController
         end
 
         SchoolCourseTeacher.create( school_course: theSchoolCource,
-                                   teacher: theTeacher ) #TODO : Should be school_teacher
+                                   school_teacher: theTeacher )
           SchoolCourse.create
       end
     end
