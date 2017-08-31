@@ -15,8 +15,8 @@
   <tbody>
     <% @school_courses.each do |school_course| %>
       <tr>
-        <td><%= school_course.school_class %></td>
-        <td><%= school_course.lesson %></td>
+        <td><%= school_course.school_class.school_grade_specialty.code %><%= school_course.school_class.number %></td>
+        <td><%= school_course.lesson.description %><%= school_course.lesson.lesson_type.code %></td>
         <td><%= school_course.duration %></td>
         <td><%= link_to 'Show', school_course %></td>
         <td><%= link_to 'Edit', edit_school_course_path(school_course) %></td>
