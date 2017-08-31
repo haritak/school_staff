@@ -1,4 +1,4 @@
-<h1><%= @teacher.full_name %> </h1>
+<%= link_to 'Home', pick_teacher_for_path(@school)%><h1><%= @teacher.full_name %> </h1>
 <strong>
 <p>
 <% @specialties.each do |specialty| %>
