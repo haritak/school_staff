@@ -26,6 +26,11 @@ class SchoolTeachersController < ApplicationController
   def create
     @school_teacher = SchoolTeacher.new(school_teacher_params)
 
+    if @school_teacher.disposal_duration > 
+      @school_teacher.teacher.teaching_hours
+      @school_teacher.disposal_duration = @school_teacher.teacher.teaching_hours
+    end
+
     respond_to do |format|
       if @school_teacher.save
         format.html { redirect_to @school_teacher, notice: 'School teacher was successfully created.' }
