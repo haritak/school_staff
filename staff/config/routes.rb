@@ -37,5 +37,10 @@ Rails.application.routes.draw do
     to: 'personel_processor#register_lessons',
     as: 'register_these_lessons_for'
 
+  delete 'pick_lessons/:teacher_id/remove/:school_id/:school_course_id',
+    to: 'personel_processor#unregister_lessons',
+    as: 'unregister_from'
+
+
 
 end

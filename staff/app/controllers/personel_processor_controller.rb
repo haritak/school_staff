@@ -27,6 +27,30 @@ class PersonelProcessorController < ApplicationController
     @available_courses = get_available_courses_for( @teacher, @school )
   end
 
+  def unregister_lessons
+    school_teacher_id = params[ :teacher_id ]
+    school_id = params[ :school_id ]
+    school_course_id = params[ :school_course_id ]
+
+    theSchoolCourseTeacher =
+      SchoolCourseTeacher.find_by( school_course_id: school_course_id,
+                                  school_teacher_id: school_teacher_id )
+
+    theSchoolCourseTeacher.destroy
+
+    begin
+      theSchoolCourse = SchoolCourse.find( school_course_id )
+      theSchoolCourse.destroy
+    rescue ActiveRecord::StatementInvalid => e
+      #ignore the case this entry cannot be 
+      #deleted due to another SchoolTeacher
+      #refering to that entry (in case of co-teaching the
+      #same course)
+    end
+
+    redirect_to pick_lessons_for_path( school_teacher_id, school_id )
+  end
+
   def register_lessons
     teacher_id = params[:teacher_id]
     school_id = params[:school_id]

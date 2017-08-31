@@ -5,8 +5,8 @@
   <%= "#{specialty.code} #{specialty.description}" %><br/>
 <% end %>
 </p>
-<p><%= @teacher.teaching_hours%> διδακτικές 
-ώρες για το <%= @teacher.school.title %></p>
+<p><%= @school_teacher.disposal_duration%> διδακτικές 
+ώρες για το <%= @school_teacher.school.title %></p> 
 </strong>
 
 
@@ -14,7 +14,13 @@
 
 <% selected_courses_hours = 0 %>
 <% @current_courses.each do |course| %>
-  <%= "[X]-" +
+  [<strong>
+  <%= link_to "X", unregister_from_path( @school_teacher.id, 
+                    @school_teacher.school_id, 
+                    course.school_course.id),
+                    method: :delete %>
+</strong>]
+  <%= " " +
     "#{course.school_course.school_class.school_grade_specialty.description}-" +
       "#{course.school_course.school_class.number}" +
       " #{course.school_course.lesson.description}"
