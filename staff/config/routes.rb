@@ -42,5 +42,6 @@ Rails.application.routes.draw do
     as: 'unregister_from'
 
 
+  root 'personel_processor#pick_school'
 
 end
