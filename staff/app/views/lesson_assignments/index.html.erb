@@ -16,7 +16,9 @@
   <tbody>
     <% @lesson_assignments.each do |lesson_assignment| %>
       <tr>
-        <td><%= "#{lesson_assignment.lesson.school_grade_specialty.code} #{lesson_assignment.lesson.description}" %></td>
+        <td><%= "#{lesson_assignment.lesson.school_grade_specialty.code} \
+        #{lesson_assignment.lesson.description}-
+        #{lesson_assignment.lesson.lesson_type.code}" %></td>
         <td><%= lesson_assignment.specialty.code %></td>
         <td><%= lesson_assignment.priority %></td>
         <td><%= lesson_assignment.reference %></td>

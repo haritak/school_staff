@@ -23,7 +23,8 @@
   <%= " " +
     "#{course.school_course.school_class.school_grade_specialty.description}-" +
       "#{course.school_course.school_class.number}" +
-      " #{course.school_course.lesson.description}"
+      " #{course.school_course.lesson.description}-" +
+      "#{course.school_course.lesson.lesson_type.code}"
 %><br/>
   <% selected_courses_hours += course.school_course.duration %>
 <% end %>
@@ -68,7 +69,7 @@ end
       <tr>
 
         <td><%= class_name %></td>
-        <td><%= theLesson.description %></td>
+        <td><%= theLesson.description %>-<%=theLesson.lesson_type.code%></td>
         <td><%= theLesson.hours %></td>
         <td>
           <% 

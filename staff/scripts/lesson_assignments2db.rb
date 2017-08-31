@@ -706,7 +706,7 @@ lesson_assignments =
 ]
 
 def get_lesson_type(lesson)
-  lesson_type = "Θ"
+  lesson_type = "*" #will check both
   lesson_type = lesson[2] if lesson.length == 3
   return lesson_type
 end
@@ -724,18 +724,27 @@ lesson_assignments.each do |la|
   lesson = la[0]
   lesson_type = get_lesson_type( lesson )
 
-  raise "Not found lesson type #{lesson}, #{lesson_type}" if not LessonType.find_by( code: lesson_type )
+  if lesson_type != "*" 
+    raise "Not found lesson type #{lesson}, #{lesson_type}" if not LessonType.find_by( code: lesson_type )
+  end
 end
 
 puts "Checking lessons" 
 lesson_assignments.each do |la|
   lesson = la[0]
   lesson_type = get_lesson_type( lesson )
-  lesson_type = LessonType.find_by( code: lesson_type )
   school_grade_specialty = SchoolGradeSpecialty.find_by( code: lesson[0] )
-  theLesson = Lesson.find_by( lesson_type: lesson_type, 
+  theLesson = nil
+  if lesson_type != "*"
+    lesson_type = LessonType.find_by( code: lesson_type )
+    theLesson = Lesson.find_by( lesson_type: lesson_type, 
                           school_grade_specialty: school_grade_specialty,
                           description: lesson[1])
+  else
+    theLesson = Lesson.find_by( 
+                          school_grade_specialty: school_grade_specialty,
+                          description: lesson[1])
+  end
   raise "Not found lesson #{lesson[1]}, #{lesson_type.code}, #{school_grade_specialty.code}" if not theLesson
 end
 
@@ -763,30 +772,45 @@ puts "Ready to store assignments to database."
 puts "Press enter to continue"
 
 gets
+
 lesson_assignments.each do |la|
   lesson = la[0]
   lesson_type = get_lesson_type( lesson )
-  lesson_type = LessonType.find_by( code: lesson_type )
+  theLessons = []
   school_grade_specialty = SchoolGradeSpecialty.find_by( code: lesson[0] )
-  theLesson = Lesson.find_by( lesson_type: lesson_type, 
-                             school_grade_specialty: school_grade_specialty,
-                             description: lesson[1])
-  #priority 1 -> 100, 101, 102, ...
-  [ la[1], la[2], la[3]].each_with_index do |la, level|
-    next if not la
-    la.each_with_index do |spec, index|
-      priority = 100 + level*100 + index
-      theSpecialty = Specialty.find_by( code: spec)
-      begin
-        LessonAssignment.create( lesson: theLesson,
-                                specialty: theSpecialty,
-                                priority: priority,
-                                reference: reference )
-      rescue ActiveRecord::RecordNotUnique => e
-        puts "Assignment #{theLesson.description} - #{theSpecialty.code} already exists"
+  if lesson_type != "*"
+    lesson_type = LessonType.find_by( code: lesson_type )
+    theLesson = Lesson.find_by( lesson_type: lesson_type, 
+                               school_grade_specialty: school_grade_specialty,
+                               description: lesson[1])
+    theLessons << theLesson
+  else
+    theLesson = Lesson.where( school_grade_specialty: school_grade_specialty,
+                             description: lesson[1]).to_a
+    theLessons += theLesson
+  end
+
+  theLessons.each do |theLesson|
+    #priority 1 -> 100, 101, 102, ...
+    [ la[1], la[2], la[3]].each_with_index do |la, level|
+      next if not la
+      la.each_with_index do |spec, index|
+        priority = 100 + level*100 + index
+        theSpecialty = Specialty.find_by( code: spec)
+        begin
+          LessonAssignment.create( lesson: theLesson,
+                                  specialty: theSpecialty,
+                                  priority: priority,
+                                  reference: reference )
+          puts "NEW Assignment #{theLesson.description}-#{theLesson.lesson_type.code} with #{theSpecialty.code}"
+        rescue ActiveRecord::RecordNotUnique => e
+          puts "Assignment #{theLesson.description} - #{theSpecialty.code} already exists"
+        end#rescue
       end
     end
-  end
-end
+
+  end#each of theLessons
+
+end#each lesson_assignments
 
 
