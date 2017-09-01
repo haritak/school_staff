@@ -745,7 +745,7 @@ lesson_assignments.each do |la|
                           school_grade_specialty: school_grade_specialty,
                           description: lesson[1])
   end
-  raise "Not found lesson #{lesson[1]}, #{lesson_type.code}, #{school_grade_specialty.code}" if not theLesson
+  raise "Not found lesson #{lesson[1]}, #{lesson_type}, #{school_grade_specialty.code}" if not theLesson
 end
 
 def check_specialties(specialties)
