@@ -156,6 +156,9 @@ lessons_after.each do |lesson|
 end
 
 
+puts
+puts "All done"
+puts "MAKE SURE ANY CURRENT CLASS OF THIS SPECIALTY IS REASSIGNED TO THE NEW"
 
 
   
