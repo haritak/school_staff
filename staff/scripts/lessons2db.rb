@@ -235,6 +235,7 @@ lessons.each do |lesson|
                   school_grade_specialty: school_grade_specialty, 
                   lesson_type: lesson_type,
                   reference: lesson[4] )
+    puts "Lesson #{abbr} created."
   rescue ActiveRecord::RecordNotUnique => e
     puts "Lesson #{abbr} already exists."
   end
