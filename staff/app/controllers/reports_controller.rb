@@ -23,4 +23,19 @@ class ReportsController < ApplicationController
       @missing_hours << [ school_class, total_hours_for_grade, required_lesson_hours, declared_hours ]
     end
   end
+  def school_teachers_report
+    teachers = SchoolTeacher.all
+
+    @teacher_availability = []
+    teachers.each do |teacher|
+      courses = SchoolCourseTeacher.where( school_teacher: teacher)
+
+      registered_hours = 0
+      courses.each do |course|
+        registered_hours += course.school_course.duration
+      end
+
+      @teacher_availability << [ teacher, registered_hours ]
+    end
+  end
 end

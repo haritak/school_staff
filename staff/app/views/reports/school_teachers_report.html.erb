@@ -1,0 +1,10 @@
+
+<table>
+  <% @teacher_availability.each do |ta| %>
+    <tr>
+      <td> <%= ta[0].teacher.person.last_name %> </td>
+      <td> <%= ta[0].teacher.teaching_hours %> </td>
+      <td> <%= ta[1] %> </td>
+    </tr>
+  <% end %>
+</table>
