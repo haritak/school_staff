@@ -143,8 +143,7 @@ class PersonelProcessorController < ApplicationController
     school_id = params[ :school_id ]
     @school = School.find( school_id )
     @teacher = SchoolTeacher.find( school_teacher_id )
-    @available_classes = SchoolClass.where( school: @school,
-                                         deprecated: false ) #TODO : Should include schoolyear
+    @available_classes = SchoolClass.where( school: @school) #TODO : Should include schoolyear
     @available_lessons = Lesson.where( deprecated: false )
   end
 
