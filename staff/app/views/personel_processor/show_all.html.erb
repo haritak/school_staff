@@ -1,0 +1,33 @@
+<%= link_to 'back', pick_lessons_for_path(@teacher.id,
+                                          @teacher.school.id) %>
+
+<%= form_tag register_these_unassigned_lessons_for_path do %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Τμήμα</th>
+      <th>Μάθημα</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <tr>
+
+        <td>
+          <%= select_tag "class_id", 
+            options_from_collection_for_select( @available_classes,
+                                               "id", "short_name" ) %>
+        </td>
+        <td>
+          <%= select_tag "lesson_id", 
+            options_from_collection_for_select( @available_lessons,
+                                               "id", "combined_name" ) %>
+        </td>
+      </tr>
+  </tbody>
+</table>
+
+<%= submit_tag 'Καταχώρηση' %>
+<% end %>
+

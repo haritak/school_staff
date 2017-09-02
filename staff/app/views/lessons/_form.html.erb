@@ -45,6 +45,16 @@
     <%= form.text_field :reference, id: :lesson_reference %>
   </div>
 
+  <div class="field">
+    <%= form.label :deprecated %>
+    <%= form.check_box :deprecated, id: :lesson_deprecated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deprecated_reference %>
+    <%= form.text_field :deprecated_reference, id: :lesson_deprecated_reference %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

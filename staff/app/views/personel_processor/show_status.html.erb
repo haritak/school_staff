@@ -134,3 +134,9 @@ end
 
 <%= submit_tag 'Καταχώρηση' %>
 <% end %>
+
+<p>
+Για καταχώρηση μαθημάτων <em>εκτός ανάθεσης</em> παρακαλώ κάντε κλικ
+<%= link_to 'εδώ.', pick_unassigned_lessons_for_path( @school_teacher.id,
+                                                         @school_teacher.school_id) %>
+</p>

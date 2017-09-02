@@ -137,4 +137,28 @@ class PersonelProcessorController < ApplicationController
     end
     return found_lessons
   end
+
+  def show_all
+    school_teacher_id = params[ :teacher_id ]
+    school_id = params[ :school_id ]
+    @school = School.find( school_id )
+    @teacher = SchoolTeacher.find( school_teacher_id )
+    @available_classes = SchoolClass.where( school: @school,
+                                         deprecated: false ) #TODO : Should include schoolyear
+    @available_lessons = Lesson.where( deprecated: false )
+  end
+
+  def register_unassigned_lessons
+    school_teacher_id = params[ :teacher_id ]
+    school_id = params[ :school_id ]
+
+    class_id = params[ :class_id ]
+    lesson_id = params[ :lesson_id ]
+
+    school_class = SchoolClass.find( class_id )
+    lesson = Lesson.find( lesson_id )
+
+    redirect_to pick_lessons_for_path( school_teacher_id, school_id )
+  end
+
 end

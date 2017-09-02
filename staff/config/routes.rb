@@ -41,6 +41,14 @@ Rails.application.routes.draw do
     to: 'personel_processor#unregister_lessons',
     as: 'unregister_from'
 
+  get '/pick_lessons/:teacher_id/pick_not_assigned/:school_id',
+    to: 'personel_processor#show_all',
+    as: 'pick_unassigned_lessons_for'
+
+  post '/pick_lessons/:teacher_id/pick_not_assigned/:school_id',
+    to: 'personel_processor#register_unassigned_lessons',
+    as: 'register_these_unassigned_lessons_for'
+
 
   root 'personel_processor#pick_school'
 

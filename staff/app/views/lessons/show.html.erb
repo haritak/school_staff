@@ -30,5 +30,15 @@
   <%= @lesson.reference %>
 </p>
 
+<p>
+  <strong>Deprecated:</strong>
+  <%= @lesson.deprecated %>
+</p>
+
+<p>
+  <strong>Deprecated Reference:</strong>
+  <%= @lesson.deprecated_reference %>
+</p>
+
 <%= link_to 'Edit', edit_lesson_path(@lesson) %> |
 <%= link_to 'Back', lessons_path %>
