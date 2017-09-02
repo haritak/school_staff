@@ -1,11 +1,25 @@
-<h1> Select Teacher </h1>
+<h1> Επιλογή Καθηγητή / Καθηγήτριας </h1>
 
-<ol>
-<% @teachers.each do |st| %>
-  <li>
-    <%= link_to "#{st.teacher.full_name} #{st.teacher.teaching_hours}Ω",
-      pick_lessons_for_path( st.id, st.school.id )
-    %>
-  </li>
-<% end %>
-</ol>
+<table>
+  <thead>
+    <tr>
+      <th>Ονοματεπώνυμο</th>
+      <th>Διδακτικές Ώρες</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @teachers.each do |st| %>
+      <tr>
+        <td><%= link_to "#{st.teacher.full_name}",
+          pick_lessons_for_path( st.id, st.school.id )%></td>
+        <td><%= link_to "#{st.teacher.teaching_hours}",
+          pick_lessons_for_path( st.id, st.school.id )%></td>
+        <td><%= link_to "Επιλογή μαθημάτων",
+          pick_lessons_for_path( st.id, st.school.id )%></td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+

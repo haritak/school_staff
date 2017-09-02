@@ -1,38 +1,80 @@
-<%= link_to 'Home', pick_teacher_for_path(@school)%><h1><%= @teacher.full_name %> </h1>
-<strong>
-<p>
-<% @specialties.each do |specialty| %>
-  <%= "#{specialty.code} #{specialty.description}" %><br/>
-<% end %>
-</p>
-<p><%= @school_teacher.disposal_duration%> διδακτικές 
-ώρες για το <%= @school_teacher.school.title %></p> 
-</strong>
+<%= link_to 'Home', pick_teacher_for_path(@school)%>
 
+<% 
+    specialties_code = []
+@specialties.each do |specialty| 
+  specialties_code << specialty.code
+end 
+%>
 
-<h2>Selected courses</h2>
+<h1>
+  <%= @teacher.full_name %> 
+  (<%= specialties_code.join(", ") %>)
+  <%= @school_teacher.hours_for_teaching%> 
+  ώρες στο <%= @school_teacher.school.title %>
+</h1>
+
+<h2>Επιλεγμένες σειρές μαθημάτων</h2>
 
 <% selected_courses_hours = 0 %>
-<% @current_courses.each do |course| %>
-  [<strong>
-  <%= link_to "X", unregister_from_path( @school_teacher.id, 
-                    @school_teacher.school_id, 
-                    course.school_course.id),
-                    method: :delete %>
-</strong>]
-  <%= " " +
-    "#{course.school_course.school_class.school_grade_specialty.description}-" +
-      "#{course.school_course.school_class.number}" +
-      " #{course.school_course.lesson.description}-" +
-      "#{course.school_course.lesson.lesson_type.code}"
-%><br/>
-  <% selected_courses_hours += course.school_course.duration %>
-<% end %>
-<p>
-Συνολικές επιλεγμένες ώρες : <%= selected_courses_hours %>
-</p>
 
-<h2>Available courses</h2>
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Τμήμα</th>
+      <th>Ειδικότητα/Τομέας</th>
+      <th>Μάθημα</th>
+      <th>Ώρες μαθήματος</th>
+      <th>Ώρες επιλεγμένες</th>
+      <th>Εκτιμώμενος μαθητών/μαθητριών</th>
+      <th colspan="1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @current_courses.each do |course| %>
+      <% selected_courses_hours += course.school_course.duration %>
+      <tr>
+        <td>
+          <%= link_to "X", unregister_from_path( @school_teacher.id, 
+                                                @school_teacher.school_id, 
+                                                course.school_course.id),
+                                                method: :delete %>
+      </td>
+        <td>
+          <%= "#{course.school_course.school_class.school_grade_specialty.code}" +
+            "#{course.school_course.school_class.number}" %>
+        </td>
+        <td>
+          <%= course.school_course.school_class.school_grade_specialty.description %>
+        </td>
+        <td>
+          <%= "#{course.school_course.lesson.description}-\
+          #{course.school_course.lesson.lesson_type.code}" %>
+        </td>
+        <td>
+          <%= course.school_course.lesson.hours%>
+        </td>
+        <td>
+          <%= course.school_course.duration %>
+        </td>
+        <td>
+          <%= link_to "διαγραφή", unregister_from_path( @school_teacher.id, 
+                                                       @school_teacher.school_id, 
+                                                       course.school_course.id),
+                                                       method: :delete %>
+      </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2>
+Συνολικές επιλεγμένες ώρες : <%= selected_courses_hours %>
+</h2>
+
+<h2>Διαθέσιμες σειρές μαθημάτων</h2>
 
 <%
     total_hours = 0
