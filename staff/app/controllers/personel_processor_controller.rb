@@ -156,8 +156,32 @@ class PersonelProcessorController < ApplicationController
 
     school_class = SchoolClass.find( class_id )
     lesson = Lesson.find( lesson_id )
+    school_teacher = SchoolTeacher.find( school_teacher_id )
 
-    redirect_to pick_lessons_for_path( school_teacher_id, school_id )
+    
+    alert = ""
+
+    if lesson.school_grade_specialty == 
+        school_class.school_grade_specialty
+      #continue only if assignment is compatible
+      existing_course = SchoolCourse.find_by( school_class: school_class,
+                                           lesson: lesson )
+      if not existing_course
+        existing_course = 
+          SchoolCourse.create( school_class: school_class, lesson: lesson, duration: lesson.hours )
+      end
+
+      #register teacher with course
+      SchoolCourseTeacher.create( school_course: existing_course,
+                                 school_teacher: school_teacher )
+    else
+      alert = "Δεν επιτρέπεται το συγκεκριμένο μάθημα με το συγκεκριμένο τμήμα"
+      redirect_to pick_unassigned_lessons_for_path( school_teacher_id,
+                                                   school_id), alert: alert
+      return
+    end
+
+    redirect_to pick_lessons_for_path( school_teacher_id, school_id)
   end
 
 end
