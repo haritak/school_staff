@@ -20,5 +20,13 @@
   <%= @school_grade_specialty.required_hours %>
 </p>
 
+<p>
+  <strong>Deprecated:</strong>
+  <%= @school_grade_specialty.deprecated %>
+</p>
+<p>
+  <strong>Deprecated Reference:</strong>
+  <%= @school_grade_specialty.deprecated_reference %>
+</p>
 <%= link_to 'Edit', edit_school_grade_specialty_path(@school_grade_specialty) %> |
 <%= link_to 'Back', school_grade_specialties_path %>

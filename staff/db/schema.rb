@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902053009) do
+ActiveRecord::Schema.define(version: 20170902061959) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170902053009) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "required_hours"
+    t.boolean "deprecated", default: false
+    t.string "deprecated_reference"
     t.index ["code"], name: "index_school_grade_specialties_on_code", unique: true
     t.index ["school_grade_id"], name: "index_school_grade_specialties_on_school_grade_id"
   end

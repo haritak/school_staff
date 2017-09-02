@@ -31,6 +31,16 @@
     <%= form.number_field :required_hours, id: :school_grade_specialty_required_hours %>
   </div>
 
+  <div class="field">
+    <%= form.label :deprecated %>
+    <%= form.check_box :deprecated, id: :school_grade_specialty_deprecated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deprecated_reference %>
+    <%= form.text_field :deprecated_reference, id: :school_grade_specialty_deprecated_reference %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
