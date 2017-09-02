@@ -80,6 +80,8 @@ class SchoolClassesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_class_params
-      params.require(:school_class).permit(:schoolyear_id, :school_id, :school_grade_specialty_id, :number, :capacity)
+      params.require(:school_class).permit(:schoolyear_id, :school_id, :school_grade_specialty_id, :number, :capacity,
+                                          :deprecated,
+                                          :deprecated_reference)
     end
 end

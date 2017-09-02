@@ -24,6 +24,14 @@
   <strong>Capacity:</strong>
   <%= @school_class.capacity %>
 </p>
+<p>
+  <strong>Deprecated:</strong>
+  <%= @school_class.deprecated %>
+</p>
+<p>
+  <strong>Deprecated Reference:</strong>
+  <%= @school_class.deprecated_reference %>
+</p>
 
 <%= link_to 'Edit', edit_school_class_path(@school_class) %> |
 <%= link_to 'Back', school_classes_path %>

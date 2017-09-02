@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170830170122) do
+ActiveRecord::Schema.define(version: 20170902053009) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 20170830170122) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "reference"
+    t.boolean "deprecated", default: false
+    t.string "deprecated_reference"
     t.index ["abbr"], name: "index_lessons_on_abbr", unique: true
     t.index ["lesson_type_id"], name: "index_lessons_on_lesson_type_id"
     t.index ["school_grade_specialty_id"], name: "index_lessons_on_school_grade_specialty_id"
@@ -66,6 +68,8 @@ ActiveRecord::Schema.define(version: 20170830170122) do
     t.integer "capacity"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "deprecated", default: false
+    t.string "deprecated_reference"
     t.index ["school_grade_specialty_id"], name: "index_school_classes_on_school_grade_specialty_id"
     t.index ["school_id"], name: "index_school_classes_on_school_id"
     t.index ["schoolyear_id", "school_id", "school_grade_specialty_id", "number"], name: "uniqeness in school_classes", unique: true

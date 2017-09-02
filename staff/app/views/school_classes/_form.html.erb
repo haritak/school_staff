@@ -42,6 +42,16 @@
     <%= form.number_field :capacity, id: :school_class_capacity %>
   </div>
 
+  <div class="field">
+    <%= form.label :deprecated %>
+    <%= form.check_box :deprecated, id: :school_class_deprecated %>
+  </div>
+
+  <div class="field">
+    <%= form.label :deprecated_reference %>
+    <%= form.text_field :deprecated_reference, id: :school_class_deprecated_reference %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
