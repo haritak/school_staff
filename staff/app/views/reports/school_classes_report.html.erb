@@ -1,0 +1,18 @@
+
+<table>
+  <% @missing_hours.each do |mh| %>
+
+    <tr>
+      <td><%= mh[0].school_grade_specialty.code %><%= mh[0].number %></td>
+      <td><%= mh[1] %></td>
+      <td><%= mh[2] %></td>
+      <td><%= mh[3] %></td>
+      <% if mh[2]<mh[1] %>
+        <td> - </td>
+      <% else %>
+        <td>  </td>
+      <% end %>
+    </tr>
+
+  <% end %>
+</table>
