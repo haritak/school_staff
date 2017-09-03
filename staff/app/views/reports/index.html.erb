@@ -1,13 +1,5 @@
 <h1>Αναφορές</h1>
 
-<p>
-<%= link_to 'Τμημάτων', controller: :reports,
-  action: "school_classes_report" %>
-</p>
-<p>
-<%= 
-  link_to 'Καθηγητών/Καθηγητριών', 
-  controller: :reports,
-  action: "school_teachers_report" 
-%>
-</p>
+<p> <%= link_to 'Μαθήματα ανα καθηγητή', controller: :reports, action: "lessons_per_teacher" %> </p>
+<p> <%= link_to 'Τμημάτων', controller: :reports, action: "school_classes_report" %> </p>
+<p> <%= link_to 'Καθηγητών/Καθηγητριών', controller: :reports, action: "school_teachers_report" %> </p>

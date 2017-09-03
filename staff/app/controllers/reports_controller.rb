@@ -1,4 +1,17 @@
 class ReportsController < ApplicationController
+
+  def lessons_per_teacher
+    school_teachers = SchoolTeacher.all
+    @courses_per_teacher = {}
+    school_teachers.each do |sct|
+      @courses_per_teacher[ sct ] = [] if not @courses_per_teacher[ sct ]
+      school_courses = SchoolCourseTeacher.where( school_teacher: sct )
+      school_courses.each do |sc|
+        @courses_per_teacher[ sct ] << sc
+      end
+    end
+  end
+
   def school_classes_report
     school_classes = SchoolClass.all
 

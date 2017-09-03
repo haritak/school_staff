@@ -1,0 +1,49 @@
+
+<table>
+  <tr>
+    <td> </td>
+    <td> </td>
+    <td><center> Ώρες που <br/>θα πρέπει να έχει</center></td>
+    <td><center> Τμήμα </center></td>
+    <td><center> Μάθημα </center></td>
+    <td><center> Διάρκεια μαθήματος </center></td>
+  </tr>
+  <% @courses_per_teacher.each do |school_teacher, courses| %>
+    <% 
+        teacher_specialties = ""
+    school_teacher.teacher.teacher_specialties.each do |tsp| 
+      teacher_specialties += tsp.specialty.code
+    end
+  %>
+<tr>
+  <td> <%= school_teacher.teacher.full_name %> </td>
+  <td> <%= teacher_specialties %> </td>
+  <td> <%= school_teacher.hours_for_teaching %> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+</tr>
+<% registered_hours = 0%>
+<% courses.each do |course| %>
+  <tr>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> <%= course.school_course.school_class.short_name %> </td>
+    <td> <%= course.school_course.lesson.combined_name %> </td>
+    <td> <%= course.school_course.duration %> </td>
+  </tr>
+  <% registered_hours += course.school_course.duration %>
+<% end %>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+    <td> Συνολικές επιλεγμένες ώρες </td>
+    <td> <%= registered_hours %> </td>
+    <td> </td>
+    <td> </td>
+    <td> </td>
+
+  <% end %>
+</table>
