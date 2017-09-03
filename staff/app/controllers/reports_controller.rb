@@ -22,14 +22,15 @@ class ReportsController < ApplicationController
           school_class.get_required_no_teachers( lesson )
         required_hours =
           school_class.get_required_hours( lesson )
+        required_magic_number = required_hours * required_no_teachers
 
         total_teachers = {}
         total_hours = 0
         school_courses.each do |sc|
-          total_hours += sc.duration
           school_course_teachers = SchoolCourseTeacher.where( school_course: sc )
           school_course_teachers.each do |sct|
             t = sct.school_teacher
+            total_hours += sc.duration
             total_teachers[ t ] =  "not used"
           end
         end
@@ -37,7 +38,7 @@ class ReportsController < ApplicationController
         hours = hours<0? 0 : hours
         teachers = required_no_teachers - total_teachers.length
         teachers = teachers<0? 0 : teachers
-        @missing_lessons[school_class] << [lesson, teachers, hours] if hours>0 or teachers>0
+        @missing_lessons[school_class] << [lesson, teachers, hours] if hours>0
       end
     end
   end
