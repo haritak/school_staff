@@ -35,15 +35,23 @@
   </tr>
   <% registered_hours += course.school_course.duration %>
 <% end %>
+<tr>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> </td>
+  <td> Συνολικές επιλεγμένες ώρες </td>
+  <td> <%= registered_hours %> </td>
+  <td> </td>
+  <td> </td>
+  <% if registered_hours == school_teacher.hours_for_teaching %>
     <td> </td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
-    <td> Συνολικές επιλεγμένες ώρες </td>
-    <td> <%= registered_hours %> </td>
-    <td> </td>
-    <td> </td>
-    <td> </td>
+  <% elsif registered_hours > school_teacher.hours_for_teaching %>
+    <td> + <%= registered_hours - school_teacher.hours_for_teaching %> </td>
+    <% else %>
+      <td> - <%= school_teacher.hours_for_teaching - registered_hours %> </td>
+    <% end %>
+</tr>
 
   <% end %>
 </table>
