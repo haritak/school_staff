@@ -1,0 +1,40 @@
+<% @missing_lessons.each do |school_class, lessons| %>
+
+  <h3>
+    <%= school_class.short_name %>
+  </h3>
+  <p>Εκτιμώμενος αριθμός μαθητών/μαθητριών : <%= school_class.capacity %><br/>
+  Ώρες που θα πρέπει να έχει : <%= school_class.school_grade_specialty.required_hours %>
+</p>
+
+<table>
+  <tr>
+    <td>Μάθημα</td>
+    <td>Καθηγ.</br>που λείπουν</td>
+    <td>Ώρες</br>που λείπουν</td>
+  </tr>
+  <% unregistered_hours = 0 %>
+  <% unregistered_teachers = 0 %>
+  <% lessons.each do |la| %>
+    <% lesson = la[0] %>
+    <% required_teachers = la[1] %>
+    <% required_hours = la[2] %>
+    <tr>
+      <td> <%= lesson.combined_name %> </td>
+      <td> <%= required_teachers %> </td>
+      <td> <%= required_hours %> </td>
+      <% unregistered_hours += required_hours %>
+      <% unregistered_teachers += required_teachers %>
+    </tr>
+  <% end %>
+  <tr>
+    <td>Σύνολο ωρών που λείπουν:</td>
+    <td><%= unregistered_hours %></td>
+  </tr>
+  <tr>
+    <td>Σύνολο διδασκώντων που λείπουν:</td>
+    <td><%= unregistered_teachers %></td>
+  </tr>
+</table>
+
+<% end %>

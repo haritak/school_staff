@@ -1,4 +1,47 @@
 class ReportsController < ApplicationController
+  def unregistered_lessons_per_class
+    @school_classes = SchoolClass.all
+    @missing_lessons = {}
+    @school_classes.each do |school_class|
+      required_lessons = school_class.get_required_lessons
+
+      @missing_lessons[school_class] = [] 
+      required_lessons.each do |lesson|
+        school_courses = SchoolCourse.where( school_class: school_class,
+                                              lesson: lesson ).to_a
+        if school_courses.length==0
+          required_teachers = school_class.get_required_no_teachers( lesson )
+          required_hours = school_class.get_required_hours( lesson )
+          @missing_lessons[school_class] << [lesson, 
+                                             required_teachers,
+                                             required_hours ]
+          next
+        end
+
+        required_no_teachers = 
+          school_class.get_required_no_teachers( lesson )
+        required_hours =
+          school_class.get_required_hours( lesson )
+
+        total_teachers = {}
+        total_hours = 0
+        school_courses.each do |sc|
+          total_hours += sc.duration
+          school_course_teachers = SchoolCourseTeacher.where( school_course: sc )
+          school_course_teachers.each do |sct|
+            t = sct.school_teacher
+            total_teachers[ t ] =  "not used"
+          end
+        end
+        if total_hours < required_hours or
+            total_teachers.length < required_no_teachers
+          @missing_lessons[school_class] << [lesson,
+                                             required_no_teachers - total_teachers.length,
+                                             required_hours - total_hours ]
+        end
+      end
+    end
+  end
 
   def registered_lessons_per_class
     @school_classes = SchoolClass.all
