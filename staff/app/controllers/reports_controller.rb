@@ -1,5 +1,14 @@
 class ReportsController < ApplicationController
 
+  def registered_lessons_per_class
+    @school_classes = SchoolClass.all
+    @lessons_per_class = {}
+    @school_classes.each do |school_class|
+      courses = SchoolCourse.where( school_class: school_class )
+      @lessons_per_class[ school_class ] = courses
+    end
+  end
+
   def lessons_per_teacher
     school_teachers = SchoolTeacher.all
     @courses_per_teacher = {}

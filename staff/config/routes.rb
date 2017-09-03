@@ -60,6 +60,7 @@ Rails.application.routes.draw do
   get '/reports/classes', to: 'reports#school_classes_report'
   get '/reports/teachers', to: 'reports#school_teachers_report'
   get '/reports/teachers/lessons', to: 'reports#lessons_per_teacher'
+  get '/reports/classes/registered_lessons', to: 'reports#registered_lessons_per_class'
 
   #get '/pick_teacher/:school_id', 
     #to: 'personel_processor#pick_teacher',

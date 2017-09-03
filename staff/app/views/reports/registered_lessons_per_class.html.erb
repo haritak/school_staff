@@ -1,0 +1,37 @@
+<% missing_hours = [] %>
+<% @lessons_per_class.each do |school_class, courses| %>
+
+  <h3>
+    <%= school_class.short_name %>
+  </h3>
+  <p>Εκτιμώμενος αριθμός μαθητών/μαθητριών : <%= school_class.capacity %><br/>
+  Ώρες που θα πρέπει να έχει : <%= school_class.school_grade_specialty.required_hours %>
+</p>
+
+<table>
+  <tr>
+    <td>Μάθημα</td>
+    <td><center>Ώρες στο <br/>ωρολόγιο</center></td>
+    <td><center>Διδάσκωντες</td>
+  </tr>
+  <% registered_hours = 0 %>
+  <% courses.each do |school_course| %>
+    <tr>
+      <td> <%= school_course.lesson.combined_name%> </td>
+      <td> <%= school_course.duration %> </td>
+      <% registered_hours += school_course.duration %>
+      <td> 
+        <% school_course.school_course_teachers.each do |sct| %>
+          <%= sct.school_teacher.teacher.full_name%> <br/>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+  <tr>
+    <td><strong>Συνολικές ώρες</strong></td>
+    <td><strong><%= registered_hours %></strong></td>
+    <td></td>
+  </tr>
+</table>
+
+<% end %>
