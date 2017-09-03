@@ -23,7 +23,7 @@
       <td> <%= lesson.combined_name %> </td>
       <td> <%= required_teachers %> </td>
       <td> <%= required_hours %> </td>
-      <% unregistered_hours += required_hours %>
+      <% unregistered_hours += required_hours*required_teachers %>
       <% unregistered_teachers += required_teachers %>
     </tr>
   <% end %>
