@@ -33,12 +33,11 @@ class ReportsController < ApplicationController
             total_teachers[ t ] =  "not used"
           end
         end
-        if total_hours < required_hours or
-            total_teachers.length < required_no_teachers
-          @missing_lessons[school_class] << [lesson,
-                                             required_no_teachers - total_teachers.length,
-                                             required_hours - total_hours ]
-        end
+        hours = required_hours-total_hours
+        hours = hours<0? 0 : hours
+        teachers = required_no_teachers - total_teachers.length
+        teachers = teachers<0? 0 : teachers
+        @missing_lessons[school_class] << [lesson, teachers, hours] if hours>0 or teachers>0
       end
     end
   end
