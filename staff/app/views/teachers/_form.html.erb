@@ -27,12 +27,14 @@
 
   <div class="field">
     <%= form.label :date_in_school %>
-    <%= form.date_select :date_in_school, id: :teacher_date_in_school %>
+    <%= form.date_select :date_in_school, id: :teacher_date_in_school,
+      start_year: 1950 %>
   </div>
 
   <div class="field">
     <%= form.label :date_employed %>
-    <%= form.date_select :date_employed, id: :teacher_date_employed %>
+    <%= form.date_select :date_employed, id: :teacher_date_employed,
+      start_year: 1950 %>
   </div>
 
   <div class="field">
