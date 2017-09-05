@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Saved school course:</strong>
+  <%= @saved_school_course_teacher.saved_school_course %>
+</p>
+
+<p>
+  <strong>School teacher:</strong>
+  <%= @saved_school_course_teacher.school_teacher %>
+</p>
+
+<p>
+  <strong>Save no:</strong>
+  <%= @saved_school_course_teacher.save_no %>
+</p>
+
+<%= link_to 'Edit', edit_saved_school_course_teacher_path(@saved_school_course_teacher) %> |
+<%= link_to 'Back', saved_school_course_teachers_path %>

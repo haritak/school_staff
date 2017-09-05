@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170902061959) do
+ActiveRecord::Schema.define(version: 20170905024945) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -58,6 +58,27 @@ ActiveRecord::Schema.define(version: 20170902061959) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["first_name", "last_name", "father_name", "mother_name"], name: "uniqness_in_people", unique: true
+  end
+
+  create_table "saved_school_course_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "saved_school_course_id"
+    t.bigint "school_teacher_id"
+    t.integer "save_no"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["saved_school_course_id"], name: "index_saved_school_course_teachers_on_saved_school_course_id"
+    t.index ["school_teacher_id"], name: "index_saved_school_course_teachers_on_school_teacher_id"
+  end
+
+  create_table "saved_school_courses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_class_id"
+    t.bigint "lesson_id"
+    t.integer "duration"
+    t.integer "save_no"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_id"], name: "index_saved_school_courses_on_lesson_id"
+    t.index ["school_class_id"], name: "index_saved_school_courses_on_school_class_id"
   end
 
   create_table "school_classes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -183,6 +204,10 @@ ActiveRecord::Schema.define(version: 20170902061959) do
 
   add_foreign_key "lesson_assignments", "lessons"
   add_foreign_key "lesson_assignments", "specialties"
+  add_foreign_key "saved_school_course_teachers", "saved_school_courses"
+  add_foreign_key "saved_school_course_teachers", "school_teachers"
+  add_foreign_key "saved_school_courses", "lessons"
+  add_foreign_key "saved_school_courses", "school_classes"
   add_foreign_key "school_classes", "school_grade_specialties"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "school_classes", "schoolyears"

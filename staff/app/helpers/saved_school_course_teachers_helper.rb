@@ -1,0 +1,2 @@
+module SavedSchoolCourseTeachersHelper
+end

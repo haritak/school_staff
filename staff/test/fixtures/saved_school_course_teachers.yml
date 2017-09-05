@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  saved_school_course: one
+  school_teacher: one
+  save_no: 1
+
+two:
+  saved_school_course: two
+  school_teacher: two
+  save_no: 1
