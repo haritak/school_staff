@@ -55,6 +55,17 @@ class PersonelProcessorController < ApplicationController
     teacher_id = params[:teacher_id]
     school_id = params[:school_id]
 
+    all_requested_hours = {}
+    params.each do |p, v|
+      if p.start_with? "registered_hours"
+        parts = p.split
+        class_grade_id = parts[1].to_i
+        class_number = parts[2].to_i
+        lesson_id = parts[3].to_i
+        all_requested_hours[ "#{class_grade_id} #{class_number} #{lesson_id}" ] = v
+      end
+    end
+
     params.each do |p|
       if p.start_with? "register_me"
         parts = p.split
@@ -62,7 +73,8 @@ class PersonelProcessorController < ApplicationController
         class_number = parts[2].to_i
         lesson_id = parts[3].to_i
 
-        theTeacher = SchoolTeacher.find( teacher_id )
+        requested_hours = all_requested_hours[ "#{class_grade_id} #{class_number} #{lesson_id}"]
+
         theSchool = School.find( school_id )
         theGrade = SchoolGradeSpecialty.find( class_grade_id )
         theClass = SchoolClass.find_by( school_grade_specialty: theGrade,
@@ -70,13 +82,15 @@ class PersonelProcessorController < ApplicationController
         theLesson = Lesson.find( lesson_id )
 
         theSchoolCource = SchoolCourse.find_by( school_class: theClass,
-                                               lesson: theLesson)
+                                               lesson: theLesson,
+                                              duration: requested_hours )
         if not theSchoolCource
           theSchoolCource = SchoolCourse.create( school_class: theClass,
-                                                duration: theLesson.hours,
+                                                duration: requested_hours,
                                                 lesson: theLesson)
         end
 
+        theTeacher = SchoolTeacher.find( teacher_id )
         SchoolCourseTeacher.create( school_course: theSchoolCource,
                                    school_teacher: theTeacher )
           SchoolCourse.create
