@@ -127,7 +127,7 @@ class PersonelProcessorController < ApplicationController
       end
     end
     all_courses.sort! do |left, right|
-      left[3] <=> right[3]
+      left[0] <=> right[0] #sort by school grade
     end
 
     return all_courses
