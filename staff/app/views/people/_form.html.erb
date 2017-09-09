@@ -11,33 +11,37 @@
     </div>
   <% end %>
 
+  <p>Κατά προτίμηση, χωρίς αυτό να είναι αναγκαίο,
+  χρησιμοποιείστε κεφαλαία γράμματα χωρίς τόνους.</p>
+  <p>Αλλιώς, στην περίπτωση που χρησιμοποιήσετε κεφαλαία και μικρά
+  γράμματα, προσέξτε τον τονισμό τους.</p>
   <div class="field">
-    <%= form.label :first_name %>
+    <%= form.label "Μικρό όνομα" %>
     <%= form.text_field :first_name, id: :person_first_name %>
   </div>
 
   <div class="field">
-    <%= form.label :last_name %>
+    <%= form.label "Επώνυμο" %>
     <%= form.text_field :last_name, id: :person_last_name %>
   </div>
 
   <div class="field">
-    <%= form.label :father_name %>
+    <%= form.label "Πατρώνυμο" %>
     <%= form.text_field :father_name, id: :person_father_name %>
   </div>
 
   <div class="field">
-    <%= form.label :mother_name %>
+    <%= form.label "Μητρώνυμο" %>
     <%= form.text_field :mother_name, id: :person_mother_name %>
   </div>
 
   <div class="field">
-    <%= form.label :notification_email %>
+    <%= form.label "e-mail" %>
     <%= form.text_field :notification_email, id: :person_notification_email %>
   </div>
 
   <div class="field">
-    <%= form.label :notifcation_sms_phone %>
+    <%= form.label "Κινητό τηλέφωνο" %>
     <%= form.text_field :notifcation_sms_phone, id: :person_notifcation_sms_phone %>
   </div>
 

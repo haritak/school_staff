@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :teacher_id %>
+    <%= form.label "Επιλογή καθηγητή/καθηγήτριας" %>
     <%= form.collection_select :teacher_id,
     Teacher.order(:id), :id, :full_name,
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :school_id %>
+    <%= form.label "Σχολείο" %>
     <%= form.collection_select :school_id,
     School.order(:id), :id, :title,
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :disposal_duration %>
+    <%= form.label "Χρόνος διάθεσης στο σχολείο" %>
     <%= form.number_field :disposal_duration, id: :school_teacher_disposal_duration %>
   </div>
 
