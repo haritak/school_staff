@@ -55,25 +55,35 @@ class PersonelProcessorController < ApplicationController
     teacher_id = params[:teacher_id]
     school_id = params[:school_id]
 
-    all_requested_hours = {}
+    req_hours_per_course = {}
     params.each do |p, v|
       if p.start_with? "registered_hours"
         parts = p.split
         class_grade_id = parts[1].to_i
         class_number = parts[2].to_i
         lesson_id = parts[3].to_i
-        all_requested_hours[ "#{class_grade_id} #{class_number} #{lesson_id}" ] = v
+        req_hours_per_course[ "#{class_grade_id} #{class_number} #{lesson_id}" ] = v
       end
     end
 
     params.each do |p|
-      if p.start_with? "register_me"
-        parts = p.split
+      theTeacher = SchoolTeacher.find( teacher_id )
+      parts = p.split
+
+      if parts[0].start_with? "count_me_in"
+
+        school_course_id = parts[1].to_i
+        theSchoolCourse = SchoolCourse.find( school_course_id )
+        SchoolCourseTeacher.create( school_course: theSchoolCourse,
+                                   school_teacher: theTeacher )
+
+      elsif parts[0].start_with? "register_me"
+
         class_grade_id = parts[1].to_i
         class_number = parts[2].to_i
         lesson_id = parts[3].to_i
 
-        requested_hours = all_requested_hours[ "#{class_grade_id} #{class_number} #{lesson_id}"]
+        requested_hours = req_hours_per_course[ "#{class_grade_id} #{class_number} #{lesson_id}"]
 
         theSchool = School.find( school_id )
         theGrade = SchoolGradeSpecialty.find( class_grade_id )
@@ -81,19 +91,12 @@ class PersonelProcessorController < ApplicationController
                                        number: class_number )
         theLesson = Lesson.find( lesson_id )
 
-        theSchoolCource = SchoolCourse.find_by( school_class: theClass,
-                                               lesson: theLesson,
-                                              duration: requested_hours )
-        if not theSchoolCource
-          theSchoolCource = SchoolCourse.create( school_class: theClass,
-                                                duration: requested_hours,
-                                                lesson: theLesson)
-        end
+        theSchoolCource = SchoolCourse.create( school_class: theClass,
+                                              duration: requested_hours,
+                                              lesson: theLesson)
 
-        theTeacher = SchoolTeacher.find( teacher_id )
         SchoolCourseTeacher.create( school_course: theSchoolCource,
                                    school_teacher: theTeacher )
-          SchoolCourse.create
       end
     end
 
@@ -103,31 +106,59 @@ class PersonelProcessorController < ApplicationController
   def get_available_courses_for( someteacher, someschool )
 
     all_classes_at_school = SchoolClass.where( school: someschool )
-    all_teacher_specialties = TeacherSpecialty.where( teacher: someteacher )
+    my_teacher_specialties = TeacherSpecialty.where( teacher: someteacher )
 
     all_courses = []
     all_classes_at_school.each do |sc|
       class_grade = sc.school_grade_specialty
       class_number = sc.number
 
-      lessons = get_lessons_for( class_grade, all_teacher_specialties )
+      lessons = get_lessons_for( class_grade, my_teacher_specialties )
+
+      school_class = SchoolClass.find_by( school_grade_specialty: class_grade,
+                                         number: class_number )
       lessons.each do |lesson|
-        school_class = SchoolClass.find_by( school_grade_specialty: class_grade,
-                                           number: class_number )
-        school_course = SchoolCourse.find_by( school_class: school_class,
-                                             lesson: lesson )
-        already_registered = SchoolCourseTeacher.where(
-          school_course: school_course ).to_a
-        all_courses << [ class_grade, 
-                         class_number, 
-                         lesson[0],  #lesson
-                         lesson[1],  #lesson assignment priority
-                         already_registered
-        ]
+
+        total_required_hours = 
+          school_class.get_total_required_hours( lesson[:lesson] )
+
+        school_courses = SchoolCourse.where( school_class: school_class,
+                                            lesson: lesson[:lesson] ).to_a
+
+        #already registered
+        already_registered_hours = 0
+        school_courses.each do |school_course|
+          already_registered = SchoolCourseTeacher.where(
+            school_course: school_course ).to_a
+
+            already_registered_hours = 
+              already_registered.length * school_course.duration
+
+            all_courses << { school_course: school_course,
+                             school_class: sc, #left for convienience
+                             lesson: lesson[:lesson], #left for convienience
+                             duration: school_course.duration, #left for convienience
+                             lesson_priority: lesson[:assignment_priority], 
+                             already_registered: already_registered,
+            }
+        end#for each school course
+
+        #add an empty place holder for new school courses
+        if already_registered_hours < total_required_hours
+          available_hours = total_required_hours - already_registered_hours
+          all_courses << { school_course: nil,
+                           school_class: sc,
+                           lesson: lesson[:lesson],
+                           duration: available_hours,
+                           lesson_priority: lesson[:assignment_priority], 
+                           already_registered: [],
+          }
+        end
+
       end
     end
     all_courses.sort! do |left, right|
-      left[0] <=> right[0] #sort by school grade
+      left[:school_class].school_grade_specialty <=> right[:school_class].school_grade_specialty 
     end
 
     return all_courses
@@ -145,7 +176,9 @@ class PersonelProcessorController < ApplicationController
       lesson_assignments = LessonAssignment.where( lesson: lesson )
       lesson_assignments.each do |lesson_assignment|
         if specialties_codes.include? lesson_assignment.specialty.code 
-          found_lessons << [lesson, lesson_assignment.priority ]
+          found_lessons << { lesson: lesson, 
+                             assignment_priority: lesson_assignment.priority 
+          }
         end
       end
     end

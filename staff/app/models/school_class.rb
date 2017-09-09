@@ -20,6 +20,7 @@ class SchoolClass < ApplicationRecord
     end
     return lesson.hours
   end
+
   def get_required_no_teachers( lesson )
     if lesson.lesson_type.code == 'Ε' #TODO fragile
       if capacity > 12
@@ -29,4 +30,9 @@ class SchoolClass < ApplicationRecord
 
     return 1
   end
+
+  def get_total_required_hours( lesson )
+    get_required_no_teachers( lesson ) * get_required_hours( lesson )
+  end
+
 end
