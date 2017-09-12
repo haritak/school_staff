@@ -1,9 +1,13 @@
-<h1>Schedule</h1>
+<h1>Πρόγραμμα</h1>
 
 <p>
-<%= link_to 'Create snapshot', controller: "schedule", action: "save_form" %>
+<%= link_to 'Αποθήκευση τρέχουσας εικόνας προγράμματος', controller: "schedule", action: "save_form" %>
 </p>
 
 <p>
-<%= link_to 'Show diffs', controller: "schedule", action: "diff" %>
+<%= link_to 'Σύγκριση δύο τελευταίων εικόνων', controller: "schedule", action: "diff" %>
+</p>
+
+<p>
+<%= link_to 'Σύγκριση δύο οποινδήποτε εικόνων', controller: "schedule", action: "diff_general" %>
 </p>

@@ -44,7 +44,25 @@ class ScheduleController < ApplicationController
     redirect_to '/schedule/index'
   end
 
+  def diff_general
+    @all_snapshots = ScheduleSnapshot.all
+  end
+
   def diff(latest_no=nil, previous_no=nil)
+    if params
+      params.each do |p|
+        if p.start_with? "save_no"
+          a = p.split[1].to_i
+          latest_no = a if not latest_no
+          previous_no = a if not previous_no
+        end
+      end
+    end
+    if latest_no and previous_no and previous_no>latest_no
+      b = latest_no
+      latest_no = previous_no
+      previous_no = b
+    end
 
     if not latest_no
       latest_no = SavedSchoolCourse.maximum( :save_no )

@@ -1,0 +1,27 @@
+<h1>Επιλογή εικόνων προς σύγκριση</h1>
+
+
+<%= form_tag schedule_diff_path do %>
+<table>
+  <thead>
+    <th>Νούμερο εικόνας</th>
+    <th>Σχόλιο</th>
+    <th>Ημερομηνία</th>
+    <th>Επιλογή (δύο ακριβως)</th>
+  </thead>
+  <tbody>
+<% @all_snapshots.each_with_index do |snapshot,i| %>
+  <tr>
+    <td> <%= snapshot.save_no %> </td>
+    <td> <%= snapshot.description %> </td>
+    <td> <%= snapshot.created_at %> </td>
+    <td> <%= check_box_tag "save_no #{snapshot.save_no}",
+      "save_no #{snapshot.save_no}" %> </td>
+  </tr>
+<% end %>
+  </tbody>
+</table>
+
+
+<%= submit_tag 'Σύγκριση' %>
+<% end %>

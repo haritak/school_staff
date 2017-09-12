@@ -1,38 +1,35 @@
-<h1>Schedule#diff</h1>
-<p>Find me in app/views/schedule/diff.html.erb</p>
+<h1>Σύγκριση προγραμμάτων</h1>
 
-<h2>Previous schedule</h2>
-<h3>
+<h2>Εικόνα Προηγούμενου Προγράμματος (
   <%= @schedule_snapshot_previous.description %> 
   taken at 
   <%= @schedule_snapshot_previous.created_at %>
-</h3>
+  )</h2>
 <% @previous_schedule.each do |s| %>
   <%= s %><br/>
 <% end %>
 
-<h2>Latest schedule</h2>
-<h3>
+<h2>Τελευταία εικόνα προγράμματος (
   <%= @schedule_snapshot_latest.description %> 
   taken at 
   <%= @schedule_snapshot_latest.created_at %>
-</h3>
+  )</h2>
 <% @latest_schedule.each do |s| %>
   <%= s %><br/>
 <% end %>
 
-<h2>Μόνο οι διαφορές</h2>
-<h3>Αρχή διαφορών</h3>
-<h4>Μαθήματα που δεν υπάρχουν στο νέο πρόγραμμα ή έχουν αλλαγές</h4>
+<h2>Διαφορές μεταξύ των εικόνων</h2>
+<h4>Μαθήματα από το παλιό που δεν υπάρχουν στον νέο.</h4>
 <% @previous_schedule.each do |s| %>
   <% if not s.ends_with? "==" %>
     <%= s %><br/>
   <% end %>
 <% end %>
-<h4>Νέα μαθήματα στο νέο πρόγραμμα</h4>
+<h4>Νέα μαθήματα του νέου προγράμματος</h4>
 <% @latest_schedule.each do |s| %>
   <% if not s.ends_with? "==" %>
     <%= s %><br/>
   <% end %>
 <% end %>
 <h3>Τέλος διαφορών</h3>
+<% console %>
