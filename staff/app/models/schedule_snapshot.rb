@@ -1,0 +1,2 @@
+class ScheduleSnapshot < ApplicationRecord
+end

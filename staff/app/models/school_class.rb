@@ -14,7 +14,7 @@ class SchoolClass < ApplicationRecord
   def get_required_hours( lesson )
     if lesson.description.include? "Πληροφορική" or 
         lesson.description.include? "Ερευνητική"
-      if capacity > 17
+      if capacity > 16
         return 2 * lesson.hours
       end
     end
