@@ -79,7 +79,8 @@ end
 <%
     total_hours = 0
 @available_courses.each do |course| 
-  total_hours += course[2].hours
+  total_hours += course[:school_class].
+    get_total_required_hours( course[:lesson] )
 end
  %>
 
@@ -99,8 +100,9 @@ end
     <tr>
       <th>Τμήμα</th>
       <th>Μάθημα</th>
-      <th>Ώρες μαθήματος</th>
-      <th>Ώρες επιλεγμένες</th> 
+      <th>Ώρες<br/>μαθήματος
+        <br/>προς διάθεση</th>
+      <th>Επιλεγμένες</br>ώρες</th> 
       <th>Διδάσκων</th>
       <th>Επιλογή</th>
       <th>Προτεραιότητα</th>
@@ -109,34 +111,46 @@ end
 
   <tbody>
 <% @available_courses.each do |course|
-  class_grade = course[0]
-  class_number = course[1]
+  class_grade = course[:school_class].school_grade_specialty
+  class_number = course[:school_class].number
   class_name = "#{class_grade.description}-#{class_number}"
-  theLesson = course[2]
-  priority = course[3]
-  registered_courses = course[4]
+  theLesson = course[:lesson]
+  courseDuration = course[:duration]
+  priority = course[:assignment_priority]
+  registered_teachers = course[:already_registered]
 %>
       <tr>
 
+        <% lesson_total_required_hours = 
+          course[:school_class].get_total_required_hours( theLesson ) %>
+
         <td><%= class_name %></td>
         <td><%= theLesson.description %>-<%=theLesson.lesson_type.code%></td>
-        <td><%= theLesson.hours %></td>
+        <td><%= lesson_total_required_hours %></td>
+
+        <% if registered_teachers.length > 0 %>
+
+          <td><%= courseDuration %></td>
+          <td>
+            <% registered_teachers.each do |sct| %>
+              <%=sct.school_teacher.teacher.full_name%> <br/>
+            <% end %>
+          </td>
+          <td>
+            <% school_course = course[:school_course] %>
+            <%= check_box_tag "count_me_in #{school_course.id}",
+              "#{school_course.id}", false %>
+        </td>
+
+      <% else %>
+
         <td><%= text_field_tag "registered_hours #{class_grade.id} #{class_number} #{theLesson.id}", 
           theLesson.hours, maxlength: 2 %></td>
-        <td>
-          <% 
-            if registered_courses.length > 0 
-              registered_courses.each do |course|
-            %>
-          <%=course.school_teacher.teacher.full_name%> <br/>
-          <%
-              end
-            end
-          %>
-        </td>
+        <td></td>
         <td><%= check_box_tag "register_me #{class_grade.id} #{class_number} #{theLesson.id}",
           "#{class_grade.id} #{class_number} #{theLesson.id}", false %></td>
         <td><%= priority %></td>
+      <% end %>
       </tr>
 <% end %>
   </tbody>
@@ -145,6 +159,7 @@ end
 <%= submit_tag 'Καταχώρηση' %>
 <% end %>
 
+<!--
 <p>
 Για καταχώρηση μαθημάτων <em>εκτός ανάθεσης</em> παρακαλώ κάντε κλικ
 <strong>
@@ -152,3 +167,4 @@ end
                                                          @school_teacher.school_id) %>.
 </strong>
 </p>
+-->

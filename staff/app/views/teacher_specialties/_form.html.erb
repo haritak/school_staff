@@ -12,21 +12,21 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :teacher_id %>
+    <%= form.label "Επιλογή καθηγητή / καθηγήτριας" %>
     <%= form.collection_select :teacher_id,
     Teacher.order(:id), :id, :full_name,
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :specialty_id %>
+    <%= form.label "Επιλογή ειδικότητας" %>
     <%= form.collection_select :specialty_id,
     Specialty.order(:code), :id, :code, 
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :priority %>
+    Προτεραιότητα (100 για την πρώτη ειδικότητα, 200 για την δεύτερη, ...)<br/>
     <%= form.number_field :priority, id: :teacher_specialty_priority %>
   </div>
 

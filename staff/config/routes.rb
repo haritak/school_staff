@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  get 'schedule/save_form'
+  post 'schedule/save'
+  get 'schedule/diff'
+  get 'schedule/index'
+
   resources :saved_school_course_teachers
   resources :saved_school_courses
   resources :school_teachers

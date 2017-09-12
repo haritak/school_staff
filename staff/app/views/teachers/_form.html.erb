@@ -12,33 +12,33 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :person_id %>
+    <%= form.label "Επιλογή προσωπικού" %>
     <%= form.collection_select :person_id,
-    Person.order(:last_name), :id, :last_name, 
+    Person.order(:last_name), :id, :full_name, 
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :school_id %>
+    <%= form.label "Σχολείο οργανικής θέσης ή τοποθέτησης" %>
     <%= form.collection_select :school_id,
     School.order(:title), :id, :title, 
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :date_in_school %>
+    <%= form.label "Ημερομηνία προσέλευσης στο σχολείο (προαιρετικό)." %>
     <%= form.date_select :date_in_school, id: :teacher_date_in_school,
       start_year: 1950 %>
   </div>
 
   <div class="field">
-    <%= form.label :date_employed %>
+    <%= form.label "Ημερομηνία διορισμού (προαιρετικό)." %>
     <%= form.date_select :date_employed, id: :teacher_date_employed,
       start_year: 1950 %>
   </div>
 
   <div class="field">
-    <%= form.label :teaching_hours %>
+    <%= form.label "Διδακτικό ωράριο" %>
     <%= form.number_field :teaching_hours, id: :teacher_teaching_hours %>
   </div>
 

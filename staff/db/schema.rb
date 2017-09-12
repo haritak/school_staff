@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170905024945) do
+ActiveRecord::Schema.define(version: 20170912030156) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -79,6 +79,13 @@ ActiveRecord::Schema.define(version: 20170905024945) do
     t.datetime "updated_at", null: false
     t.index ["lesson_id"], name: "index_saved_school_courses_on_lesson_id"
     t.index ["school_class_id"], name: "index_saved_school_courses_on_school_class_id"
+  end
+
+  create_table "schedule_snapshots", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer "save_no"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "school_classes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
