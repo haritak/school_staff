@@ -54,7 +54,7 @@ class ScheduleController < ApplicationController
         if p.start_with? "save_no"
           a = p.split[1].to_i
           latest_no = a if not latest_no
-          previous_no = a if not previous_no
+          previous_no = a 
         end
       end
     end
