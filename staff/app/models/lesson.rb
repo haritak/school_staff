@@ -2,6 +2,9 @@ class Lesson < ApplicationRecord
   belongs_to :lesson_type
   belongs_to :school_grade_specialty
 
+  def short_name
+    "#{description}-#{lesson_type.code}"
+  end
   def full_name
     "#{description} - #{hours}#{lesson_type.code}"
   end

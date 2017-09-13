@@ -1,0 +1,22 @@
+<h1>Περιεχόμενα για τα Βιβλία Ύλης</h1>
+
+<% @all_school_classes.each do |school_class| %>
+  <p style="page-break-after: always;">&nbsp;</p>
+  <p style="page-break-before: always;">&nbsp;</p>
+  <h1><%= school_class.short_name %></h1>
+  <table>
+    <thead>
+      <th>Όνομα μαθήματος</th>
+      <th>Σελίδα</th>
+    </thead>
+    <tbody>
+    <% all_lessons = school_class.get_required_lessons %>
+    <% all_lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.short_name %></td>
+        <td>.....</td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>

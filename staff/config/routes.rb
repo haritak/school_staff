@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'log_books/index'
+
   get 'schedule/save_form'
   post 'schedule/save'
   get 'schedule/diff'
