@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Student Parent Mobiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student_parent_mobiles.each do |student_parent_mobile| %>
+      <tr>
+        <td><%= link_to 'Show', student_parent_mobile %></td>
+        <td><%= link_to 'Edit', edit_student_parent_mobile_path(student_parent_mobile) %></td>
+        <td><%= link_to 'Destroy', student_parent_mobile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student Parent Mobile', new_student_parent_mobile_path %>

@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Student Personal Mobiles</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student_personal_mobiles.each do |student_personal_mobile| %>
+      <tr>
+        <td><%= link_to 'Show', student_personal_mobile %></td>
+        <td><%= link_to 'Edit', edit_student_personal_mobile_path(student_personal_mobile) %></td>
+        <td><%= link_to 'Destroy', student_personal_mobile, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student Personal Mobile', new_student_personal_mobile_path %>

@@ -1,0 +1,1 @@
+json.partial! "student_residence_addresses/student_residence_address", student_residence_address: @student_residence_address

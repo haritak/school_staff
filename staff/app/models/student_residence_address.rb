@@ -1,0 +1,2 @@
+class StudentResidenceAddress < StudentContactInfo
+end

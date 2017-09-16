@@ -1,0 +1,17 @@
+<%= form_with(model: student_residence_town, local: true) do |form| %>
+  <% if student_residence_town.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student_residence_town.errors.count, "error") %> prohibited this student_residence_town from being saved:</h2>
+
+      <ul>
+      <% student_residence_town.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

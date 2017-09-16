@@ -1,0 +1,17 @@
+<%= form_with(model: student_parent_mobile, local: true) do |form| %>
+  <% if student_parent_mobile.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student_parent_mobile.errors.count, "error") %> prohibited this student_parent_mobile from being saved:</h2>
+
+      <ul>
+      <% student_parent_mobile.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

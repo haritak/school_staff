@@ -1,0 +1,32 @@
+<%= form_with(model: student_photo, local: true) do |form| %>
+  <% if student_photo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(student_photo.errors.count, "error") %> prohibited this student_photo from being saved:</h2>
+
+      <ul>
+      <% student_photo.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :student_id %>
+    <%= form.text_field :student_id, id: :student_photo_student_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :filename %>
+    <%= form.text_field :filename, id: :student_photo_filename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :type %>
+    <%= form.text_field :type, id: :student_photo_type %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

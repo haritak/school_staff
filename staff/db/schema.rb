@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912030156) do
+ActiveRecord::Schema.define(version: 20170916123155) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -88,6 +88,16 @@ ActiveRecord::Schema.define(version: 20170912030156) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "school_class_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_student_id"
+    t.bigint "school_class_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_class_id"], name: "index_school_class_students_on_school_class_id"
+    t.index ["school_student_id", "school_class_id"], name: "uniqness_in_school_class_registrations", unique: true
+    t.index ["school_student_id"], name: "index_school_class_students_on_school_student_id"
+  end
+
   create_table "school_classes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "schoolyear_id"
     t.bigint "school_id"
@@ -144,6 +154,17 @@ ActiveRecord::Schema.define(version: 20170912030156) do
     t.index ["code"], name: "index_school_grades_on_code", unique: true
   end
 
+  create_table "school_students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_id"
+    t.bigint "student_id"
+    t.integer "registry_no"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_school_students_on_school_id"
+    t.index ["student_id"], name: "index_school_students_on_student_id"
+    t.index ["student_id"], name: "uniqness_in_school_registrations", unique: true
+  end
+
   create_table "school_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "teacher_id"
     t.bigint "school_id"
@@ -178,6 +199,35 @@ ActiveRecord::Schema.define(version: 20170912030156) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["code"], name: "index_specialties_on_code", unique: true
+  end
+
+  create_table "student_contact_infos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "student_id"
+    t.text "info"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_student_contact_infos_on_student_id"
+  end
+
+  create_table "student_photos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "student_id"
+    t.string "filename"
+    t.string "type"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["student_id"], name: "index_student_photos_on_student_id"
+  end
+
+  create_table "students", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "last_name", default: "", null: false
+    t.string "first_name", default: "", null: false
+    t.string "father_name", default: "", null: false
+    t.string "mother_name", default: "", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "serial_no"
+    t.index ["first_name", "last_name", "father_name", "mother_name"], name: "uniqness_in_students", unique: true
   end
 
   create_table "teacher_specialties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -215,6 +265,8 @@ ActiveRecord::Schema.define(version: 20170912030156) do
   add_foreign_key "saved_school_course_teachers", "school_teachers"
   add_foreign_key "saved_school_courses", "lessons"
   add_foreign_key "saved_school_courses", "school_classes"
+  add_foreign_key "school_class_students", "school_classes"
+  add_foreign_key "school_class_students", "school_students"
   add_foreign_key "school_classes", "school_grade_specialties"
   add_foreign_key "school_classes", "schools"
   add_foreign_key "school_classes", "schoolyears"
@@ -223,8 +275,12 @@ ActiveRecord::Schema.define(version: 20170912030156) do
   add_foreign_key "school_courses", "lessons"
   add_foreign_key "school_courses", "school_classes"
   add_foreign_key "school_grade_specialties", "school_grades"
+  add_foreign_key "school_students", "schools"
+  add_foreign_key "school_students", "students"
   add_foreign_key "school_teachers", "schools"
   add_foreign_key "school_teachers", "teachers"
+  add_foreign_key "student_contact_infos", "students"
+  add_foreign_key "student_photos", "students"
   add_foreign_key "teacher_specialties", "specialties"
   add_foreign_key "teacher_specialties", "teachers"
   add_foreign_key "teachers", "people"

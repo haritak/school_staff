@@ -1,0 +1,2 @@
+class StudentPersonalMobile < StudentContactInfo
+end

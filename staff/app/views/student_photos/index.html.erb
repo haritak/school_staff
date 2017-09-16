@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Student Photos</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Student</th>
+      <th>Filename</th>
+      <th>Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @student_photos.each do |student_photo| %>
+      <tr>
+        <td><%= student_photo.student %></td>
+        <td><%= student_photo.filename %></td>
+        <td><%= student_photo.type %></td>
+        <td><%= link_to 'Show', student_photo %></td>
+        <td><%= link_to 'Edit', edit_student_photo_path(student_photo) %></td>
+        <td><%= link_to 'Destroy', student_photo, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Student Photo', new_student_photo_path %>

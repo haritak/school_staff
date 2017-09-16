@@ -1,4 +1,14 @@
 Rails.application.routes.draw do
+  resources :school_class_students
+  resources :school_students
+  resources :student_bus_cards
+  resources :student_photos
+  resources :student_residence_addresses
+  resources :student_residence_towns
+  resources :student_personal_mobiles
+  resources :student_parent_mobiles
+  resources :student_contact_infos
+  resources :students
   get 'log_books/index'
 
   get 'schedule/save_form'
