@@ -3,8 +3,10 @@
 filename = $ARGV[0]
 
 schoolid = "1740300" # all go to epal moiron
+schoolyear = 2017 #all go to 2017-2018
 
 target_school = School.find_by( code: schoolid )
+target_schoolyear = Schoolyear.find_by( startingyear: schoolyear )
 
 exit if not filename
 
@@ -65,11 +67,11 @@ puts
 puts "Hit enter to see serial numbers for each student"
 $stdin.gets
 
-number = 7102 #2017 reversed.
+number = 710#2 #2017 reversed.
 students.each do |student|
   #serial_no = "#{student[:last_name][0..5].upcase}#{student[:first_name][0..2].upcase}#{student[:father_name][0].upcase}#{student[:mother_name][0].upcase}"
 
-  serial_no = sprintf "EMST2017%04d", number
+  serial_no = sprintf "EMS17%03d", number
   number += 1
   student.merge!( { serial_no: serial_no } )
   puts serial_no
@@ -94,6 +96,7 @@ students.each do |student|
   stored_school_student = nil
   begin
     stored_school_student = SchoolStudent.create( school: target_school,
+                                                 schoolyear: target_schoolyear,
                        student: stored_student )
   rescue ActiveRecord::RecordNotUnique => e
     puts "student already assigned to school"

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Serial number</th>
       <th>Last name</th>
       <th>First name</th>
       <th>Father name</th>
@@ -16,6 +17,7 @@
   <tbody>
     <% @students.each do |student| %>
       <tr>
+        <td><%= student.serial_no %></td>
         <td><%= student.last_name %></td>
         <td><%= student.first_name %></td>
         <td><%= student.father_name %></td>
