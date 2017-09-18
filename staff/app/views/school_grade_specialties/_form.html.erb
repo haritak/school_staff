@@ -23,7 +23,9 @@
 
   <div class="field">
     <%= form.label :school_grade_id %>
-    <%= form.text_field :school_grade_id, id: :school_grade_specialty_school_grade_id %>
+    <%= form.collection_select :school_grade_id,
+    SchoolGrade.order(:id), :id, :code,
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
