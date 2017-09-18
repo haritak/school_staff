@@ -8,7 +8,21 @@ class SchoolClass < ApplicationRecord
   end
 
   def get_required_lessons
-    all_lessons = Lesson.where( school_grade_specialty: school_grade_specialty )
+    all_lessons = []
+
+    #first search in school_class_lessons table.
+    school_class_lessons = SchoolClassLesson.where( school_class: self )
+
+    if not school_class_lessons or school_class_lessons.blank?
+      #If it's empty go on to the next choice
+      all_lessons = Lesson.where( school_grade_specialty: school_grade_specialty )
+    else
+      school_class_lessons.each do |scl|
+        all_lessons << scl.lesson
+      end
+    end
+
+    return all_lessons
   end
 
   def get_required_hours( lesson )
@@ -33,6 +47,10 @@ class SchoolClass < ApplicationRecord
 
   def get_total_required_hours( lesson )
     get_required_no_teachers( lesson ) * get_required_hours( lesson )
+  end
+
+  def to_s
+    short_name
   end
 
 end

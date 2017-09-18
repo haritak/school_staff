@@ -114,7 +114,7 @@ class PersonelProcessorController < ApplicationController
       class_grade = sc.school_grade_specialty
       class_number = sc.number
 
-      lessons = get_lessons_for( class_grade, my_teacher_specialties )
+      lessons = get_lessons_for( sc, my_teacher_specialties )
 
       school_class = SchoolClass.find_by( school_grade_specialty: class_grade,
                                          number: class_number )
@@ -165,14 +165,15 @@ class PersonelProcessorController < ApplicationController
     return all_courses
   end
 
-  def get_lessons_for( grade, specialties )
+  def get_lessons_for( school_class, specialties )
+
     specialties_codes = ""
     specialties.each do |sp|
       specialties_codes += (sp.specialty.code + " ")
     end
 
     found_lessons = []
-    lessons = Lesson.where( school_grade_specialty: grade )
+    lessons = school_class.get_required_lessons
     lessons.each do |lesson|
       lesson_assignments = LessonAssignment.where( lesson: lesson )
       lesson_assignments.each do |lesson_assignment|
