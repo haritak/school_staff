@@ -105,7 +105,8 @@ class PersonelProcessorController < ApplicationController
 
   def get_available_courses_for( someteacher, someschool )
 
-    all_classes_at_school = SchoolClass.where( school: someschool )
+    all_classes_at_school = SchoolClass.where( school: someschool,
+                                            deprecated: false )
     my_teacher_specialties = TeacherSpecialty.where( teacher: someteacher )
 
     all_courses = []
