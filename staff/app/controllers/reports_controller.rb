@@ -1,12 +1,25 @@
 class ReportsController < ApplicationController
+
   def unregistered_lessons_per_class
-    @school_classes = SchoolClass.all
+    @missing_hours_per_specialty = {}
+
+    @school_classes = SchoolClass.where( deprecated: false )
     @missing_lessons = {}
     @school_classes.each do |school_class|
       required_lessons = school_class.get_required_lessons
 
       @missing_lessons[school_class] = [] 
       required_lessons.each do |lesson|
+
+
+        primary_lesson_assignment = lesson.lesson_assignments[0]
+        lesson.lesson_assignments.each do |la|
+          if primary_lesson_assignment.priority > la.priority
+            primary_lesson_assignment = la
+          end
+        end
+
+
         school_courses = SchoolCourse.where( school_class: school_class,
                                               lesson: lesson ).to_a
         if school_courses.length==0
@@ -15,6 +28,13 @@ class ReportsController < ApplicationController
           @missing_lessons[school_class] << [lesson, 
                                              required_teachers,
                                              required_hours ]
+          if @missing_hours_per_specialty[ primary_lesson_assignment.specialty ]
+            @missing_hours_per_specialty[ primary_lesson_assignment.specialty ] +=
+              (required_hours * required_teachers )
+          else
+            @missing_hours_per_specialty[ primary_lesson_assignment.specialty ] =
+              (required_hours * required_teachers )
+          end
           next
         end
 
@@ -39,6 +59,13 @@ class ReportsController < ApplicationController
         teachers = required_no_teachers - total_teachers.length
         teachers = teachers<0? 0 : teachers
         @missing_lessons[school_class] << [lesson, teachers, hours] if hours>0
+        if @missing_hours_per_specialty[ primary_lesson_assignment.specialty ]
+          @missing_hours_per_specialty[ primary_lesson_assignment.specialty ] +=
+            (teachers * hours )
+        else
+          @missing_hours_per_specialty[ primary_lesson_assignment.specialty ] =
+            (teachers * hours )
+        end
       end
     end
   end

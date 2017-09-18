@@ -34,3 +34,18 @@
 </table>
 
 <% end %>
+
+<h2>Σύνολο ωρών που λείπουν ανα ειδικότητα</h2>
+<table>
+<% @missing_hours_per_specialty.each do |specialty, hours| %>
+  <tr>
+  <td>
+  <%= specialty.code %>
+  </td>
+  <td>
+  <%= hours %>
+  </td>
+  </tr>
+<% end %>
+</table>
+

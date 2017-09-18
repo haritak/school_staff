@@ -1,6 +1,7 @@
 class Lesson < ApplicationRecord
   belongs_to :lesson_type
   belongs_to :school_grade_specialty
+  has_many :lesson_assignments
 
   def short_name
     "#{description}-#{lesson_type.code}"
