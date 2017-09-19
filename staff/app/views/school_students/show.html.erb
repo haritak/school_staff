@@ -15,5 +15,15 @@
   <%= @school_student.registry_no %>
 </p>
 
+<p>
+  <strong>username:</strong>
+  <%= @school_student.username %>
+</p>
+
+<p>
+  <strong>password:</strong>
+  <%= @school_student.password %>
+</p>
+
 <%= link_to 'Edit', edit_school_student_path(@school_student) %> |
 <%= link_to 'Back', school_students_path %>

@@ -26,6 +26,16 @@
     <%= form.number_field :registry_no, id: :school_student_registry_no %>
   </div>
 
+  <div class="field">
+    <%= form.label :username %>
+    <%= form.text_field :username, id: :school_student_username %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password %>
+    <%= form.text_field :password, id: :school_student_password %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>
