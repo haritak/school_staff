@@ -31,26 +31,37 @@ school_classes.each do |k, v|
     pdf.font "scripts/labels/FreeMono.ttf"
     school_student = school_class_student.school_student
     student = school_student.student
+
     username = school_student.username
     password = school_student.password
+    if not password or not username
+      p student
+      puts "Warning! Student without password or username"
+      username = "CONTACT"
+      password = "SUPPORT"
+    end
 
-    last_name = student.last_name[0..8]
-    first_name = student.first_name[0..8]
-    father_name = student.father_name[0..8]
+    last_name = student.last_name[0..10]
+    first_name = student.first_name[0..10]
+    father_name = student.father_name[0..10]
+
+    if username.length>10 or password.length>10
+      puts "Warning! Password or username too long for #{last_name}"
+    end
 
     y = 58 #55
-    pdf.draw_text "ΕΠΩΝΥΜΟ  :",    at: [5,y-=10], size: 7
-    pdf.draw_text "ΟΝΟΜΑ    :",    at: [5,y-=10], size: 7
-    pdf.draw_text "ΠΑΤΡΩΝΥΜΟ:",    at: [5,y-=10], size: 7
-    pdf.draw_text "username :",    at: [5,y-=10], size: 7
-    pdf.draw_text "password :",    at: [5,y-=10], size: 7
+    pdf.draw_text "επων",       at: [5,y-=8], size: 7
+    pdf.draw_text "ονομ",       at: [5,y-=8], size: 7
+    pdf.draw_text "πατρ",       at: [5,y-=8], size: 7
+    pdf.draw_text "user",       at: [5,y-=11], size: 7
+    pdf.draw_text "pass",       at: [5,y-=11], size: 7
 
     y = 58 #55
-    pdf.draw_text last_name,      at: [55,y-=10], size: 10
-    pdf.draw_text first_name,     at: [55,y-=10], size: 10
-    pdf.draw_text father_name,    at: [55,y-=10], size: 8
-    pdf.draw_text username,       at: [55,y-=10], size: 8
-    pdf.draw_text password,       at: [55,y-=10], size: 8
+    pdf.draw_text last_name,      at: [25,y-=8], size: 8
+    pdf.draw_text first_name,     at: [25,y-=8], size: 8
+    pdf.draw_text father_name,    at: [25,y-=8], size: 8
+    pdf.draw_text username,       at: [25,y-=11], size: 11
+    pdf.draw_text password,       at: [25,y-=11], size: 11
 
     count = (count+=1) % 3
   end
