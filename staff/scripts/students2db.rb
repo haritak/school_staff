@@ -2,17 +2,63 @@
 
 filename = $ARGV[0]
 
+IGNORE_NON_EXISTENT_CLASSES = true
+
 schoolid = "1740300" # all go to epal moiron
 schoolyear = 2017 #all go to 2017-2018
 
-target_school = School.find_by( code: schoolid )
-target_schoolyear = Schoolyear.find_by( startingyear: schoolyear )
+Target_school = School.find_by( code: schoolid )
+Target_schoolyear = Schoolyear.find_by( startingyear: schoolyear )
 
 exit if not filename
 
-puts "Reading from #{filename}"
+def find_student( s )
+  found_student = nil
+  begin
+    found_student = Student.find_by( last_name: s[:last_name],
+                  first_name: s[:first_name],
+                  father_name: s[:father_name],
+                  mother_name: s[:mother_name] )
+  rescue => e
+  end
+  return found_student
+end
 
-puts "I expect on a comma separated line with :"
+def find_school_student( s )
+  student = find_student s
+  school_student = SchoolStudent.find_by( school: Target_school,
+                        schoolyear: Target_schoolyear,
+                        student: student )
+end
+
+def calculate_serial( student )
+  sprintf "EMS%02d%02d%02d%02d%02%02d",
+    Time.now.year,
+    Time.now.month,
+    Time.now.day,
+    Time.now.hour,
+    Time.now.min,
+    Time.now.sec
+end
+
+def store_student( student )
+  serial_no = calculate_serial( student )
+  stored_student = Student.create( serial_no: serial_no,
+                                  last_name: student[ :last_name ],
+                                  first_name: student[ :first_name ],
+                                  father_name: student[ :father_name ],
+                                  mother_name: student[ :mother_name ] )
+  puts "Stored student #{serial_no} #{student[:last_name]}"
+end
+
+
+puts
+puts "Reading from "
+puts "#{filename}"
+puts
+
+puts "I expect a comma separated line with :"
+puts
 puts "First a number which is ignored,"
 puts "Second the last name,"
 puts "Third the first name,"
@@ -23,6 +69,13 @@ puts
 puts "Everything else is ignored"
 puts
 puts "Hit enter to start processing the file"
+$stdin.gets
+
+if IGNORE_NON_EXISTENT_CLASSES
+  puts "School_classes that do not exists in database will be ignored"
+  puts "press enter to continue"
+  $stdin.gets
+end
 
 students=[]
 File.open( filename ).readlines.each_with_index do |line, i|
@@ -33,13 +86,18 @@ File.open( filename ).readlines.each_with_index do |line, i|
   father_name = line[3].strip
   mother_name = line[4].strip
 
+  next if last_name == "" and first_name == ""
+  next if last_name =~ /.*π.νυμο.*/
+
   school_class = line[5].strip.split[0]
 
   if school_class =~ /.*([Α-Δ]+)([0-9]+).*/
     school_grade = $1.strip
     school_class_number = $2.strip
   else
-    puts "Warning! Couldn't detetect school class in line #{i} for #{last_name} #{first_name}"
+    if not IGNORE_NON_EXISTENT_CLASSES
+      puts "Warning! Couldn't detetect school class in line #{i} #{line}"
+    end
     next
   end
 
@@ -52,7 +110,14 @@ File.open( filename ).readlines.each_with_index do |line, i|
   school_class = SchoolClass.find_by( school_grade_specialty: school_grade, 
                                      number: school_class_number.to_i )
 
-  raise "Couldn't find school class for #{last_name}" if not school_class
+  if not school_class
+    if not IGNORE_NON_EXISTENT_CLASSES
+      puts "Warning! Couldn't find school class for #{line}"
+    else
+      next
+    end
+  end
+
   #puts "Found #{school_class} for #{last_name} #{first_name}"
   #
   students << { last_name: last_name, 
@@ -64,51 +129,76 @@ end
 
 puts "First pass of the file succesfull. Please handle any warnings."
 puts 
-puts "Hit enter to see serial numbers for each student"
+puts "Hit enter to see the list of students"
 $stdin.gets
 
-number = 710#2 #2017 reversed.
-students.each do |student|
-  #serial_no = "#{student[:last_name][0..5].upcase}#{student[:first_name][0..2].upcase}#{student[:father_name][0].upcase}#{student[:mother_name][0].upcase}"
+school_sums = {}
+students.each do |s|
+  puts "#{s[ :last_name ]} #{s[ :first_name ]} του #{s[ :father_name ]} και της #{s[ :mother_name ]} τμήμα #{s[ :school_class ]}"
 
-  serial_no = sprintf "EMS17%03d", number
-  number += 1
-  student.merge!( { serial_no: serial_no } )
-  puts serial_no
+  school_sums[ s[:school_class] ] = 0 if not school_sums[ s[:school_class] ]
+  school_sums[ s[:school_class] ] += 1
 end
 
-puts "Hit enter to start storing"
+school_sums.each do |k, v|
+  puts "#{k} -> #{v}"
+end
+
+puts "Next step is to store only NEW students."
 $stdin.gets
 
-students.each do |student|
-  stored_student = nil
+students.each do |s|
+  next if find_student s
+
+  store_student s
+end
+
+puts "Next step is to check that all students exist in #{schoolid} during #{schoolyear}"
+$stdin.gets
+
+students.each do |s|
+  school_student = find_school_student s
+  if not school_student
+    raise "Error with student: #{s}"
+  end
+end
+
+puts "All students exist in the above school, school year"
+puts
+puts "Next step is to MOVE students to the correct school class."
+puts
+$stdin.gets
+
+students.each do |s|
+  school_student = find_school_student s
+
+  no_change = true
   begin
-    stored_student = Student.create( serial_no: student[ :serial_no ],
-                 last_name: student[ :last_name ],
-                 first_name: student[ :first_name ],
-                 father_name: student[ :father_name ],
-                 mother_name: student[ :mother_name ] )
-  rescue ActiveRecord::RecordNotUnique => e
-    puts "student exists"
-    stored_student = Student.find_by( serial_no: student[ :serial_no ] )
+    school_class_student = 
+      SchoolClassStudent.find_by( school_student: school_student,
+                                 school_class: s[ :school_class ] )
+  rescue => e
+    no_change = false
   end
 
-  stored_school_student = nil
-  begin
-    stored_school_student = SchoolStudent.create( school: target_school,
-                                                 schoolyear: target_schoolyear,
-                       student: stored_student )
-  rescue ActiveRecord::RecordNotUnique => e
-    puts "student already assigned to school"
-    stored_school_student = SchoolStudent.find_by( school: target_school, 
-                                                  student: stored_student )
-  end
+  no_change = false if not school_class_student
 
-  begin
-    SchoolClassStudent.create( school_student: stored_school_student,
-                              school_class: student[ :school_class ] )
-  rescue ActiveRecord::RecordNotUnique => e
-    puts "student already assigned to specific class in school"
+  if no_change
+    #puts "#{s[:last_name]} #{s[:first_name]} remains"
+  else
+
+    school_class_student = 
+      SchoolClassStudent.find_by( school_student: school_student )
+
+    from = school_class_student.school_class
+    to = s[:school_class]
+    print "#{s[:last_name]} #{s[:first_name]} has to move from #{from} to #{to}"
+
+    school_class_student.destroy
+    SchoolClassStudent.create( school_student: school_student, 
+                              school_class: to )
+
+    puts " DONE"
   end
 end
 

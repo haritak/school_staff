@@ -4,7 +4,8 @@ class SchoolClassStudentsController < ApplicationController
   # GET /school_class_students
   # GET /school_class_students.json
   def index
-    @school_class_students = SchoolClassStudent.all.order( :school_class_id )
+    @school_class_students = SchoolClassStudent.all.order( :school_class_id, 
+                                                        :school_student_id )
   end
 
   # GET /school_class_students/1
