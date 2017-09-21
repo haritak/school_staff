@@ -7,6 +7,7 @@
   <table>
     <thead>
       <th>Όνομα μαθήματος</th>
+      <th>Ώρες</th>
       <th>Σελίδα</th>
     </thead>
     <tbody>
@@ -14,6 +15,7 @@
     <% all_lessons.each do |lesson| %>
       <tr>
         <td><%= lesson.short_name %></td>
+        <td><%=lesson.hours%>Ω</td>
         <td>.....</td>
       </tr>
     <% end %>
