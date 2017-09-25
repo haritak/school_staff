@@ -12,7 +12,7 @@
   <% end %>
 
   <p>Κατά προτίμηση, χωρίς αυτό να είναι αναγκαίο,
-  χρησιμοποιείστε κεφαλαία γράμματα χωρίς τόνους.</p>
+  χρησιμοποιείστε <strong>κεφαλαία γράμματα χωρίς τόνους</strong>.</p>
   <p>Αλλιώς, στην περίπτωση που χρησιμοποιήσετε κεφαλαία και μικρά
   γράμματα, προσέξτε τον τονισμό τους.</p>
   <div class="field">
@@ -42,7 +42,14 @@
 
   <div class="field">
     <%= form.label "Κινητό τηλέφωνο" %>
-    <%= form.text_field :notifcation_sms_phone, id: :person_notifcation_sms_phone %>
+    <%= form.text_field :mobile_phone, id: :person_mobile_phone %>
+    (χρησιμοποιείται στις αιτήσεις άδειας)
+  </div>
+
+  <div class="field">
+    <%= form.label "Διεύθυνση κατοικίας" %>
+    <%= form.text_field :home_address, id: :person_home_address %>
+    (χρησιμοποιείται στις αιτήσεις άδειας)
   </div>
 
   <div class="actions">

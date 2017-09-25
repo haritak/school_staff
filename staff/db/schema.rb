@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925151625) do
+ActiveRecord::Schema.define(version: 20170925154229) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -54,9 +54,10 @@ ActiveRecord::Schema.define(version: 20170925151625) do
     t.string "father_name", default: "", null: false
     t.string "mother_name", default: "", null: false
     t.string "notification_email"
-    t.string "notifcation_sms_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "mobile_phone"
+    t.string "home_address"
     t.index ["first_name", "last_name", "father_name", "mother_name"], name: "uniqness_in_people", unique: true
   end
 
