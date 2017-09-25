@@ -1,27 +1,32 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Person:</strong>
+  <strong>Προσωπικό:</strong>
   <%= @teacher.person.last_name %>
 </p>
 
 <p>
-  <strong>School:</strong>
+  <strong>Σχολείο:</strong>
   <%= @teacher.school.title %>
 </p>
 
 <p>
-  <strong>Date in school:</strong>
+  <strong>Σχέση εργασίας:</strong>
+  <%= @teacher.teacher_working_class.description %>
+</p>
+
+<p>
+  <strong>Ημερομηνία ανάληψης υπηρεσίας στο παραπάνω σχολείο:</strong>
   <%= @teacher.date_in_school %>
 </p>
 
 <p>
-  <strong>Date employed:</strong>
+  <strong>Ημερομηνία ανάληψης υπηρεσίας:</strong>
   <%= @teacher.date_employed %>
 </p>
 
 <p>
-  <strong>Teaching hours:</strong>
+  <strong>Διδακτικό ωράριο:</strong>
   <%= @teacher.teaching_hours %>
 </p>
 

@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Code</th>
       <th>Description</th>
       <th colspan="3"></th>
     </tr>
@@ -13,6 +14,7 @@
   <tbody>
     <% @teacher_working_classes.each do |twc| %>
       <tr>
+        <td><%= twc.code %></td>
         <td><%= twc.description %></td>
         <td><%= link_to 'Show', twc %></td>
         <td><%= link_to 'Edit', edit_teacher_working_class_path(twc) %></td>

@@ -26,6 +26,13 @@
   </div>
 
   <div class="field">
+    <%= form.label "Σχέση εργασίας" %>
+    <%= form.collection_select :teacher_working_class_id,
+    TeacherWorkingClass.order(:id), :id, :description, 
+    include_blank: false, prompt:true %>
+  </div>
+
+  <div class="field">
     <%= form.label "Ημερομηνία προσέλευσης στο σχολείο (προαιρετικό)." %>
     <%= form.date_select :date_in_school, id: :teacher_date_in_school,
       start_year: 1950 %>

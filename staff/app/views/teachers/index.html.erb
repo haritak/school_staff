@@ -5,10 +5,11 @@
 <table>
   <thead>
     <tr>
-      <th>Person</th>
-      <th>School</th>
-      <th>Date in school</th>
-      <th>Date employed</th>
+      <th>Προσωπικό</th>
+      <th>Σχολείο</th>
+      <th>Σχέση εργασίας</th>
+      <th>Ημ. Ανάλ. Υπ. στο Σχολείο</th>
+      <th>Ημ. Διορισμού</th>
       <th>Teaching hours</th>
       <th colspan="3"></th>
     </tr>
@@ -19,6 +20,7 @@
       <tr>
         <td><%= teacher.person.last_name %></td>
         <td><%= teacher.school.title %></td>
+        <td><%= teacher.teacher_working_class.description %></td>
         <td><%= teacher.date_in_school %></td>
         <td><%= teacher.date_employed %></td>
         <td><%= teacher.teaching_hours %></td>

@@ -1,6 +1,7 @@
 class Teacher < ApplicationRecord
   belongs_to :person
   belongs_to :school
+  belongs_to :teacher_working_class
   has_many :teacher_specialties
 
   def full_name
