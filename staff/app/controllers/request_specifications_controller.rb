@@ -40,8 +40,12 @@ class RequestSpecificationsController < ApplicationController
   # PATCH/PUT /request_specifications/1
   # PATCH/PUT /request_specifications/1.json
   def update
+    processed_params = request_specification_params
+
+    processed_params.delete :remove_template # TODO
+
     respond_to do |format|
-      if @request_specification.update(request_specification_params)
+      if @request_specification.update(processed_params)
         format.html { redirect_to @request_specification, notice: 'Request specification was successfully updated.' }
         format.json { render :show, status: :ok, location: @request_specification }
       else
@@ -69,9 +73,9 @@ class RequestSpecificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def request_specification_params
-      params.require(:request_specification).permit(:request_type, 
-                                                    :request_description, 
-                                                    :request_spec_reference, 
+      params.require(:request_specification).permit(:code, 
+                                                    :description, 
+                                                    :spec_reference, 
                                                     :teacher_working_class_id, 
                                                     :template_filename,
                                                     :remove_template,

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>School teacher:</strong>
+  <%= @school_teacher_request.school_teacher %>
+</p>
+
+<p>
+  <strong>Request specification:</strong>
+  <%= @school_teacher_request.request_specification %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @school_teacher_request.filename %>
+</p>
+
+<%= link_to 'Edit', edit_school_teacher_request_path(@school_teacher_request) %> |
+<%= link_to 'Back', school_teacher_requests_path %>

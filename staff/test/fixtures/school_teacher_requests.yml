@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school_teacher: one
+  request_specification: one
+  filename: MyString
+
+two:
+  school_teacher: two
+  request_specification: two
+  filename: MyString

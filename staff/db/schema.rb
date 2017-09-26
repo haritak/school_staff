@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925182740) do
+ActiveRecord::Schema.define(version: 20170926144616) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -62,9 +62,9 @@ ActiveRecord::Schema.define(version: 20170925182740) do
   end
 
   create_table "request_specifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string "request_type"
-    t.string "request_description"
-    t.text "request_spec_reference"
+    t.string "code"
+    t.string "description"
+    t.text "spec_reference"
     t.bigint "teacher_working_class_id"
     t.string "template_filename"
     t.datetime "created_at", null: false
@@ -190,6 +190,16 @@ ActiveRecord::Schema.define(version: 20170925182740) do
     t.index ["student_id"], name: "uniqness_in_school_registrations", unique: true
   end
 
+  create_table "school_teacher_requests", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_teacher_id"
+    t.bigint "request_specification_id"
+    t.string "filename"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["request_specification_id"], name: "index_school_teacher_requests_on_request_specification_id"
+    t.index ["school_teacher_id"], name: "index_school_teacher_requests_on_school_teacher_id"
+  end
+
   create_table "school_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "teacher_id"
     t.bigint "school_id"
@@ -310,6 +320,8 @@ ActiveRecord::Schema.define(version: 20170925182740) do
   add_foreign_key "school_students", "schools"
   add_foreign_key "school_students", "schoolyears"
   add_foreign_key "school_students", "students"
+  add_foreign_key "school_teacher_requests", "request_specifications"
+  add_foreign_key "school_teacher_requests", "school_teachers"
   add_foreign_key "school_teachers", "schools"
   add_foreign_key "school_teachers", "teachers"
   add_foreign_key "student_contact_infos", "students"

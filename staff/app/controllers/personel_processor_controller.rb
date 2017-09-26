@@ -25,6 +25,8 @@ class PersonelProcessorController < ApplicationController
 
     @current_courses = SchoolCourseTeacher.where( school_teacher: @school_teacher ).to_a
     @available_courses = get_available_courses_for( @teacher, @school )
+
+    @available_requests = RequestSpecification.where( teacher_working_class: @teacher.teacher_working_class )
   end
 
   def unregister_lessons

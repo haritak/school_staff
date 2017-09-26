@@ -5,9 +5,9 @@
 <table>
   <thead>
     <tr>
-      <th>Request type</th>
-      <th>Request description</th>
-      <th>Request spec reference</th>
+      <th>code</th>
+      <th>description</th>
+      <th>spec reference</th>
       <th>Teacher working class</th>
       <th>Template filename</th>
       <th colspan="3"></th>
@@ -17,10 +17,10 @@
   <tbody>
     <% @request_specifications.each do |request_specification| %>
       <tr>
-        <td><%= request_specification.request_type %></td>
-        <td><%= request_specification.request_description %></td>
-        <td><%= request_specification.request_spec_reference %></td>
-        <td><%= request_specification.teacher_working_class %></td>
+        <td><%= request_specification.code %></td>
+        <td><%= request_specification.description %></td>
+        <td><%= request_specification.spec_reference %></td>
+        <td><%= request_specification.teacher_working_class.description %></td>
         <td><%= request_specification.template_filename %></td>
         <td><%= link_to 'Show', request_specification %></td>
         <td><%= link_to 'Edit', edit_request_specification_path(request_specification) %></td>

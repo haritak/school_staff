@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :school_teacher_requests
   resources :request_specifications
   resources :school_class_lessons
   resources :school_class_students
@@ -76,6 +77,10 @@ Rails.application.routes.draw do
   root 'personel_processor#pick_school'
 
 
+  #requests
+  get '/request/:school_teacher_id/:request_specification_id',
+    to: 'school_teacher_requests#apply_new',
+    as: 'apply_request'
 
 
 

@@ -178,11 +178,11 @@ end
 
 <h2>Επιλέξτε αίτηση άδειας</h2>
 <ul>
-  <li> Κανονική </li>
-  <li> Αναρρωτική </li>
-  <li> Αιμοδοσίας </li>
-  <li> Γονική </li>
+<% @available_requests.each do |req| %>
+  <li> <%= link_to req.description, apply_request_url( @school_teacher.id, req.id ) %> </li>
+<% end %>
 </ul>
+
 <p id="adeies">
 Παρακαλώ επιλέξτε από τις παραπάνω.
 </p>
