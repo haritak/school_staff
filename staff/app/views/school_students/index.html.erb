@@ -16,6 +16,7 @@
     <% @school_students.each do |school_student| %>
       <tr>
         <td><%= school_student.school %></td>
+        <td><%= school_student.username %></td>
         <td><%= school_student.student %></td>
         <td><%= school_student.registry_no %></td>
         <td><%= link_to 'Show', school_student %></td>

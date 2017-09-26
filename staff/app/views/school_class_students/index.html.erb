@@ -5,6 +5,7 @@
 <table>
   <thead>
     <tr>
+      <th>Username</th>
       <th>School student</th>
       <th>School class</th>
       <th colspan="3"></th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @school_class_students.each do |school_class_student| %>
       <tr>
+        <td><%= school_class_student.school_student.username %></td>
         <td><%= school_class_student.school_student %></td>
         <td><%= school_class_student.school_class %></td>
         <td><%= link_to 'Show', school_class_student %></td>
