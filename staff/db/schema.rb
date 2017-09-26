@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170925154229) do
+ActiveRecord::Schema.define(version: 20170925182740) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -59,6 +59,17 @@ ActiveRecord::Schema.define(version: 20170925154229) do
     t.string "mobile_phone"
     t.string "home_address"
     t.index ["first_name", "last_name", "father_name", "mother_name"], name: "uniqness_in_people", unique: true
+  end
+
+  create_table "request_specifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "request_type"
+    t.string "request_description"
+    t.text "request_spec_reference"
+    t.bigint "teacher_working_class_id"
+    t.string "template_filename"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["teacher_working_class_id"], name: "index_request_specifications_on_teacher_working_class_id"
   end
 
   create_table "saved_school_course_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -279,6 +290,7 @@ ActiveRecord::Schema.define(version: 20170925154229) do
 
   add_foreign_key "lesson_assignments", "lessons"
   add_foreign_key "lesson_assignments", "specialties"
+  add_foreign_key "request_specifications", "teacher_working_classes"
   add_foreign_key "saved_school_course_teachers", "saved_school_courses"
   add_foreign_key "saved_school_course_teachers", "school_teachers"
   add_foreign_key "saved_school_courses", "lessons"

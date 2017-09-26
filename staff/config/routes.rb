@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :request_specifications
   resources :school_class_lessons
   resources :school_class_students
   resources :school_students

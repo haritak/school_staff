@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Request type:</strong>
+  <%= @request_specification.request_type %>
+</p>
+
+<p>
+  <strong>Request description:</strong>
+  <%= @request_specification.request_description %>
+</p>
+
+<p>
+  <strong>Request spec reference:</strong>
+  <%= @request_specification.request_spec_reference %>
+</p>
+
+<p>
+  <strong>Teacher working class:</strong>
+  <%= @request_specification.teacher_working_class %>
+</p>
+
+<p>
+  <strong>Template filename:</strong>
+  <%= @request_specification.template_filename %>
+</p>
+
+<%= link_to 'Edit', edit_request_specification_path(@request_specification) %> |
+<%= link_to 'Back', request_specifications_path %>

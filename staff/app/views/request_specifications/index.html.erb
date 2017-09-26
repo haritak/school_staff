@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Request Specifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request type</th>
+      <th>Request description</th>
+      <th>Request spec reference</th>
+      <th>Teacher working class</th>
+      <th>Template filename</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @request_specifications.each do |request_specification| %>
+      <tr>
+        <td><%= request_specification.request_type %></td>
+        <td><%= request_specification.request_description %></td>
+        <td><%= request_specification.request_spec_reference %></td>
+        <td><%= request_specification.teacher_working_class %></td>
+        <td><%= request_specification.template_filename %></td>
+        <td><%= link_to 'Show', request_specification %></td>
+        <td><%= link_to 'Edit', edit_request_specification_path(request_specification) %></td>
+        <td><%= link_to 'Destroy', request_specification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Request Specification', new_request_specification_path %>
