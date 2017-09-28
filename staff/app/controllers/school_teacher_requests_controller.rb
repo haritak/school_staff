@@ -76,6 +76,10 @@ class SchoolTeacherRequestsController < ApplicationController
   # GET /school_teacher_requests
   # GET /school_teacher_requests.json
   def index(school_teacher = nil)
+    if not school_teacher
+      school_teacher_id = params[ :format ] #? format ? Have a lot to learn...
+      school_teacher = SchoolTeacher.find( school_teacher_id )
+    end
     @school_teacher_requests = SchoolTeacherRequest.all
     if school_teacher
       @school_teacher_requests = SchoolTeacherRequest.where(school_teacher: school_teacher)
