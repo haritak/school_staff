@@ -63,7 +63,7 @@ class SchoolTeacherRequestsController < ApplicationController
       filename: filename )
 
 
-    redirect_to :school_teacher_requests
+    redirect_to school_teacher_requests_path(school_teacher)
   end
 
   def download
@@ -75,8 +75,11 @@ class SchoolTeacherRequestsController < ApplicationController
 
   # GET /school_teacher_requests
   # GET /school_teacher_requests.json
-  def index
+  def index(school_teacher = nil)
     @school_teacher_requests = SchoolTeacherRequest.all
+    if school_teacher
+      @school_teacher_requests = SchoolTeacherRequest.where(school_teacher: school_teacher)
+    end
   end
 
   # GET /school_teacher_requests/1

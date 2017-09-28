@@ -1,6 +1,6 @@
 <p id="notice"><%= notice %></p>
 
-<h1>School Teacher Requests</h1>
+<h1>Αιτήσεις</h1>
 
 <table>
   <thead>
@@ -18,9 +18,9 @@
         <td><%= school_teacher_request.school_teacher %></td>
         <td><%= school_teacher_request.request_specification %></td>
         <td><%= link_to school_teacher_request.filename, download_request_path( school_teacher_request ) %></td>
-        <td><%= link_to 'Show', school_teacher_request %></td>
-        <td><%= link_to 'Edit', edit_school_teacher_request_path(school_teacher_request) %></td>
-        <td><%= link_to 'Destroy', school_teacher_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <!-- <td><%= link_to 'Show', school_teacher_request %></td> -->
+        <!-- <td><%= link_to 'Edit', edit_school_teacher_request_path(school_teacher_request) %></td> -->
+        <!-- <td><%= link_to 'Destroy', school_teacher_request, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +28,4 @@
 
 <br>
 
-<%= link_to 'New School Teacher Request', new_school_teacher_request_path %>
+<!-- <%= link_to 'New School Teacher Request', new_school_teacher_request_path %> -->
