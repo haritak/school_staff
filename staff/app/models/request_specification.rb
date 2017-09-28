@@ -30,4 +30,8 @@ class RequestSpecification < ApplicationRecord
     self.template_filename = File.absolute_path( target_filename )
   end
 
+  def to_s
+    description
+  end
+
 end

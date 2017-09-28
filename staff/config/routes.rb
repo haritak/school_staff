@@ -82,6 +82,15 @@ Rails.application.routes.draw do
     to: 'school_teacher_requests#apply_new',
     as: 'apply_request'
 
+  post '/request/:school_teacher_id/:request_specification_id',
+    to: 'school_teacher_requests#create_request',
+    as: 'create_request'
+
+  get '/school_teacher_request/:school_teacher_request/download',
+    to: 'school_teacher_requests#download',
+    as: 'download_request'
+
+
 
 
   get '/reports', to: 'reports#index'

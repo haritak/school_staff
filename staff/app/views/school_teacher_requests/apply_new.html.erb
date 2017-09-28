@@ -1,0 +1,21 @@
+<h1>Νέα αίτηση</h1>
+
+<h2><%= @school_teacher %></h2>
+<h2><%= @request_specification.description %></h2>
+
+<%= form_tag do %>
+
+  <p>
+  Ημερομηνία έναρξης:<br/>
+  (πχ 25/7/2008)<br/>
+  <%= date_field "start_date", :start_date %>
+  </p>
+
+  <p>
+  Πλήθος ημερών:<br/>
+  <%= number_field "duration", :duration %>
+  </p>
+
+  <%= submit_tag "Υποβολή" %>
+<% end %>
+

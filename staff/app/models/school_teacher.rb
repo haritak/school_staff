@@ -7,4 +7,8 @@ class SchoolTeacher < ApplicationRecord
       disposal_duration : teacher.teaching_hours
   end
 
+  def to_s
+    teacher.to_s + ", " + school.title
+  end
+
 end
