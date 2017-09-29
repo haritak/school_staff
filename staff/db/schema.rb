@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170926144616) do
+ActiveRecord::Schema.define(version: 20170929025518) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -196,6 +196,8 @@ ActiveRecord::Schema.define(version: 20170926144616) do
     t.string "filename"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "starting_date"
+    t.integer "duration"
     t.index ["request_specification_id"], name: "index_school_teacher_requests_on_request_specification_id"
     t.index ["school_teacher_id"], name: "index_school_teacher_requests_on_school_teacher_id"
   end
