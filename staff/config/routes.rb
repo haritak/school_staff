@@ -78,6 +78,10 @@ Rails.application.routes.draw do
 
 
   #requests
+  get '/request/history/:school_teacher_id',
+    to: 'school_teacher_requests#history',
+    as: 'history_of_requests'
+
   get '/request/:school_teacher_id/:request_specification_id',
     to: 'school_teacher_requests#apply_new',
     as: 'apply_request'

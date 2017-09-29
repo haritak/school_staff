@@ -26,6 +26,16 @@
     <%= form.text_field :filename, id: :school_teacher_request_filename %>
   </div>
 
+  <div class="field">
+    <%= form.label :starting_date %>
+    <%= form.date_field :starting_date, id: :school_teacher_request_starting_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :duration %>
+    <%= form.number_field :duration, id: :school_teacher_request_duration %>
+  </div>
+
   <div class="actions">
     <%= form.submit %>
   </div>

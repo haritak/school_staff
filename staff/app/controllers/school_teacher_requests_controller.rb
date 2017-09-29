@@ -60,10 +60,12 @@ class SchoolTeacherRequestsController < ApplicationController
     SchoolTeacherRequest.create(
       school_teacher: school_teacher,
       request_specification: request_specification,
-      filename: filename )
+      filename: filename,
+      starting_date: starting_date,
+      duration: duration
+    )
 
-
-    redirect_to school_teacher_requests_path(school_teacher)
+    redirect_to history_of_requests_path(school_teacher)
   end
 
   def download
@@ -73,17 +75,16 @@ class SchoolTeacherRequestsController < ApplicationController
     send_file school_teacher_request.filename
   end
 
+  def history
+    school_teacher_id = params[ :school_teacher_id ]
+    school_teacher = SchoolTeacher.find( school_teacher_id )
+    @school_teacher_requests = SchoolTeacherRequest.where(school_teacher: school_teacher)
+  end
+
   # GET /school_teacher_requests
   # GET /school_teacher_requests.json
   def index(school_teacher = nil)
-    if not school_teacher
-      school_teacher_id = params[ :format ] #? format ? Have a lot to learn...
-      school_teacher = SchoolTeacher.find( school_teacher_id )
-    end
     @school_teacher_requests = SchoolTeacherRequest.all
-    if school_teacher
-      @school_teacher_requests = SchoolTeacherRequest.where(school_teacher: school_teacher)
-    end
   end
 
   # GET /school_teacher_requests/1
@@ -148,6 +149,11 @@ class SchoolTeacherRequestsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def school_teacher_request_params
-      params.require(:school_teacher_request).permit(:school_teacher_id, :request_specification_id, :filename)
+      params.require(:school_teacher_request).permit(:school_teacher_id, 
+                                                     :request_specification_id, 
+                                                     :filename,
+                                                     :starting_date,
+                                                     :duration
+                                                    )
     end
 end
