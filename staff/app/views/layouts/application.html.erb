@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Staff</title>
+    <title>Geo - Staff</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -9,6 +10,12 @@
   </head>
 
   <body>
+    <small>
+      <p align="center">
+      <a href="http://srv-1tee-moiron.ira.sch.gr">Κεντρική ιστοσελίδα σχολείου</a>  - 
+      <a href="http://srv-1tee-moiron.ira.sch.gr/epalmoiron/wordpress/?page_id=1374">Ιστοσελίδα προσωπικού</a>
+      </p>
+    </small>
     <%= yield %>
   </body>
 </html>
