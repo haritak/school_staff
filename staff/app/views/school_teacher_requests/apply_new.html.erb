@@ -5,6 +5,13 @@
 
 <%= form_tag do %>
 
+  <table border=1>
+    <tr><td>Νομικό πλαίσιο άδειας</td></tr>
+    <tr><td>
+        <%= raw @request_specification.spec_reference %>
+      </td></tr>
+  </table>
+
   <p>
   Ημερομηνία έναρξης:<br/>
   (πχ 25/7/2008)<br/>
