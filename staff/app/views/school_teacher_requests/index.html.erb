@@ -21,8 +21,7 @@
         <td><%= school_teacher_request.request_specification %></td>
         <td><%= school_teacher_request.starting_date %></td>
         <td><%= school_teacher_request.duration %></td>
-        <td><%= link_to school_teacher_request.filename, download_request_path( school_teacher_request ) %></td>
-        <td><%= link_to school_teacher_request.filename, download_request_path( school_teacher_request ) %></td>
+        <td><%= link_to "Κατεβάστε το odt", download_request_path( school_teacher_request ) %></td>
         <td><%= link_to 'Show', school_teacher_request %></td>
         <td><%= link_to 'Edit', edit_school_teacher_request_path(school_teacher_request) %></td>
         <td><%= link_to 'Destroy', school_teacher_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
