@@ -15,12 +15,6 @@ end
   ώρες στο <%= @school_teacher.school.title %>
 </h1>
 
-<p>
-<h2><font color=blue>Αν χρειάζεστε μία αίτηση για άδεια κάντε κλίκ εδώ : <a href="#adeies"><em> ΑΙΤΗΣΕΙΣ ΓΙΑ ΑΔΕΙΑ </em></a></font></h2>
-</p>
-
-
-
 <h2>Επιλεγμένες σειρές μαθημάτων</h2>
 
 <% selected_courses_hours = 0 %>
@@ -175,14 +169,3 @@ end
 </strong>
 </p>
 -->
-
-<h2>Επιλέξτε αίτηση άδειας</h2>
-<ul>
-<% @available_requests.each do |req| %>
-  <li> <%= link_to req.description, apply_request_url( @school_teacher.id, req.id ) %> </li>
-<% end %>
-</ul>
-
-<p id="adeies">
-Παρακαλώ επιλέξτε από τις παραπάνω.
-</p>

@@ -9,6 +9,31 @@ class PersonelProcessorController < ApplicationController
     @teachers = SchoolTeacher.where( school: school ).to_a
   end
 
+  def homepage
+    teacher_id = params[ :teacher_id ]
+    school_id = params[ :school_id ]
+    @school_teacher = SchoolTeacher.find( teacher_id )
+    @teacher = @school_teacher.teacher
+    @school = School.find( school_id )
+    tmp =  TeacherSpecialty.where( teacher: @teacher ).to_a
+
+    @specialties = []
+    tmp.each do | ts |
+      @specialties << ts.specialty
+    end
+  end
+
+  def select_request_type
+    teacher_id = params[ :teacher_id ]
+    school_id = params[ :school_id ]
+    @school_teacher = SchoolTeacher.find( teacher_id )
+    @teacher = @school_teacher.teacher
+    @school = School.find( school_id )
+    tmp =  TeacherSpecialty.where( teacher: @teacher ).to_a
+
+    @available_requests = RequestSpecification.where( teacher_working_class: @teacher.teacher_working_class )
+  end
+
   def show_status
     teacher_id = params[ :teacher_id ]
     school_id = params[ :school_id ]

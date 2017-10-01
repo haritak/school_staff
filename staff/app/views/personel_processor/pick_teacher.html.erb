@@ -13,11 +13,12 @@
     <% @teachers.each do |st| %>
       <tr>
         <td><%= link_to "#{st.teacher.full_name}",
-          pick_lessons_for_path( st.id, st.school.id )%></td>
-        <td><%= link_to "#{st.teacher.teaching_hours}",
-          pick_lessons_for_path( st.id, st.school.id )%></td>
+          school_teacher_homepage_path( st.id, st.school.id )%></td>
+        <td><%= st.teacher.teaching_hours %></td>
         <td><%= link_to "Επιλογή μαθημάτων",
           pick_lessons_for_path( st.id, st.school.id )%></td>
+        <td><%= link_to "Αίτηση για άδεια",
+          select_request_type_path( st.id, st.school.id )%></td>
     </tr>
   <% end %>
   </tbody>

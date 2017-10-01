@@ -76,6 +76,14 @@ Rails.application.routes.draw do
 
   root 'personel_processor#pick_school'
 
+  get '/homepage/:teacher_id/school/:school_id', 
+    to: 'personel_processor#homepage',
+    as: 'school_teacher_homepage'
+
+  get '/homepage/:teacher_id/school/:school_id/select_request', 
+    to: 'personel_processor#select_request_type',
+    as: 'select_request_type'
+
 
   #requests
   get '/request/history/:school_teacher_id',

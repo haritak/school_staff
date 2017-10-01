@@ -1,0 +1,18 @@
+<%= link_to 'Home', pick_teacher_for_path(@school)%>
+
+
+<h1>
+  <%= @teacher.full_name %>, <%= @teacher.school.title %>
+</h1>
+<h2>
+  <%= @teacher.teacher_working_class.description%> 
+</h2>
+
+
+<h3>Επιλέξτε αίτηση άδειας</h3>
+<ul>
+<% @available_requests.each do |req| %>
+  <li> <%= link_to req.description, apply_request_url( @school_teacher.id, req.id ) %> </li>
+<% end %>
+</ul>
+

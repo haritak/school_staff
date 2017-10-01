@@ -1,0 +1,32 @@
+<%= link_to 'Home', pick_teacher_for_path(@school)%>
+
+
+<% 
+    specialties_code = []
+@specialties.each do |specialty| 
+  specialties_code << specialty.code
+end 
+%>
+
+<h1>
+  <%= @teacher.full_name %> 
+  (<%= specialties_code.join(", ") %>)
+  <%= @school_teacher.hours_for_teaching%> 
+  ώρες στο <%= @school_teacher.school.title %>
+</h1>
+
+<table>
+  <tr>
+    <td>
+      <%= link_to "Επιλογή των μαθημάτων μου",
+        pick_lessons_for_path( @school_teacher.id, @school_teacher.school.id )%>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <%= link_to "Αίτηση για άδεια",
+        select_request_type_path( @school_teacher.id, @school_teacher.school.id )%>
+    </td>
+  </tr>
+        
+</table>
