@@ -31,7 +31,8 @@ class SchoolTeacherRequestsController < ApplicationController
     duration_str = "1 ημέρα" if duration == 1
 
     end_date = starting_date
-    (duration -= 1).times do 
+    count = duration
+    (count -= 1).times do 
       end_date += 1
       end_date += 2 if end_date.saturday? 
     end
@@ -50,7 +51,7 @@ class SchoolTeacherRequestsController < ApplicationController
 
       r.add_field :start_date, start_date_str
       r.add_field :end_date, end_date_str
-      r.add_field :duration, duration_str
+      r.add_field :duration, duration
     end
 
     filename = Time.now.strftime "%Y%m%d%H%M%S-#{last_name}-#{first_name}"
