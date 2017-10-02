@@ -1,0 +1,164 @@
+<%= form_tag do %>
+  <% if school_teacher.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(school_teacher.errors.count, "error") %> prohibited this school_teacher from being saved:</h2>
+
+      <ul>
+      <% school_teacher.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <p>Κατά προτίμηση, χωρίς αυτό να είναι αναγκαίο,
+  χρησιμοποιείστε <strong>κεφαλαία γράμματα χωρίς τόνους</strong>.</p>
+  <p>Αλλιώς, στην περίπτωση που χρησιμοποιήσετε κεφαλαία και μικρά
+  γράμματα, προσέξτε τον τονισμό τους.</p>
+  <table>
+    <tr>
+      <td>
+        <%= "Όνομα" %>
+      </td>
+      <td>
+        <%= text_field_tag :first_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Επώνυμο" %>
+      </td>
+      <td>
+        <%= text_field_tag :last_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Πατρώνυμο" %>
+      </td>
+      <td>
+        <%= text_field_tag :father_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Μητρώνυμο" %>
+      </td>
+      <td>
+        <%= text_field_tag :mother_name %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "e-mail" %>
+      </td>
+      <td>
+        <%= text_field_tag :notification_email %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Κινητό τηλέφωνο" %>
+      </td>
+      <td>
+        <%= text_field_tag :mobile_phone %>
+        (χρησιμοποιείται στις αιτήσεις άδειας)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Διεύθυνση κατοικίας" %>
+      </td>
+      <td>
+        <%= text_field_tag :home_address %>
+        (χρησιμοποιείται στις αιτήσεις άδειας)
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Επιλογή 1ης ειδικότητας" %>
+      </td>
+      <td>
+        <%= collection_select :specialty1, :id,
+          Specialty.order(:code), :id, :code, 
+          include_blank: false, prompt:true %>
+    </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Επιλογή 2ης ειδικότητας (αν υπάρχει)" %>
+      </td>
+      <td>
+        <%= collection_select :specialty2, :id,
+          Specialty.order(:code), :id, :code, 
+          include_blank: false, prompt:true %>
+    </td>
+    </tr>
+    <tr>
+      <td>
+        <%= "Διδακτικό ωράριο" %>
+      </td>
+      <td>
+        <%= number_field_tag :teaching_hours %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <%= label_tag "Σχολείο" %>
+      </td>
+      <td>
+        <%= collection_select :school, :id,
+          School.order(:id), :id, :title,
+          include_blank: false, prompt:true %>
+    </td>
+    </tr>
+    <tr>
+      <td>
+        <%= label_tag "Χρόνος διάθεσης στο σχολείο" %>
+      </td>
+      <td>
+        <%= number_field_tag :disposal_duration %>
+      </td>
+    </tr>
+    <tr>
+      <td>
+      </td>
+      <td>
+      </td>
+    </tr>
+  </table>
+
+
+
+
+
+  <hr/>
+
+  <div class="field">
+    <%= label_tag "Σχέση εργασίας" %>
+    <%= collection_select :teacher_working_class, :id,
+    TeacherWorkingClass.order(:id), :id, :description, 
+    include_blank: false, prompt:true %>
+  </div>
+
+  <hr/>
+
+  <div class="field">
+    <%= label_tag "Ημερομηνία προσέλευσης στο σχολείο (προαιρετικό)." %>
+    <%= date_select :date_in_school, :teacher_date_in_school,
+      start_year: 1950 %>
+  </div>
+
+  <div class="field">
+    <%= label_tag "Ημερομηνία διορισμού (προαιρετικό)." %>
+    <%= date_select :date_employed, :teacher_date_employed,
+      start_year: 1950 %>
+  </div>
+
+  <hr/>
+
+
+  <div class="actions">
+    <%= submit_tag %>
+  </div>
+<% end %>

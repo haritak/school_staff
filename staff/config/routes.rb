@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+
+  get '/school_teachers/new_all'
+  post '/school_teachers/new_all', 
+    to: 'school_teachers#create_all'
+
   resources :school_teacher_requests
   resources :request_specifications
   resources :school_class_lessons
@@ -83,6 +88,7 @@ Rails.application.routes.draw do
   get '/homepage/:teacher_id/school/:school_id/select_request', 
     to: 'personel_processor#select_request_type',
     as: 'select_request_type'
+
 
 
   #requests
