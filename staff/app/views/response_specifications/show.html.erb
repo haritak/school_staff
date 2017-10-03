@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Request specification:</strong>
+  <%= @response_specification.request_specification %>
+</p>
+
+<p>
+  <strong>Template filename:</strong>
+  <%= @response_specification.template_filename %>
+</p>
+
+<%= link_to 'Edit', edit_response_specification_path(@response_specification) %> |
+<%= link_to 'Back', response_specifications_path %>

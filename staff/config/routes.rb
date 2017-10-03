@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :response_specifications
   get '/school_teachers/new_all'
   post '/school_teachers/new_all', 
     to: 'school_teachers#create_all'

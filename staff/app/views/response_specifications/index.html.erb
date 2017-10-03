@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Response Specifications</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Request specification</th>
+      <th>Template filename</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @response_specifications.each do |response_specification| %>
+      <tr>
+        <td><%= response_specification.request_specification %></td>
+        <td><%= response_specification.template_filename %></td>
+        <td><%= link_to 'Show', response_specification %></td>
+        <td><%= link_to 'Edit', edit_response_specification_path(response_specification) %></td>
+        <td><%= link_to 'Destroy', response_specification, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Response Specification', new_response_specification_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: response_specification, local: true) do |form| %>
+  <% if response_specification.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(response_specification.errors.count, "error") %> prohibited this response_specification from being saved:</h2>
+
+      <ul>
+      <% response_specification.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :request_specification_id %>
+    <%= form.text_field :request_specification_id, id: :response_specification_request_specification_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :template_filename %>
+    <%= form.text_field :template_filename, id: :response_specification_template_filename %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
