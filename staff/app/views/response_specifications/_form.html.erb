@@ -13,12 +13,27 @@
 
   <div class="field">
     <%= form.label :request_specification_id %>
-    <%= form.text_field :request_specification_id, id: :response_specification_request_specification_id %>
+    <%= form.collection_select :request_specification_id,
+    RequestSpecification.order(:id), :id, :to_s,
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
     <%= form.label :template_filename %>
     <%= form.text_field :template_filename, id: :response_specification_template_filename %>
+  </div>
+
+  <p> - or, upload a template - </p>
+
+  <div class="field">
+    <% if @response_specification.template_filename %>
+      Template exists.<br/>
+      <%= form.check_box :remove_template %>Remove template.
+    <% else %>
+      there is no template here
+    <% end %>
+    <%= form.file_field(:uploaded_template,
+                        accept: "application/vnd.oasis.opendocument.text") %> 
   </div>
 
   <div class="actions">

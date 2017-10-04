@@ -3,7 +3,6 @@ class RequestSpecification < ApplicationRecord
 
   Templates_Directory = "request_templates" #inside Rails.root
 
-
   def uploaded_template
     self.template_filename
   end
@@ -31,7 +30,7 @@ class RequestSpecification < ApplicationRecord
   end
 
   def to_s
-    description
+    "#{description}-#{teacher_working_class}"
   end
 
 end

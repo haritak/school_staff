@@ -69,6 +69,9 @@ class ResponseSpecificationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def response_specification_params
-      params.require(:response_specification).permit(:request_specification_id, :template_filename)
+      params.require(:response_specification).permit(:request_specification_id, 
+                                                     :template_filename,
+                                                     :uploaded_template,
+                                                    )
     end
 end
