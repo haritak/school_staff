@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171003170455) do
+ActiveRecord::Schema.define(version: 20171009135755) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -58,6 +58,14 @@ ActiveRecord::Schema.define(version: 20171003170455) do
     t.datetime "updated_at", null: false
     t.string "mobile_phone"
     t.string "home_address"
+    t.string "first_name_gen"
+    t.string "first_name_ait"
+    t.string "father_name_gen"
+    t.string "father_name_ait"
+    t.string "mother_name_gen"
+    t.string "mother_name_ait"
+    t.string "last_name_gen"
+    t.string "last_name_ait"
     t.index ["first_name", "last_name", "father_name", "mother_name"], name: "uniqness_in_people", unique: true
   end
 
