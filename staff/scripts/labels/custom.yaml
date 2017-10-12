@@ -20,6 +20,17 @@ TypoLabel6511:
   row_gutter: 0
 
 
+AveryL6011_hpP2015:
+    paper_size: A4
+    top_margin: 41.1017 #14.5mm
+    bottom_margin: 42.519 #15mm
+    left_margin: 19.8422 #7mm
+    right_margin: 21.2595 #7.5mm
+    columns: 3
+    rows: 9
+    column_gutter: 7.0865 #2.5mm
+    row_gutter: 0 #0mm
+
 AveryL6009_Canon:
     paper_size: A4
     top_margin: 69 #62.4 #2.2cm 
