@@ -32,7 +32,7 @@ def find_school_student( s )
 end
 
 def calculate_serial( student )
-  sprintf "EMS%02d%02d%02d%02d%02%02d",
+  sprintf "EMS%02d%02d%02d%02d%02d%02d",
     Time.now.year,
     Time.now.month,
     Time.now.day,
@@ -51,10 +51,23 @@ def store_student( student )
   puts "Stored student #{serial_no} #{student[:last_name]}"
 end
 
+def store_school_student( student )
+  stored_student = find_student student
+
+  stored_school_student = SchoolStudent.create( student: stored_student,
+                                               school: Target_school,
+                                               schoolyear: Target_schoolyear )
+
+  puts "Stored school student #{stored_student.last_name}"
+end
+
 
 puts
 puts "Reading from "
 puts "#{filename}"
+puts
+
+puts "Ignoring classes that do not exist" if IGNORE_NON_EXISTENT_CLASSES
 puts
 
 puts "I expect a comma separated line with :"
@@ -158,9 +171,9 @@ $stdin.gets
 
 students.each do |s|
   school_student = find_school_student s
-  if not school_student
-    raise "Error with student: #{s}"
-  end
+  next if school_student
+
+  store_school_student s
 end
 
 puts "All students exist in the above school, school year"
@@ -190,11 +203,13 @@ students.each do |s|
     school_class_student = 
       SchoolClassStudent.find_by( school_student: school_student )
 
-    from = school_class_student.school_class
+    from = nil;
+    from = school_class_student.school_class if school_class_student
+
     to = s[:school_class]
     print "#{s[:last_name]} #{s[:first_name]} has to move from #{from} to #{to}"
 
-    school_class_student.destroy
+    school_class_student.destroy if school_class_student
     SchoolClassStudent.create( school_student: school_student, 
                               school_class: to )
 
