@@ -4,6 +4,13 @@ staff/tmp
 
 **/*~
 
+#usually data
+**/*csv
+**/*xls
+**/*xlsx
+**/*ods
+**/*pdf
+
 *.rbc
 capybara-*.html
 .rspec
