@@ -7,10 +7,10 @@ require 'prawn/labels' #https://github.com/madriska/prawn-labels
 require 'prawn-svg' #https://github.com/mogest/prawn-svg
 
 
-LabelsType = "AveryL6011_hpP2015"
+LabelsType = "AveryL6011_CanoniR3035"
 
 SRV_URL = "http://srv-1tee-moiron.ira.sch.gr"
-SRV_PORT= "12345"
+SRV_PORT= "9876"
 
 base_dir = Rails.root.join "scripts/ktel"
 tmp_dir = "#{base_dir}/tmp"
@@ -26,7 +26,12 @@ end
 if not Dir.empty?(tmp_dir)
   puts "Warning! Target directory (#{tmp_dir}) not empty."
   puts "It is strongly recommented to empty it before running this program."
+  exit
 end
+
+puts "Please provide secret password to be used as salt for secure hash."
+puts "WARNING : PASSWORD WILL BE SHOWN HERE IN PLAINTEXT"
+password = gets.strip
 
 
 students = []
@@ -45,8 +50,10 @@ File.open(students_csv, "r").each_line do |line|
   }
 end
 
+selection_memory = {}
 not_found_students = []
 students.each do |student|
+  key = "#{student[ :last_name ]} #{student[ :first_name ]}"
   db_students = Student.where( last_name: student[ :last_name ],
                                first_name: student[ :first_name ] ).to_a
   if db_students.length == 0
@@ -59,14 +66,27 @@ students.each do |student|
     puts "CONFLICT DETECTED"
     puts db_students
     puts
-    puts "Please select (starts with 0, give -1 to select all):"
+    puts "Please select (starts with 0, give -1 to autoselect):"
     puts
-    select = $stdin.gets.to_i
+    if selection_memory[key]
+      select = -1
+    else
+      select = $stdin.gets.to_i
+    end
+    if select == -1
+      if selection_memory[ key ] 
+        selection_memory[ key ] += 1
+      else
+        selection_memory[ key ] = 0
+      end
+      select = selection_memory[ key ]
+      puts "Autoselected #{select}"
+    end
     db_student = db_students[ select ]
   end
 
   student[ :father_name ] = db_student.father_name
-  student[ :serial ] = db_student.serial_no
+  student[ :serial ] = db_student.serial_no.gsub(/EMS/,'')
 
   db_sc = SchoolStudent.find_by( student: db_student )
   db_scs = SchoolClassStudent.where( school_student: db_sc ).to_a
@@ -110,7 +130,13 @@ Prawn::Labels.generate("student-stickers.pdf", students,
                        :type => LabelsType) do |pdf, student|
   pdf.font "#{base_dir}/FreeMono.ttf"
 
-  url = "#{SRV_URL}:#{SRV_PORT}/#{student[ :serial ]}"
+  secure_hash = 
+    Digest::MD5.hexdigest( student[ :serial ] + password )
+    .chars.select.with_index { |_, i| i.even? }.join
+    .chars.select.with_index { |_, i| i.even? }.join
+
+  url = "#{SRV_URL}:#{SRV_PORT}/#{student[ :serial ]}?ksh=#{secure_hash}" #Ktel Secure Hash"
+  puts url
   qrcode = RQRCode::QRCode.new( url )
   svg = qrcode.as_svg
 
