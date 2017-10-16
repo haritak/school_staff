@@ -21,7 +21,7 @@
         <%= "Όνομα" %>
       </td>
       <td>
-        <%= text_field_tag :first_name %>
+        <%= text_field_tag :first_name, nil, required: true %>
       </td>
     </tr>
     <tr>
@@ -29,7 +29,7 @@
         <%= "Επώνυμο" %>
       </td>
       <td>
-        <%= text_field_tag :last_name %>
+        <%= text_field_tag :last_name, nil, required: true %>
       </td>
     </tr>
     <tr>
@@ -37,7 +37,7 @@
         <%= "Πατρώνυμο" %>
       </td>
       <td>
-        <%= text_field_tag :father_name %>
+        <%= text_field_tag :father_name, nil, required: true %>
       </td>
     </tr>
     <tr>
@@ -45,7 +45,7 @@
         <%= "Μητρώνυμο" %>
       </td>
       <td>
-        <%= text_field_tag :mother_name %>
+        <%= text_field_tag :mother_name, nil, required: true %>
       </td>
     </tr>
     <tr>
@@ -53,7 +53,7 @@
         <%= "e-mail" %>
       </td>
       <td>
-        <%= text_field_tag :notification_email %>
+        <%= text_field_tag :notification_email, nil, required: true %>
       </td>
     </tr>
     <tr>
@@ -61,7 +61,7 @@
         <%= "Κινητό τηλέφωνο" %>
       </td>
       <td>
-        <%= text_field_tag :mobile_phone %>
+        <%= text_field_tag :mobile_phone, nil, required: true %>
         (χρησιμοποιείται στις αιτήσεις άδειας)
       </td>
     </tr>
@@ -70,7 +70,7 @@
         <%= "Διεύθυνση κατοικίας" %>
       </td>
       <td>
-        <%= text_field_tag :home_address %>
+        <%= text_field_tag :home_address, nil, required: true %>
         (χρησιμοποιείται στις αιτήσεις άδειας)
       </td>
     </tr>
@@ -99,7 +99,7 @@
         <%= "Υποχρεωτικό διδακτικό ωράριο" %>
       </td>
       <td>
-        <%= number_field_tag :teaching_hours %>
+        <%= number_field_tag :teaching_hours, nil, required: true %>
       </td>
     </tr>
     <tr>
@@ -120,7 +120,7 @@
         <br/>είναι λιγότερες. Πχ για 6 ώρες στο ΕΠΑΛ Μοιρών.)
       </td>
       <td>
-        <%= number_field_tag :disposal_duration %>
+        <%= number_field_tag :disposal_duration, nil, required: true %>
       </td>
     </tr>
     <tr>
