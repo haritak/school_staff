@@ -15,14 +15,13 @@ end
   ώρες στο <%= @school_teacher.school.title %>
 </h1>
 
-<h2>Επιλεγμένες σειρές μαθημάτων</h2>
+<h2>Τι έχω επιλέξει μέχρι τώρα :</h2>
 
 <% selected_courses_hours = 0 %>
 
 <table>
   <thead>
     <tr>
-      <th></th>
       <th>Τμήμα</th>
       <th>Ειδικότητα/Τομέας</th>
       <th>Μάθημα</th>
@@ -36,12 +35,6 @@ end
     <% @current_courses.each do |course| %>
       <% selected_courses_hours += course.school_course.duration %>
       <tr>
-        <td>
-          <%= link_to "X", unregister_from_path( @school_teacher.id, 
-                                                @school_teacher.school_id, 
-                                                course.school_course.id),
-                                                method: :delete %>
-      </td>
         <td>
           <%= "#{course.school_course.school_class.school_grade_specialty.code}" +
             "#{course.school_course.school_class.number}" %>
@@ -68,11 +61,10 @@ end
 </table>
 
 <h2>
-Συνολικές επιλεγμένες ώρες : <%= selected_courses_hours %>
+Συνολικές ώρες που έχω επιλέξει : <%= selected_courses_hours %>
 </h2>
 
-<h2>Διαθέσιμες σειρές μαθημάτων</h2>
-
+<!--
 <%
     total_hours = 0
 @available_courses.each do |course| 
@@ -82,7 +74,19 @@ end
  %>
 
 <h3>Συνολικές διαθέσιμες ώρες: <%= total_hours %></h3>
+-->
 
+<p>Παρακαλώ, επιλέξτε από τον παρακάτω πίνακα τα μαθήματα που επιθυμείτε και πατήστε στο κουμπί <em>Καταχώρηση</em> στο κάτω μέρος της σελίδας.</p>
+<p>Σημείωσεις:</p>
+<ol>
+  <li>Από τις ώρες που έχει ένα μάθημα προς διάθεση, μπορείτε να τις επιλέξετε όλες ή λιγότερες.
+    (Συνήθως τις επιλέγω όλες. Επιλέγω λιγότερες, αν για παράδειγμα τις υπόλοιπες τις κάνει κάποιος/α άλλος/η.
+    πχ Στην περίπτωση που ένα μεγάλο εργαστήριο διάρκειας 5 ωρών, τις 3εις ώρες τις κάνει ο Α και τις υπόλοιπες 2 ο Β.)</li>
+  <li>Για δημιουργία <strong>συνδιδασκαλίας</strong>, πρέπει ο πρώτος να διαλέξει το μάθημα κανονικά, και ο δεύτερος να διαλέξει το το μάθημα που έχει διδάσκωντα τον πρώτο.
+    Δηλαδή, για να δηλώσουμε μία συνδιδασκαλία του Α με τον Β για το μάθημα "Εφαρμογές Πληροφορικής", τότε ο Α δηλώνει κανονικά όλες τις ώρες του μαθήματος και
+    κατόπιν ο Β επιλέγει το ίδιο μάθημα, στο οποίο εμφανίζεται διδάσκων ο Α. Μετά την καταχώρηση θα δεί το όνομά του να είναι δίπλα στο όνομα του Α. 
+  </li>
+</ol>
 <%= form_tag register_these_lessons_for_path do %>
 
 <table>
@@ -102,7 +106,7 @@ end
       <th>Επιλεγμένες</br>ώρες</th> 
       <th>Διδάσκων<br/>(Διδάσκοντες για συνδιδασκ.)</th>
       <th>Επιλογή</th>
-      <th>Προτεραιότητα</th>
+      <!--<th>Προτεραιότητα</th>-->
     </tr>
   </thead>
 
@@ -146,7 +150,7 @@ end
         <td></td>
         <td><%= check_box_tag "register_me #{class_grade.id} #{class_number} #{theLesson.id}",
           "#{class_grade.id} #{class_number} #{theLesson.id}", false %></td>
-        <td><%= priority %></td>
+        <!-- <td><%= priority %></td> -->
       <% end %>
       </tr>
 <% end %>
