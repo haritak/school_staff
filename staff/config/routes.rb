@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   post 'schedule/diff'
   get 'schedule/index'
   get 'schedule/diff_general'
+  get '/people/phones', to: 'people#phones'
 
   resources :saved_school_course_teachers
   resources :saved_school_courses
