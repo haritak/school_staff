@@ -6,12 +6,9 @@
   <thead>
     <tr>
       <th>School teacher request</th>
-      <th>Decision no</th>
-      <th>Decision year</th>
-      <th>Protocol no</th>
-      <th>Protocol date</th>
+      <th>Decision</th>
+      <th>Protocol</th>
       <th>Decision duration</th>
-      <th>Decision starting date</th>
       <th>Comments</th>
       <th>Response completed</th>
       <th colspan="3"></th>
@@ -21,13 +18,12 @@
   <tbody>
     <% @school_teacher_responses.each do |school_teacher_response| %>
       <tr>
-        <td><%= school_teacher_response.school_teacher_request %></td>
-        <td><%= school_teacher_response.decision_no %></td>
-        <td><%= school_teacher_response.decision_year %></td>
-        <td><%= school_teacher_response.protocol_no %></td>
-        <td><%= school_teacher_response.protocol_date %></td>
-        <td><%= school_teacher_response.decision_duration %></td>
-        <td><%= school_teacher_response.decision_starting_date %></td>
+        <td><%= link_to "#{school_teacher_response.school_teacher_request.description}", 
+          school_teacher_response.school_teacher_request %></td>
+        <td><%= school_teacher_response.decision_no %>/<%= school_teacher_response.decision_year %></td>
+        <td><%= school_teacher_response.protocol_no %>/<%= school_teacher_response.protocol_date %></td>
+        <td><%= school_teacher_response.decision_duration %> day(s) starting at
+        <%= school_teacher_response.decision_starting_date %></td>
         <td><%= school_teacher_response.comments %></td>
         <td><%= school_teacher_response.response_completed %></td>
         <td><%= link_to 'Show', school_teacher_response %></td>

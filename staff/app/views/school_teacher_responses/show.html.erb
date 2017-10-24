@@ -2,7 +2,9 @@
 
 <p>
   <strong>School teacher request:</strong>
-  <%= @school_teacher_response.school_teacher_request %>
+  <%= link_to @school_teacher_response.school_teacher_request.description,
+     @school_teacher_response.school_teacher_request
+  %>
 </p>
 
 <p>

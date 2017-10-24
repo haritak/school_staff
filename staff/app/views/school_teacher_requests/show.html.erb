@@ -12,7 +12,8 @@
 
 <p>
   <strong>Filename:</strong>
-  <%= @school_teacher_request.filename %>
+  <%= link_to "Κατεβάστε το odt", 
+    download_request_path( @school_teacher_request ) %>
 </p>
 
 <%= link_to 'Edit', edit_school_teacher_request_path(@school_teacher_request) %> |
