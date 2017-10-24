@@ -13,7 +13,9 @@
 
   <div class="field">
     <%= form.label :school_teacher_request_id %>
-    <%= form.text_field :school_teacher_request_id, id: :school_teacher_response_school_teacher_request_id %>
+    <%= form.collection_select :school_teacher_request_id,
+    SchoolTeacherRequest.order(:id), :id, :description,
+    include_blank: false, prompt:true %>
   </div>
 
   <div class="field">

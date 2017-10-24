@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171009135755) do
+ActiveRecord::Schema.define(version: 20171024041623) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -218,6 +218,24 @@ ActiveRecord::Schema.define(version: 20171009135755) do
     t.index ["school_teacher_id"], name: "index_school_teacher_requests_on_school_teacher_id"
   end
 
+  create_table "school_teacher_responses", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_teacher_request_id"
+    t.integer "decision_no"
+    t.integer "decision_year"
+    t.integer "protocol_no"
+    t.date "protocol_date"
+    t.integer "decision_duration"
+    t.date "decision_starting_date"
+    t.text "comments"
+    t.boolean "response_completed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["decision_no", "decision_year"], name: "index_school_teacher_responses_on_decision_no_and_decision_year", unique: true
+    t.index ["protocol_no", "protocol_date"], name: "index_school_teacher_responses_on_protocol_no_and_protocol_date", unique: true
+    t.index ["school_teacher_request_id"], name: "index_school_teacher_responses_on_school_teacher_request_id"
+    t.index ["school_teacher_request_id"], name: "unique_one_response_per_request", unique: true
+  end
+
   create_table "school_teachers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "teacher_id"
     t.bigint "school_id"
@@ -341,6 +359,7 @@ ActiveRecord::Schema.define(version: 20171009135755) do
   add_foreign_key "school_students", "students"
   add_foreign_key "school_teacher_requests", "request_specifications"
   add_foreign_key "school_teacher_requests", "school_teachers"
+  add_foreign_key "school_teacher_responses", "school_teacher_requests"
   add_foreign_key "school_teachers", "schools"
   add_foreign_key "school_teachers", "teachers"
   add_foreign_key "student_contact_infos", "students"
