@@ -1,0 +1,62 @@
+<%= form_with(model: school_teacher_response, local: true) do |form| %>
+  <% if school_teacher_response.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(school_teacher_response.errors.count, "error") %> prohibited this school_teacher_response from being saved:</h2>
+
+      <ul>
+      <% school_teacher_response.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :school_teacher_request_id %>
+    <%= form.text_field :school_teacher_request_id, id: :school_teacher_response_school_teacher_request_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :decision_no %>
+    <%= form.number_field :decision_no, id: :school_teacher_response_decision_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :decision_year %>
+    <%= form.number_field :decision_year, id: :school_teacher_response_decision_year %>
+  </div>
+
+  <div class="field">
+    <%= form.label :protocol_no %>
+    <%= form.number_field :protocol_no, id: :school_teacher_response_protocol_no %>
+  </div>
+
+  <div class="field">
+    <%= form.label :protocol_date %>
+    <%= form.date_select :protocol_date, id: :school_teacher_response_protocol_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :decision_duration %>
+    <%= form.number_field :decision_duration, id: :school_teacher_response_decision_duration %>
+  </div>
+
+  <div class="field">
+    <%= form.label :decision_starting_date %>
+    <%= form.date_select :decision_starting_date, id: :school_teacher_response_decision_starting_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :comments %>
+    <%= form.text_area :comments, id: :school_teacher_response_comments %>
+  </div>
+
+  <div class="field">
+    <%= form.label :response_completed %>
+    <%= form.check_box :response_completed, id: :school_teacher_response_response_completed %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

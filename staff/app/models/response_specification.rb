@@ -1,7 +1,7 @@
 class ResponseSpecification < ApplicationRecord
   belongs_to :request_specification
 
-  Templates_Directory = "response_templates" #inside Rails.root
+  Templates_Directory = Rails.root.join "response_templates" #inside Rails.root
 
   def uploaded_template
     self.template_filename

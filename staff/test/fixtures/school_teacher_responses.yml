@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school_teacher_request: one
+  decision_no: 1
+  decision_year: 1
+  protocol_no: 1
+  protocol_date: 2017-10-24
+  decision_duration: 1
+  decision_starting_date: 2017-10-24
+  comments: MyText
+  response_completed: false
+
+two:
+  school_teacher_request: two
+  decision_no: 1
+  decision_year: 1
+  protocol_no: 1
+  protocol_date: 2017-10-24
+  decision_duration: 1
+  decision_starting_date: 2017-10-24
+  comments: MyText
+  response_completed: false

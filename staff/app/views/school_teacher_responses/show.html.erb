@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>School teacher request:</strong>
+  <%= @school_teacher_response.school_teacher_request %>
+</p>
+
+<p>
+  <strong>Decision no:</strong>
+  <%= @school_teacher_response.decision_no %>
+</p>
+
+<p>
+  <strong>Decision year:</strong>
+  <%= @school_teacher_response.decision_year %>
+</p>
+
+<p>
+  <strong>Protocol no:</strong>
+  <%= @school_teacher_response.protocol_no %>
+</p>
+
+<p>
+  <strong>Protocol date:</strong>
+  <%= @school_teacher_response.protocol_date %>
+</p>
+
+<p>
+  <strong>Decision duration:</strong>
+  <%= @school_teacher_response.decision_duration %>
+</p>
+
+<p>
+  <strong>Decision starting date:</strong>
+  <%= @school_teacher_response.decision_starting_date %>
+</p>
+
+<p>
+  <strong>Comments:</strong>
+  <%= @school_teacher_response.comments %>
+</p>
+
+<p>
+  <strong>Response completed:</strong>
+  <%= @school_teacher_response.response_completed %>
+</p>
+
+<%= link_to 'Edit', edit_school_teacher_response_path(@school_teacher_response) %> |
+<%= link_to 'Back', school_teacher_responses_path %>
