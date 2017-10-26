@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  school_teacher_request: one
+  order: 1
+  issuer: MyString
+  issuer_protocol: MyString
+  issuer_date: 2017-10-24
+  description: MyString
+
+two:
+  school_teacher_request: two
+  order: 1
+  issuer: MyString
+  issuer_protocol: MyString
+  issuer_date: 2017-10-24
+  description: MyString

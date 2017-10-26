@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Request Support Documents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>School teacher request</th>
+      <th>Order</th>
+      <th>Issuer</th>
+      <th>Issuer protocol</th>
+      <th>Issuer date</th>
+      <th>Description</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @request_support_documents.each do |request_support_document| %>
+      <tr>
+        <td><%= request_support_document.school_teacher_request %></td>
+        <td><%= request_support_document.order %></td>
+        <td><%= request_support_document.issuer %></td>
+        <td><%= request_support_document.issuer_protocol %></td>
+        <td><%= request_support_document.issuer_date %></td>
+        <td><%= request_support_document.description %></td>
+        <td><%= link_to 'Show', request_support_document %></td>
+        <td><%= link_to 'Edit', edit_request_support_document_path(request_support_document) %></td>
+        <td><%= link_to 'Destroy', request_support_document, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Request Support Document', new_request_support_document_path %>

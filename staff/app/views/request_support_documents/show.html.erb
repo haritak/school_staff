@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>School teacher request:</strong>
+  <%= @request_support_document.school_teacher_request %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @request_support_document.order %>
+</p>
+
+<p>
+  <strong>Issuer:</strong>
+  <%= @request_support_document.issuer %>
+</p>
+
+<p>
+  <strong>Issuer protocol:</strong>
+  <%= @request_support_document.issuer_protocol %>
+</p>
+
+<p>
+  <strong>Issuer date:</strong>
+  <%= @request_support_document.issuer_date %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @request_support_document.description %>
+</p>
+
+<%= link_to 'Edit', edit_request_support_document_path(@request_support_document) %> |
+<%= link_to 'Back', request_support_documents_path %>

@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :request_support_documents
   resources :school_teacher_responses
   resources :response_specifications
   get '/school_teachers/new_all'

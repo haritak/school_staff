@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024041623) do
+ActiveRecord::Schema.define(version: 20171024051032) do
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -78,6 +78,18 @@ ActiveRecord::Schema.define(version: 20171024041623) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["teacher_working_class_id"], name: "index_request_specifications_on_teacher_working_class_id"
+  end
+
+  create_table "request_support_documents", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_teacher_request_id"
+    t.integer "order"
+    t.string "issuer"
+    t.string "issuer_protocol"
+    t.date "issuer_date"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_teacher_request_id"], name: "index_request_support_documents_on_school_teacher_request_id"
   end
 
   create_table "response_specifications", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -337,6 +349,7 @@ ActiveRecord::Schema.define(version: 20171024041623) do
   add_foreign_key "lesson_assignments", "lessons"
   add_foreign_key "lesson_assignments", "specialties"
   add_foreign_key "request_specifications", "teacher_working_classes"
+  add_foreign_key "request_support_documents", "school_teacher_requests"
   add_foreign_key "response_specifications", "request_specifications"
   add_foreign_key "saved_school_course_teachers", "saved_school_courses"
   add_foreign_key "saved_school_course_teachers", "school_teachers"

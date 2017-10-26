@@ -1,0 +1,49 @@
+<%= form_with(model: request_support_document, local: true) do |form| %>
+  <% if request_support_document.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(request_support_document.errors.count, "error") %> prohibited this request_support_document from being saved:</h2>
+
+      <ul>
+      <% request_support_document.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :school_teacher_request_id %>
+    <%= form.collection_select :school_teacher_request_id,
+    SchoolTeacherRequest.order(:id), :id, :description,
+    include_blank: false, prompt:true %>
+  </div>
+
+  <div class="field">
+    <%= form.label :order %>
+    <%= form.number_field :order, id: :request_support_document_order %>
+  </div>
+
+  <div class="field">
+    <%= form.label :issuer %>
+    <%= form.text_field :issuer, id: :request_support_document_issuer %>
+  </div>
+
+  <div class="field">
+    <%= form.label :issuer_protocol %>
+    <%= form.text_field :issuer_protocol, id: :request_support_document_issuer_protocol %>
+  </div>
+
+  <div class="field">
+    <%= form.label :issuer_date %>
+    <%= form.date_select :issuer_date, id: :request_support_document_issuer_date %>
+  </div>
+
+  <div class="field">
+    <%= form.label :description %>
+    <%= form.text_field :description, id: :request_support_document_description %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
