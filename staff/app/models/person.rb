@@ -8,7 +8,7 @@ class Person < ApplicationRecord
     "#{last_name} #{first_name} του #{father_name}"
   end
 
-  def geniki( attribute )
+  def geniki( attribute, gender=gender )
     stored_geniki = self.send "#{attribute}_gen"
     return stored_geniki if stored_geniki and stored_geniki.strip != ''
 
@@ -45,7 +45,7 @@ class Person < ApplicationRecord
     geniki
   end
 
-  def aitiatiki( attribute )
+  def aitiatiki( attribute, gender=gender )
     stored_aitiatiki = self.send "#{attribute}_ait"
     return stored_aitiatiki if stored_aitiatiki and stored_aitiatiki.strip != ''
 

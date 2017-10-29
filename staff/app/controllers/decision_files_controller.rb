@@ -67,13 +67,13 @@ class DecisionFilesController < ApplicationController
       r.add_field :toy, toy
       r.add_field :last_name_gen, person.geniki( :last_name )
       r.add_field :first_name_gen, person.geniki( :first_name )
-      r.add_field :father_name_gen, person.geniki( :father_name )
+      r.add_field :father_name_gen, person.geniki( :father_name, 0 )
       r.add_field :specialty, specialty
 
       r.add_field :ston, ston
       r.add_field :last_name_ait, person.aitiatiki( :last_name )
       r.add_field :first_name_ait, person.aitiatiki( :first_name )
-      r.add_field :father_name_gen, person.aitiatiki( :father_name )
+      r.add_field :father_name_gen, person.aitiatiki( :father_name, 0 )
       r.add_field :specialty, specialty
 
       r.add_field :days_duration, duration_str
