@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+  resources :decision_files
+  get '/create_decision_files/:school_teacher_response',
+    to: 'decision_files#create_decision_files',
+    as: 'create_decision_files'
+  get '/decision_files/:decision_file/download',
+    to: 'decision_files#download',
+    as: 'download_decision'
+
   resources :request_support_documents
   resources :school_teacher_responses
   resources :response_specifications

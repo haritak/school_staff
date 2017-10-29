@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024051032) do
+ActiveRecord::Schema.define(version: 20171029064712) do
+
+  create_table "decision_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_teacher_response_id"
+    t.string "filename"
+    t.string "target"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_teacher_response_id"], name: "index_decision_files_on_school_teacher_response_id"
+  end
 
   create_table "lesson_assignments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "lesson_id"
@@ -66,6 +75,7 @@ ActiveRecord::Schema.define(version: 20171024051032) do
     t.string "mother_name_ait"
     t.string "last_name_gen"
     t.string "last_name_ait"
+    t.integer "gender", default: 1
     t.index ["first_name", "last_name", "father_name", "mother_name"], name: "uniqness_in_people", unique: true
   end
 
@@ -346,6 +356,7 @@ ActiveRecord::Schema.define(version: 20171024051032) do
     t.index ["teacher_working_class_id"], name: "index_teachers_on_teacher_working_class_id"
   end
 
+  add_foreign_key "decision_files", "school_teacher_responses"
   add_foreign_key "lesson_assignments", "lessons"
   add_foreign_key "lesson_assignments", "specialties"
   add_foreign_key "request_specifications", "teacher_working_classes"

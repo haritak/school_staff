@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>School teacher response:</strong>
+  <%= @decision_file.school_teacher_response %>
+</p>
+
+<p>
+  <strong>Filename:</strong>
+  <%= @decision_file.filename %>
+</p>
+
+<p>
+  <strong>Target:</strong>
+  <%= @decision_file.target %>
+</p>
+
+<%= link_to 'Edit', edit_decision_file_path(@decision_file) %> |
+<%= link_to 'Back', decision_files_path %>

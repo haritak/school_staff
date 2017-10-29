@@ -15,6 +15,13 @@
   χρησιμοποιείστε <strong>κεφαλαία γράμματα χωρίς τόνους</strong>.</p>
   <p>Αλλιώς, στην περίπτωση που χρησιμοποιήσετε κεφαλαία και μικρά
   γράμματα, προσέξτε τον τονισμό τους.</p>
+
+  <div class="field">
+    <%= form.label "Φύλο" %>
+    <%= form.number_field :gender, id: :person_gender %>
+    (0:Ανδρας, 1:Γυναίκα)
+  </div>
+
   <div class="field">
     <%= form.label "Μικρό όνομα" %>
     <%= form.text_field :first_name, id: :person_first_name %>

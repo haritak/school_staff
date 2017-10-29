@@ -49,3 +49,21 @@
 
 <%= link_to 'Edit', edit_school_teacher_response_path(@school_teacher_response) %> |
 <%= link_to 'Back', school_teacher_responses_path %>
+
+<hr>
+<h3>Support Documents</h3>
+<% if @request_support_documents %>
+  <ol>
+    <% @request_support_documents.each do |document| %>
+      <li>
+        <%= document %>
+      </li>
+    <% end %>
+  </ol>
+<% end %>
+<p><em>TODO: add link to add support document</em></p>
+<hr>
+<h3>Decision</h3>
+<%= link_to "Create Decision Files", create_decision_files_path(@school_teacher_response) %>
+
+

@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Decision Files</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>School teacher response</th>
+      <th>Filename</th>
+      <th>Target</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @decision_files.each do |decision_file| %>
+      <tr>
+        <td><%= decision_file.school_teacher_response %></td>
+        <td><%= link_to "Κατεβάστε το odt", download_decision_path( decision_file  ) %></td>
+        <td><%= decision_file.target %></td>
+        <td><%= link_to 'Show', decision_file %></td>
+        <td><%= link_to 'Edit', edit_decision_file_path(decision_file) %></td>
+        <td><%= link_to 'Destroy', decision_file, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Decision File', new_decision_file_path %>

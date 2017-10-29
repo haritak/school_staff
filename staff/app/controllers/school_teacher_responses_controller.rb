@@ -10,6 +10,9 @@ class SchoolTeacherResponsesController < ApplicationController
   # GET /school_teacher_responses/1
   # GET /school_teacher_responses/1.json
   def show
+    @request_support_documents = 
+      RequestSupportDocument.where( school_teacher_request: 
+                                   @school_teacher_response.school_teacher_request ).order( :order )
   end
 
   # GET /school_teacher_responses/new

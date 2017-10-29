@@ -19,6 +19,7 @@ class SchoolTeachersController < ApplicationController
   end
 
   def create_all
+    gender = params[ :gender ]
     first_name = params[ :first_name ]
     last_name = params[ :last_name ]
     father_name = params[ :father_name ]
@@ -45,7 +46,8 @@ class SchoolTeachersController < ApplicationController
                             father_name: father_name,
                             mother_name: mother_name )
     if not person
-      person = Person.create( first_name: first_name,
+      person = Person.create( gender: gender,
+                              first_name: first_name,
                               last_name: last_name,
                               father_name: father_name,
                               mother_name: mother_name,

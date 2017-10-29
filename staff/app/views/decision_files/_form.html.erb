@@ -1,0 +1,32 @@
+<%= form_with(model: decision_file, local: true) do |form| %>
+  <% if decision_file.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(decision_file.errors.count, "error") %> prohibited this decision_file from being saved:</h2>
+
+      <ul>
+      <% decision_file.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :school_teacher_response_id %>
+    <%= form.text_field :school_teacher_response_id, id: :decision_file_school_teacher_response_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :filename %>
+    <%= form.text_field :filename, id: :decision_file_filename %>
+  </div>
+
+  <div class="field">
+    <%= form.label :target %>
+    <%= form.text_field :target, id: :decision_file_target %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

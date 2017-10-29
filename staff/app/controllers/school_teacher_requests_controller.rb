@@ -51,7 +51,7 @@ class SchoolTeacherRequestsController < ApplicationController
 
       r.add_field :start_date, start_date_str
       r.add_field :end_date, end_date_str
-      r.add_field :duration, duration
+      r.add_field :duration, duration_str
     end
 
     filename = Time.now.strftime "%Y%m%d%H%M%S-#{last_name}-#{first_name}"
@@ -91,6 +91,11 @@ class SchoolTeacherRequestsController < ApplicationController
   # GET /school_teacher_requests/1
   # GET /school_teacher_requests/1.json
   def show
+    @history_of_similar = 
+      SchoolTeacherRequest.where( school_teacher: @school_teacher_request.school_teacher,
+                                 request_specification: @school_teacher_request.request_specification )
+    @history = 
+      SchoolTeacherRequest.where( school_teacher: @school_teacher_request.school_teacher)
   end
 
   # GET /school_teacher_requests/new

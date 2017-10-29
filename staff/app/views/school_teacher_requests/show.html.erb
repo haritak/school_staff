@@ -1,5 +1,26 @@
 <p id="notice"><%= notice %></p>
 
+<h3>Ιστορικό αδειών</h3>
+<b>(TODO: 1) replace requests with decisions. 2) Show myschool stored decisions. )</b>
+<p><em>όλες οι άδειες</em></p>
+<ol>
+<% @history.each do |school_teacher_request| %>
+  <li>
+  <%= school_teacher_request.to_s %>
+  </li>
+<% end %>
+</ol>
+
+<p><em>ίδιου τύπου με την αιτούμενη</em></p>
+<ol>
+<% @history_of_similar.each do |school_teacher_request| %>
+  <li>
+  <%= school_teacher_request.to_s %>
+  </li>
+<% end %>
+</ol>
+
+<h3>Αιτούμενη άδεια</h3>
 <p>
   <strong>School teacher:</strong>
   <%= @school_teacher_request.school_teacher %>
@@ -8,6 +29,16 @@
 <p>
   <strong>Request specification:</strong>
   <%= @school_teacher_request.request_specification %>
+</p>
+
+<p>
+  <strong>Starting date:</strong>
+  <%= @school_teacher_request.starting_date %>
+</p>
+
+<p>
+  <strong>Duration:</strong>
+  <%= @school_teacher_request.duration %>
 </p>
 
 <p>
