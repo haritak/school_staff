@@ -7,4 +7,8 @@ class SchoolTeacherRequest < ApplicationRecord
       "(#{school_teacher.teacher.teacher_working_class.description}) #{request_specification.description} " +
       "για #{duration} μέρα/ες ξεκινώντας από #{starting_date}"
   end
+
+  def self.open_cases
+    SchoolTeacherRequest.order(:id)
+  end
 end

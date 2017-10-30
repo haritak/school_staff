@@ -21,7 +21,7 @@
         <td><%= school_teacher_request.request_specification %></td>
         <td><%= school_teacher_request.starting_date %></td>
         <td><%= school_teacher_request.duration %></td>
-        <td><%= link_to "Κατεβάστε την αίτηση", download_request_path( school_teacher_request ) %></td>
+        <td><%= link_to "Κατεβάστε την αίτηση", download_request_path( school_teacher_request ), target: "_blank" %></td>
       </tr>
     <% end %>
   </tbody>

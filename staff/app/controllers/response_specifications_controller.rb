@@ -1,5 +1,10 @@
 class ResponseSpecificationsController < ApplicationController
-  before_action :set_response_specification, only: [:show, :edit, :update, :destroy]
+  before_action :set_response_specification, only: [:show, 
+                                                    :edit, 
+                                                    :update, 
+                                                    :destroy,
+                                                    :download ]
+
 
   # GET /response_specifications
   # GET /response_specifications.json
@@ -10,6 +15,10 @@ class ResponseSpecificationsController < ApplicationController
   # GET /response_specifications/1
   # GET /response_specifications/1.json
   def show
+  end
+
+  def download 
+    send_file @response_specification.template_filename
   end
 
   # GET /response_specifications/new

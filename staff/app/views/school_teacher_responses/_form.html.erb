@@ -14,7 +14,7 @@
   <div class="field">
     <%= form.label :school_teacher_request_id %>
     <%= form.collection_select :school_teacher_request_id,
-    SchoolTeacherRequest.order(:id), :id, :description,
+    SchoolTeacherRequest.open_cases, :id, :description,
     include_blank: false, prompt:true %>
   </div>
 

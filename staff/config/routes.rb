@@ -11,6 +11,10 @@ Rails.application.routes.draw do
   resources :request_support_documents
   resources :school_teacher_responses
   resources :response_specifications
+  get '/response_specification/:id/download',
+    to: 'response_specifications#download',
+    as: 'download_response_specification'
+
   get '/school_teachers/new_all'
   post '/school_teachers/new_all', 
     to: 'school_teachers#create_all'
