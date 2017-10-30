@@ -28,6 +28,8 @@ class Person < ApplicationRecord
                end
       geniki = base + ending
     else #female
+      return geniki if attribute.to_s=="last_name" #female surnames δεν κλίνονται
+
       base = onoma[0...-1]
       ending = onoma[-1..-1]
       ending = case ending 
@@ -65,6 +67,8 @@ class Person < ApplicationRecord
                end
       aitiatiki = base + ending
     else #female
+      return aitiatiki if attribute.to_s=="last_name" #female surnames δεν κλίνονται
+
       base = onoma[0...-1]
       ending = onoma[-1..-1]
       ending = case ending 
