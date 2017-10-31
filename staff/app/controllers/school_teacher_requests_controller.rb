@@ -26,6 +26,9 @@ class SchoolTeacherRequestsController < ApplicationController
 
     last_name = school_teacher.teacher.person.last_name
     first_name = school_teacher.teacher.person.first_name
+    gender = school_teacher.teacher.person.gender
+    applicant = "Ο Αιτών"
+    applicant = "Η Αιτούσα" if gender == 1 #female
 
     duration_str = "#{duration} ημέρες"
     duration_str = "1 ημέρα" if duration == 1
@@ -52,6 +55,8 @@ class SchoolTeacherRequestsController < ApplicationController
       r.add_field :start_date, start_date_str
       r.add_field :end_date, end_date_str
       r.add_field :duration, duration_str
+
+      r.add_field :applicant, applicant
     end
 
     filename = Time.now.strftime "%Y%m%d%H%M%S-#{last_name}-#{first_name}"
