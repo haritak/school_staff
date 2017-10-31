@@ -8,6 +8,10 @@ class Person < ApplicationRecord
     "#{last_name} #{first_name} του #{father_name}"
   end
 
+  def short_name
+    "#{last_name} #{first_name[0..2]}."
+  end
+
   def geniki( attribute, local_gender=gender )
     stored_geniki = self.send "#{attribute}_gen"
     return stored_geniki if stored_geniki and stored_geniki.strip != ''
