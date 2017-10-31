@@ -8,7 +8,7 @@ class Person < ApplicationRecord
     "#{last_name} #{first_name} του #{father_name}"
   end
 
-  def geniki( attribute, gender=gender )
+  def geniki( attribute, local_gender=gender )
     stored_geniki = self.send "#{attribute}_gen"
     return stored_geniki if stored_geniki and stored_geniki.strip != ''
 
@@ -16,7 +16,7 @@ class Person < ApplicationRecord
     onoma = capitalize( onoma )
 
     geniki = onoma
-    if gender==0 #male
+    if local_gender==0 #male
       base = onoma[0...-2]
       ending = onoma[-2..-1]
       ending = case ending 
@@ -27,7 +27,7 @@ class Person < ApplicationRecord
                else ending
                end
       geniki = base + ending
-    else #female
+    elsif local_gender==1 #female
       return geniki if attribute.to_s=="last_name" #female surnames δεν κλίνονται
 
       base = onoma[0...-1]
@@ -42,12 +42,14 @@ class Person < ApplicationRecord
                else ending
                end
       geniki = base + ending
+    else
+      raise "Uknown gender!"
     end
     
     geniki
   end
 
-  def aitiatiki( attribute, gender=gender )
+  def aitiatiki( attribute, local_gender=gender )
     stored_aitiatiki = self.send "#{attribute}_ait"
     return stored_aitiatiki if stored_aitiatiki and stored_aitiatiki.strip != ''
 
@@ -55,7 +57,7 @@ class Person < ApplicationRecord
     onoma = capitalize( onoma )
 
     aitiatiki = onoma
-    if gender==0 #male
+    if local_gender==0 #male
       base = onoma[0...-2]
       ending = onoma[-2..-1]
       ending = case ending 
@@ -66,7 +68,7 @@ class Person < ApplicationRecord
                else ending
                end
       aitiatiki = base + ending
-    else #female
+    elsif local_gender==1 #female
       return aitiatiki if attribute.to_s=="last_name" #female surnames δεν κλίνονται
 
       base = onoma[0...-1]
@@ -81,6 +83,8 @@ class Person < ApplicationRecord
                else ending
                end
       aitiatiki = base + ending
+    else
+      raise "Uknown gender!"
     end
     
     aitiatiki
