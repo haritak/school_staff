@@ -16,7 +16,7 @@
     <% @decision_files.each do |decision_file| %>
       <tr>
         <td><%= decision_file.school_teacher_response %></td>
-        <td><%= link_to "Κατεβάστε το odt", download_decision_path( decision_file  ) %></td>
+        <td><%= link_to "Κατεβάστε το odt", download_decision_path( decision_file  ), target: "_blank" %></td>
         <td><%= decision_file.target %></td>
         <td><%= link_to 'Show', decision_file %></td>
         <td><%= link_to 'Edit', edit_decision_file_path(decision_file) %></td>
