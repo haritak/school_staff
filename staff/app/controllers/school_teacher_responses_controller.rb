@@ -5,6 +5,8 @@ class SchoolTeacherResponsesController < ApplicationController
   # GET /school_teacher_responses.json
   def index
     @school_teacher_responses = SchoolTeacherResponse.all
+    @school_teacher_responses_with_decision_files = SchoolTeacherResponse.joins(:decision_file)
+    @open_school_teacher_responses = @school_teacher_responses - @school_teacher_responses_with_decision_files
   end
 
   # GET /school_teacher_responses/1
