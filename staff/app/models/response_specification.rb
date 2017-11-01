@@ -34,7 +34,7 @@ class ResponseSpecification < ApplicationRecord
     code = request_specification.code
     path = "#{Templates_Directory}/#{teacher_working_class_id}"
     FileUtils.mkdir( path ) if not File.exist?( path )
-    path += "/#{id}_#{code}.odt"
+    path += "/#{code}.odt"
 
     if not File.exist?(path)
       #XXX in case the template_filename is removed, but the path exists
