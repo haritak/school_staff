@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171029064712) do
+ActiveRecord::Schema.define(version: 20171101042937) do
 
   create_table "decision_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "school_teacher_response_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20171029064712) do
     t.string "template_filename"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["code", "teacher_working_class_id"], name: "request_specifications_uniqness", unique: true
     t.index ["teacher_working_class_id"], name: "index_request_specifications_on_teacher_working_class_id"
   end
 
