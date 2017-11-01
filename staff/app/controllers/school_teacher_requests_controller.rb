@@ -42,7 +42,12 @@ class SchoolTeacherRequestsController < ApplicationController
 
     end_date_str = end_date.strftime( "%d/%m/%y" )
 
-    report = ODFReport::Report.new( request_specification.template_filename ) do | r |
+    template_filename = request_specification.static_filename
+    if not template_filename
+      template_filename = request_specification.template_filename
+    end
+
+    report = ODFReport::Report.new( template_filename ) do | r |
       r.add_field :last_name, last_name
       r.add_field :first_name, first_name
       r.add_field :father_name, school_teacher.teacher.person.father_name

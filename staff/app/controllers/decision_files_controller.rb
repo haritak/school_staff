@@ -54,7 +54,11 @@ class DecisionFilesController < ApplicationController
       ston = "στην"
     end
 
-    report = ODFReport::Report.new( response_specification.template_filename ) do | r |
+    template_filename = response_specification.static_filename
+    if not template_filename
+      template_filename = response_specification.template_filename
+    end
+    report = ODFReport::Report.new( template_filename ) do | r |
       r.add_field :pd, school_teacher_response.protocol_date.strftime( "%d" )
       r.add_field :pm, school_teacher_response.protocol_date.strftime( "%m" )
       r.add_field :py, school_teacher_response.protocol_date.strftime( "%Y" )

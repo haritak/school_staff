@@ -29,6 +29,26 @@ class ResponseSpecification < ApplicationRecord
     self.template_filename = File.absolute_path( target_filename )
   end
 
+  def static_filename
+    teacher_working_class_id = request_specification.teacher_working_class_id
+    code = request_specification.code
+    path = "#{Templates_Directory}/#{teacher_working_class_id}"
+    FileUtils.mkdir( path ) if not File.exist?( path )
+    path += "/#{id}_#{code}.odt"
+
+    if not File.exist?(path)
+      #XXX in case the template_filename is removed, but the path exists
+      #will continue to work.
+      FileUtils.mv( template_filename, path ) if File.exist?( template_filename )
+    else
+      if File.exist?( template_filename )
+        #overwrite the path only when the template_filename is newer
+        FileUtils.mv( template_filename, path ) if File.mtime( template_filename ) > File.mtime( path )
+      end
+    end
+    return path
+  end
+
   def to_s
     "απόφαση για :#{request_specification.description}"
   end
