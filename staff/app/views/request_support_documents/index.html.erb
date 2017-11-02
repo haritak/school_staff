@@ -18,7 +18,7 @@
   <tbody>
     <% @request_support_documents.each do |request_support_document| %>
       <tr>
-        <td><%= request_support_document.school_teacher_request %></td>
+        <td><%= request_support_document.school_teacher_request.description %></td>
         <td><%= request_support_document.order %></td>
         <td><%= request_support_document.issuer %></td>
         <td><%= request_support_document.issuer_protocol %></td>

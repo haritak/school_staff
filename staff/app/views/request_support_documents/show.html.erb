@@ -30,5 +30,12 @@
   <%= @request_support_document.description %>
 </p>
 
+<p>
+<strong>
+Πώς θα φαίνεται:
+</strong>
+<em><%= @request_support_document.to_s %></em>
+</p>
+
 <%= link_to 'Edit', edit_request_support_document_path(@request_support_document) %> |
 <%= link_to 'Back', request_support_documents_path %>
