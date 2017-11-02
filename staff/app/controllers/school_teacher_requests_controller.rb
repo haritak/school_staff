@@ -1,5 +1,6 @@
 class SchoolTeacherRequestsController < ApplicationController
-  before_action :set_school_teacher_request, only: [:show, :edit, :update, :destroy]
+  before_action :set_school_teacher_request, 
+    only: [:show, :edit, :update, :destroy, :add_support_document]
 
   def apply_new
     school_teacher_id = params[ :school_teacher_id ]
@@ -7,6 +8,11 @@ class SchoolTeacherRequestsController < ApplicationController
 
     @school_teacher = SchoolTeacher.find( school_teacher_id )
     @request_specification = RequestSpecification.find( request_specification_id )
+  end
+
+  def add_support_document
+    support_document = RequestSupportDocument.create( school_teacher_request: @school_teacher_request )
+    redirect_to edit_request_support_document_path( support_document )
   end
 
   def create_request

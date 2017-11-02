@@ -20,6 +20,9 @@ Rails.application.routes.draw do
     to: 'school_teachers#create_all'
 
   resources :school_teacher_requests
+  get '/school_teacher_requests/:id/add_support_document',
+    to: "school_teacher_requests#add_support_document",
+    as: "add_support_document"
   resources :request_specifications
   resources :school_class_lessons
   resources :school_class_students
