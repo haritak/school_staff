@@ -1,6 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Open School Teacher Responses</h1>
+<h1>Open School Teacher Responses (without decision files)</h1>
+
 
 <table>
   <thead>
@@ -38,7 +39,8 @@
 
 <%= link_to 'New School Teacher Response', new_school_teacher_response_path %>
 
-<h1>Closed School Teacher Responses</h1>
+<h1>Closed School Teacher Responses (with
+  <%= link_to 'decision files', decision_files_path %>)</h1>
 
 <table>
   <thead>
