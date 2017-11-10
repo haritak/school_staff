@@ -19,29 +19,30 @@
   </div>
 
   <div class="field">
-    <%= form.label :order %>
+    <%= form.label "Σειρά εμφάνισης" %>
     <%= form.number_field :order, id: :request_support_document_order %>
   </div>
 
   <div class="field">
-    <%= form.label :issuer %>
-    <%= form.text_field :issuer, id: :request_support_document_issuer %>
-  </div>
-
-  <div class="field">
-    <%= form.label :issuer_protocol %>
-    <%= form.text_field :issuer_protocol, id: :request_support_document_issuer_protocol %>
-  </div>
-
-  <div class="field">
-    <%= form.label :issuer_date %>
+    <%= form.label "Την από" %>
     <%= form.date_select :issuer_date, id: :request_support_document_issuer_date %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
+    <%= form.label "και με αριθμό πρωτ." %>
+    <%= form.text_field :issuer_protocol, id: :request_support_document_issuer_protocol %>
+  </div>
+
+  <div class="field">
+    <%= form.label "περιγραφή" %>
     <%= form.text_field :description, id: :request_support_document_description %>
   </div>
+
+  <div class="field">
+    <%= form.label "...του/της" %>
+    <%= form.text_field :issuer, id: :request_support_document_issuer %>
+  </div>
+
 
   <div class="actions">
     <%= form.submit %>
