@@ -4,6 +4,9 @@ class SchoolTeacherResponsesController < ApplicationController
   # GET /school_teacher_responses
   # GET /school_teacher_responses.json
   def index
+    @open_school_teacher_requests = SchoolTeacherRequest.find_by_sql("select * from school_teacher_requests "+
+                                                                     "where id not in "+
+                                                                     "(select school_teacher_request_id from school_teacher_responses);")
     @school_teacher_responses = SchoolTeacherResponse.all
     @school_teacher_responses_with_decision_files = SchoolTeacherResponse.joins(:decision_file)
     @open_school_teacher_responses = @school_teacher_responses - @school_teacher_responses_with_decision_files

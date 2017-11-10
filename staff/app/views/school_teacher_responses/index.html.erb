@@ -1,7 +1,35 @@
 <p id="notice"><%= notice %></p>
+<h1>Open Requests</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Καθηγητής/Καθηγήτρια</th>
+      <th>Είδος άδειας</th>
+      <th>Εναρξη</th>
+      <th>Διάρκεια</th>
+      <th>Αρχείο άδειας</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @open_school_teacher_requests.each do |school_teacher_request| %>
+      <tr>
+        <td><%= school_teacher_request.school_teacher %></td>
+        <td><%= school_teacher_request.request_specification %></td>
+        <td><%= school_teacher_request.starting_date %></td>
+        <td><%= school_teacher_request.duration %></td>
+        <td><%= link_to "Κατεβάστε το odt", download_request_path( school_teacher_request ) %></td>
+        <td><%= link_to 'Show', school_teacher_request %></td>
+        <td><%= link_to 'Edit', edit_school_teacher_request_path(school_teacher_request) %></td>
+        <td><%= link_to 'Destroy', school_teacher_request, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <h1>Open School Teacher Responses (without decision files)</h1>
-
 
 <table>
   <thead>
