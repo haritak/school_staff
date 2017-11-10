@@ -73,3 +73,40 @@
     <% end %>
   </tbody>
 </table>
+
+<h1>All School Teacher Responses (mainly for debugging purposes) </h1>
+
+
+<table>
+  <thead>
+    <tr>
+      <th>School teacher request</th>
+      <th>Decision</th>
+      <th>Protocol</th>
+      <th>Decision duration</th>
+      <th>Comments</th>
+      <th>Response completed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @school_teacher_responses.each do |school_teacher_response| %>
+      <tr>
+        <td><%= link_to "#{school_teacher_response.school_teacher_request.description}", 
+          school_teacher_response.school_teacher_request %></td>
+        <td><%= school_teacher_response.decision_no %>/<%= school_teacher_response.decision_year %></td>
+        <td><%= school_teacher_response.protocol_no %>/<%= school_teacher_response.protocol_date %></td>
+        <td><%= school_teacher_response.decision_duration %> day(s) starting at
+        <%= school_teacher_response.decision_starting_date %></td>
+        <td><%= school_teacher_response.comments %></td>
+        <td><%= school_teacher_response.response_completed %></td>
+        <td><%= link_to 'Show', school_teacher_response %></td>
+        <td><%= link_to 'Edit', edit_school_teacher_response_path(school_teacher_response) %></td>
+        <td><%= link_to 'Destroy', school_teacher_response, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
