@@ -6,7 +6,32 @@
   </head>
   <body>
     <p>
-      You have successfully signed up to example.com,
+      Γειά σας,
+    </p>
+
+    <p>
+    Η συνημμένη αίτηση καταχωρήθηκε επιτυχώς στο σύστημα.
+    </p>
+    
+
+    <p>
+    <ul>
+      <li><%= @school_teacher_request.school_teacher.teacher.person.short_name %></li>
+      <li><%= @school_teacher_request.school_teacher.teacher.person.notification_email %></li>
+      <li><%= @school_teacher_request.school_teacher.teacher.person.mobile_phone %></li>
+      <li><%= @school_teacher_request.school_teacher.teacher.teacher_working_class.description %></li>
+      <li><%= @school_teacher_request.starting_date %></li>
+      <li><%= @school_teacher_request.duration %></li>
+      <li><%= @school_teacher_request.request_specification.description %></li>
+    </ul>
+    </p>
+
+
+    <p align=right>
+      Εκ μέρους του συστήματος GeoStaff
+    </p>
+    <p align=right>
+    <em> Άρτεμις </em>
     </p>
   </body>
 </html>
