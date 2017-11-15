@@ -74,13 +74,15 @@ class SchoolTeacherRequestsController < ApplicationController
     filename = Rails.root.join "../tmp/responses/#{filename}.odt"
     report.generate( filename )
 
-    SchoolTeacherRequest.create(
+    new_request = SchoolTeacherRequest.create(
       school_teacher: school_teacher,
       request_specification: request_specification,
       filename: filename,
       starting_date: starting_date,
       duration: duration
     )
+
+    StaffMailer.new_school_teacher_request( new_request ).deliver_now
 
     redirect_to history_of_requests_path(school_teacher)
   end
