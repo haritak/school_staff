@@ -14,24 +14,45 @@
     </p>
     
 
+    <table>
+      <tr>
+        <td>Αιτών/ούσα</td>
+        <td>
+          <%= @school_teacher_request.school_teacher.teacher.person.short_name %><br/>
+          <%= @school_teacher_request.school_teacher.teacher.teacher_working_class.description %><br/>
+          <%= @school_teacher_request.school_teacher.teacher.person.notification_email %><br/>
+          <%= @school_teacher_request.school_teacher.teacher.person.mobile_phone %><br/>
+        </td>
+      </tr>
+      <tr>
+        <td>Είδος άδειας</td>
+        <td>
+          <%= @school_teacher_request.request_specification.description %>
+        </td>
+      </tr>
+      <tr>
+        <td>Ημερομηνία απουσίας</td>
+        <td>
+          <%= @school_teacher_request.starting_date %>
+        </td>
+      </tr>
+      <tr>
+        <td>Διάρκεια απουσίας</td>
+        <td>
+          <%= @school_teacher_request.duration %>
+        </td>
+      </tr>
+    </table>
+
     <p>
-    <ul>
-      <li><%= @school_teacher_request.school_teacher.teacher.person.short_name %></li>
-      <li><%= @school_teacher_request.school_teacher.teacher.person.notification_email %></li>
-      <li><%= @school_teacher_request.school_teacher.teacher.person.mobile_phone %></li>
-      <li><%= @school_teacher_request.school_teacher.teacher.teacher_working_class.description %></li>
-      <li><%= @school_teacher_request.starting_date %></li>
-      <li><%= @school_teacher_request.duration %></li>
-      <li><%= @school_teacher_request.request_specification.description %></li>
-    </ul>
+    Θα ενημερωθείτε με καινούριο email μόλις γίνει η έγκρισή της.
     </p>
 
-
     <p align=right>
-      Εκ μέρους του συστήματος GeoStaff
+      geoStaff
     </p>
-    <p align=right>
-    <em> Άρτεμις </em>
+    <p>
+    <small>Αυτοματοποιημένο email</small>
     </p>
   </body>
 </html>
