@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Settings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>School</th>
+      <th>Mng email</th>
+      <th>Ypo1 email</th>
+      <th>Ypo2 email</th>
+      <th>Adeies email</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @settings.each do |setting| %>
+      <tr>
+        <td><%= setting.school %></td>
+        <td><%= setting.mng_email %></td>
+        <td><%= setting.ypo1_email %></td>
+        <td><%= setting.ypo2_email %></td>
+        <td><%= setting.adeies_email %></td>
+        <td><%= link_to 'Show', setting %></td>
+        <td><%= link_to 'Edit', edit_setting_path(setting) %></td>
+        <td><%= link_to 'Destroy', setting, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Setting', new_setting_path %>

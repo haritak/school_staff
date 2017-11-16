@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :settings
   resources :decision_files
   get '/create_decision_files/:school_teacher_response',
     to: 'decision_files#create_decision_files',

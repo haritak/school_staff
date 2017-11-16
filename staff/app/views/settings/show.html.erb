@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>School:</strong>
+  <%= @setting.school %>
+</p>
+
+<p>
+  <strong>Mng email:</strong>
+  <%= @setting.mng_email %>
+</p>
+
+<p>
+  <strong>Ypo1 email:</strong>
+  <%= @setting.ypo1_email %>
+</p>
+
+<p>
+  <strong>Ypo2 email:</strong>
+  <%= @setting.ypo2_email %>
+</p>
+
+<p>
+  <strong>Adeies email:</strong>
+  <%= @setting.adeies_email %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

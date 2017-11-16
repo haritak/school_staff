@@ -1,0 +1,42 @@
+<%= form_with(model: setting, local: true) do |form| %>
+  <% if setting.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(setting.errors.count, "error") %> prohibited this setting from being saved:</h2>
+
+      <ul>
+      <% setting.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :school_id %>
+    <%= form.text_field :school_id, id: :setting_school_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :mng_email %>
+    <%= form.text_field :mng_email, id: :setting_mng_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ypo1_email %>
+    <%= form.text_field :ypo1_email, id: :setting_ypo1_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :ypo2_email %>
+    <%= form.text_field :ypo2_email, id: :setting_ypo2_email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :adeies_email %>
+    <%= form.text_field :adeies_email, id: :setting_adeies_email %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

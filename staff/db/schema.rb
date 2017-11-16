@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171101042937) do
+ActiveRecord::Schema.define(version: 20171116032011) do
 
   create_table "decision_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "school_teacher_response_id"
@@ -287,6 +287,17 @@ ActiveRecord::Schema.define(version: 20171101042937) do
     t.index ["startingyear"], name: "index_schoolyears_on_startingyear", unique: true
   end
 
+  create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.bigint "school_id"
+    t.string "mng_email"
+    t.string "ypo1_email"
+    t.string "ypo2_email"
+    t.string "adeies_email"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["school_id"], name: "index_settings_on_school_id"
+  end
+
   create_table "specialties", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "code", null: false
     t.text "description"
@@ -387,6 +398,7 @@ ActiveRecord::Schema.define(version: 20171101042937) do
   add_foreign_key "school_teacher_responses", "school_teacher_requests"
   add_foreign_key "school_teachers", "schools"
   add_foreign_key "school_teachers", "teachers"
+  add_foreign_key "settings", "schools"
   add_foreign_key "student_contact_infos", "students"
   add_foreign_key "student_photos", "students"
   add_foreign_key "teacher_specialties", "specialties"
