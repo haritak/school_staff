@@ -32,13 +32,10 @@ def find_school_student( s )
 end
 
 def calculate_serial( student )
-  sprintf "EMS%02d%02d%02d%02d%02d%02d",
-    Time.now.year,
-    Time.now.month,
-    Time.now.day,
-    Time.now.hour,
-    Time.now.min,
-    Time.now.sec
+  sprintf "EMS%02d%04d",
+    schoolyear[-2..-1],
+    SchoolStudent.where(school: Target_school, 
+                        schoolyear: Target_schoolyear).count
 end
 
 def store_student( student )
@@ -140,7 +137,7 @@ File.open( filename ).readlines.each_with_index do |line, i|
                 school_class: school_class }
 end
 
-puts "First pass of the file succesfull. Please handle any warnings."
+puts "First pass of the file succesfull (#{students.length} no students}). Please handle any warnings."
 puts 
 puts "Hit enter to see the list of students"
 $stdin.gets
@@ -161,19 +158,10 @@ puts "Next step is to store only NEW students."
 $stdin.gets
 
 students.each do |s|
-  next if find_student s
+  store_student s if not find_student s
 
-  store_student s
-end
-
-puts "Next step is to check that all students exist in #{schoolid} during #{schoolyear}"
-$stdin.gets
-
-students.each do |s|
   school_student = find_school_student s
-  next if school_student
-
-  store_school_student s
+  store_school_student s if not school_student
 end
 
 puts "All students exist in the above school, school year"
