@@ -33,7 +33,7 @@ end
 
 def calculate_serial( student )
   sprintf "EMS%02d%04d",
-    schoolyear[-2..-1],
+    Target_schoolyear.startingyear.to_s[-2..-1],
     SchoolStudent.where(school: Target_school, 
                         schoolyear: Target_schoolyear).count
 end
