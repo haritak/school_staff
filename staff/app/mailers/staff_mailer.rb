@@ -10,7 +10,7 @@ class StaffMailer < ApplicationMailer
     mail(
       from: 'GeoStaff <artemis1epalmoiron@gmail.com>',
       to: [settings.mng_email, settings.ypo1_email],
-      cc: [settings.ypo2_email, settings.adeies_email],
+      cc: [settings.ypo2_email, settings.adeies_email, person.notification_email],
       subject: "Αίτηση άδειας #{person.short_name} για #{duration}, από #{starting_date}",
     )
   end
