@@ -82,7 +82,9 @@ class SchoolTeacherRequestsController < ApplicationController
       duration: duration
     )
 
-    StaffMailer.new_school_teacher_request( new_request ).deliver_later
+    StaffMailer.inform_applicant( new_request ).deliver_later
+    StaffMailer.inform_manager( new_request ).deliver_later
+    StaffMailer.inform_other( new_request ).deliver_later
 
     redirect_to history_of_requests_path(school_teacher)
   end

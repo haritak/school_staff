@@ -1,0 +1,26 @@
+Νέα αίτηση για άδεια (αυτοματοποιημένο email)
+=============================================
+
+Γειά σας,
+
+Η συνημμένη αίτηση καταχωρήθηκε επιτυχώς στο σύστημα.
+
+Αιτών/ούσα:
+          <%= @school_teacher_request.school_teacher.teacher.person.short_name %><br/>
+          <%= @school_teacher_request.school_teacher.teacher.teacher_working_class.description %><br/>
+          <%= @school_teacher_request.school_teacher.teacher.person.notification_email %><br/>
+          <%= @school_teacher_request.school_teacher.teacher.person.mobile_phone %><br/>
+          
+Είδος άδειας:
+          <%= @school_teacher_request.request_specification.description %>
+          
+Ημερομηνία απουσίας:
+          <%= @school_teacher_request.starting_date %>
+
+Διάρκεια απουσίας
+          <%= @school_teacher_request.duration %>
+          
+          
+Θα ενημερωθείτε με καινούριο email μόλις γίνει η έγκρισή της.
+
+                                                              geoStaff
