@@ -49,9 +49,13 @@ class DecisionFilesController < ApplicationController
 
     toy = "του"
     ston = "στον"
+    anapliroti = "αναπληρωτή" #σε ...
+    anapliroti_gen = "αναπληρωτή" #του/της ...
     if teacher.person.gender==1
       toy = "της"
       ston = "στην"
+      anapliroti = "αναπληρώτρια"
+      anapliroti_gen = "αναπληρώτριας" #του/της ...
     end
 
     template_filename = response_specification.static_filename
@@ -91,6 +95,9 @@ class DecisionFilesController < ApplicationController
       r.add_field :extra_document_2, extra_document_2
       r.add_field :extra_document_3, extra_document_3
       r.add_field :extra_document_4, extra_document_4
+
+      r.add_field :anapliroti, anapliroti
+      r.add_field :anapliroti_gen, anapliroti_gen
     end
 
     filename = Time.now.strftime "#{last_name}_#{first_name}_#{request_code} #{date_str} %Y%m%d%H%M%S"
