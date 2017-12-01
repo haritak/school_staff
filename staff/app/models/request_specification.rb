@@ -30,7 +30,7 @@ class RequestSpecification < ApplicationRecord
   end
 
   def static_filename
-    path = "#{Templates_Directory}/#{teacher_working_class_id}"
+    path = "#{Templates_Directory}/#{self.teacher_working_class_id}"
     FileUtils.mkdir( path ) if not File.exist?( path )
     path += "/#{code}.odt"
 
