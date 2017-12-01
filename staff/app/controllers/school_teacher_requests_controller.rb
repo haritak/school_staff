@@ -49,7 +49,7 @@ class SchoolTeacherRequestsController < ApplicationController
     end_date_str = end_date.strftime( "%d/%m/%y" )
 
     template_filename = request_specification.static_filename
-    if not template_filename
+    if not template_filename or not File.exist?( template_filename )
       template_filename = request_specification.template_filename
     end
 

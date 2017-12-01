@@ -59,7 +59,7 @@ class DecisionFilesController < ApplicationController
     end
 
     template_filename = response_specification.static_filename
-    if not template_filename
+    if not template_filename or not File.exist?( template_filename )
       template_filename = response_specification.template_filename
     end
     report = ODFReport::Report.new( template_filename ) do | r |
