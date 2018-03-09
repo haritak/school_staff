@@ -25,7 +25,10 @@
 
   <div class="field">
     <%= form.label :decision_year %>
-    <%= form.number_field :decision_year, id: :school_teacher_response_decision_year %>
+    <%= form.number_field :decision_year, 
+      id: :school_teacher_response_decision_year,
+      value: Date.today.year
+    %>
   </div>
 
   <div class="field">
