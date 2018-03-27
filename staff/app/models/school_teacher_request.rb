@@ -1,6 +1,7 @@
 class SchoolTeacherRequest < ApplicationRecord
   belongs_to :school_teacher
   belongs_to :request_specification
+  has_one :school_teacher_response
 
   
 

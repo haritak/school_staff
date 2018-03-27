@@ -57,6 +57,11 @@
     <% @request_support_documents.each do |document| %>
       <li>
         <%= document %>
+        <%= link_to '[ Διόρθωση ]', 
+          edit_request_support_document_path(document) %>
+        <%= link_to '[Αφαίρεση]', 
+          request_support_document_path(document), 
+          method: :delete %>
       </li>
     <% end %>
   </ol>
@@ -66,6 +71,6 @@
 </p>
 <hr>
 <h3>Decision</h3>
-<%= link_to "Create Decision Files", create_decision_files_path(@school_teacher_response) %>
+<%= link_to "Δημιουργία αρχείου απόφασης", create_decision_files_path(@school_teacher_response) %>
 
 

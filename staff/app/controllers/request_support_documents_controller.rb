@@ -42,7 +42,10 @@ class RequestSupportDocumentsController < ApplicationController
   def update
     respond_to do |format|
       if @request_support_document.update(request_support_document_params)
-        format.html { redirect_to @request_support_document, notice: 'Request support document was successfully updated.' }
+        #format.html { redirect_to @request_support_document, notice: 'Request support document was successfully updated.' }
+        format.html { redirect_to @request_support_document.
+                      school_teacher_request.
+                      school_teacher_response, notice: 'Request support document was successfully updated.' }
         format.json { render :show, status: :ok, location: @request_support_document }
       else
         format.html { render :edit }
@@ -56,7 +59,8 @@ class RequestSupportDocumentsController < ApplicationController
   def destroy
     @request_support_document.destroy
     respond_to do |format|
-      format.html { redirect_to request_support_documents_url, notice: 'Request support document was successfully destroyed.' }
+      #format.html { redirect_to request_support_documents_url, notice: 'Request support document was successfully destroyed.' }
+      format.html { redirect_to request.referrer }
       format.json { head :no_content }
     end
   end

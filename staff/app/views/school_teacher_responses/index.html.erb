@@ -1,5 +1,6 @@
 <p id="notice"><%= notice %></p>
-<h1>Open Requests</h1>
+<h1>Αιτήματα</h1>
+<!-- <h2>Open Requests</h2> -->
 <table>
   <thead>
     <tr>
@@ -29,17 +30,18 @@
 </table>
 
 
-<h1>Open School Teacher Responses (without decision files)</h1>
+<h1>Αποφάσεις υπο δημιουργία</h1>
+<!--<h1>Open School Teacher Responses (without decision files)</h1>-->
 
 <table>
   <thead>
     <tr>
-      <th>School teacher request</th>
-      <th>Decision</th>
-      <th>Protocol</th>
-      <th>Decision duration</th>
-      <th>Comments</th>
-      <th>Response completed</th>
+      <th>Αίτημα </th>
+      <th>Αριθμός απόφασης</th>
+      <th>Αριθμός πρωτοκόλλου</th>
+      <th>Διάρκεια απόφασης</th>
+      <th>Σχόλια</th>
+      <th>Ολοκληρωμένη;</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -65,10 +67,12 @@
 
 <br>
 
-<%= link_to 'New School Teacher Response', new_school_teacher_response_path %>
+<!-- <%= link_to 'New School Teacher Response', new_school_teacher_response_path %> -->
+<center><h1> <%= link_to 'Δημιουργία νέας απόφασης', new_school_teacher_response_path %></h1> </center>
 
-<h1>Closed School Teacher Responses (with
-  <%= link_to 'decision files', decision_files_path %>)</h1>
+<p align="right"><%= link_to 'αρχείο αποφάσεων', decision_files_path %></p>
+<!-- <h1>Closed School Teacher Responses (with
+<%= link_to 'decision files', decision_files_path %>)</h1> 
 
 <table>
   <thead>
@@ -102,8 +106,8 @@
   </tbody>
 </table>
 
-<h1>All School Teacher Responses (mainly for debugging purposes) </h1>
 
+<h1>All School Teacher Responses (mainly for debugging purposes) </h1>
 
 <table>
   <thead>
@@ -138,3 +142,5 @@
 </table>
 
 <br>
+
+-->

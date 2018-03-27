@@ -12,19 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :school_teacher_request_id %>
+    <%= form.label "Επιλογή αιτήματος" %>
     <%= form.collection_select :school_teacher_request_id,
     SchoolTeacherRequest.open_cases, :id, :description,
     include_blank: false, prompt:true %>
   </div>
 
   <div class="field">
-    <%= form.label :decision_no %>
+    <%= form.label "Αριθμός απόφασης (από το βιβλίο αποφάσεων)" %>
     <%= form.number_field :decision_no, id: :school_teacher_response_decision_no %>
   </div>
 
   <div class="field">
-    <%= form.label :decision_year %>
+    <%= form.label "Έτος απόφασης (από το βιβλίο αποφάσεων)" %>
     <%= form.number_field :decision_year, 
       id: :school_teacher_response_decision_year,
       value: Date.today.year
@@ -32,32 +32,32 @@
   </div>
 
   <div class="field">
-    <%= form.label :protocol_no %>
+    <%= form.label "Αριθμός (εξερχόμενου) πρωτοκόλλου" %>
     <%= form.number_field :protocol_no, id: :school_teacher_response_protocol_no %>
   </div>
 
   <div class="field">
-    <%= form.label :protocol_date %>
+    <%= form.label "Ημερομηνία (εξερχόμενου) πρωτοκόλλου" %>
     <%= form.date_select :protocol_date, id: :school_teacher_response_protocol_date %>
   </div>
 
   <div class="field">
-    <%= form.label :decision_duration %>
+    <%= form.label "Διάρκεια άδειας σε μέρες" %>
     <%= form.number_field :decision_duration, id: :school_teacher_response_decision_duration %>
   </div>
 
   <div class="field">
-    <%= form.label :decision_starting_date %>
+    <%= form.label "Ημερομηνία έναρξης της άδειας" %>
     <%= form.date_select :decision_starting_date, id: :school_teacher_response_decision_starting_date %>
   </div>
 
   <div class="field">
-    <%= form.label :comments %>
+    <%= form.label "Σχόλια" %>
     <%= form.text_area :comments, id: :school_teacher_response_comments %>
   </div>
 
   <div class="field">
-    <%= form.label :response_completed %>
+    <%= form.label "ολοκληρωμένη" %>
     <%= form.check_box :response_completed, id: :school_teacher_response_response_completed %>
   </div>
 
