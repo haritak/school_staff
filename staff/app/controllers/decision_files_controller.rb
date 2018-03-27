@@ -33,7 +33,7 @@ class DecisionFilesController < ApplicationController
       teacher.teacher_specialties[0].specialty.code + "-" +
       teacher.teacher_specialties[0].specialty.description
 
-    duration_str = "1 ημέρα"
+    duration_str = "μία(1) ημέρα"
     if teacher_request.duration > 1
       duration_str = "#{teacher_request.duration} ημέρες"
     end
@@ -42,7 +42,12 @@ class DecisionFilesController < ApplicationController
     count = teacher_request.duration
     (count -= 1).times do 
       end_date += 1
-      end_date += 2 if end_date.saturday? 
+
+      #τα Σ/Κ δεν μετράνε σε κάποιες άδειες, αλλά μετράνε σε άλλες.
+      #Οπότε εδώ μπήκε ένας απλός τρόπος απόφασης.
+      #Αν η άδεια είναι μικρή (<=8 ημερών), τότε τα ΣΚ δεν μετράνε.
+      #αλλιώς μετράνε κανονικά.
+      end_date += 2 if end_date.saturday? and teacher_request.duration <= 8
     end
     ending_date_str = end_date.strftime( "%d/%m/%y" )
   
