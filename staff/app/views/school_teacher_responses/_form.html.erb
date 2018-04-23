@@ -20,7 +20,10 @@
 
   <div class="field">
     <%= form.label "Αριθμός απόφασης (από το βιβλίο αποφάσεων)" %>
-    <%= form.number_field :decision_no, id: :school_teacher_response_decision_no %>
+    <%= form.number_field :decision_no, 
+      id: :school_teacher_response_decision_no,
+      value: SchoolTeacherResponse.maximum("decision_no") + 1
+    %>
   </div>
 
   <div class="field">
