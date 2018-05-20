@@ -43,7 +43,12 @@ class SchoolTeacherRequestsController < ApplicationController
     count = duration
     (count -= 1).times do 
       end_date += 1
-      end_date += 2 if end_date.saturday? 
+      #TODO code dublication : με το decision files
+      #τα Σ/Κ δεν μετράνε σε κάποιες άδειες, αλλά μετράνε σε άλλες.
+      #Οπότε εδώ μπήκε ένας απλός τρόπος απόφασης.
+      #Αν η άδεια είναι μικρή (<=8 ημερών), τότε τα ΣΚ δεν μετράνε.
+      #αλλιώς μετράνε κανονικά.
+      end_date += 2 if end_date.saturday? and teacher_request.duration <= 8
     end
 
     end_date_str = end_date.strftime( "%d/%m/%y" )
