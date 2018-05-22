@@ -48,7 +48,7 @@ class SchoolTeacherRequestsController < ApplicationController
       #Οπότε εδώ μπήκε ένας απλός τρόπος απόφασης.
       #Αν η άδεια είναι μικρή (<=8 ημερών), τότε τα ΣΚ δεν μετράνε.
       #αλλιώς μετράνε κανονικά.
-      end_date += 2 if end_date.saturday? and teacher_request.duration <= 8
+      end_date += 2 if end_date.saturday? and duration <= 8
     end
 
     end_date_str = end_date.strftime( "%d/%m/%y" )
