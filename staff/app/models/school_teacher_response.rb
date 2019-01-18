@@ -12,7 +12,7 @@ class SchoolTeacherResponse < ApplicationRecord
   # Decisions numbering restarts every year
   def self.next_decision_number
     max_value = 
-      SchoolTeacherResponse.where( decision_year: Date.today.year).maximum("decision_no") + 1
+      SchoolTeacherResponse.where( decision_year: Date.today.year).maximum("decision_no")
     max_value = 0 if not max_value
     value = max_value + 1
   end
