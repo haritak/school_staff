@@ -22,7 +22,7 @@
     <%= form.label "Αριθμός απόφασης (από το βιβλίο αποφάσεων)" %>
     <%= form.number_field :decision_no, 
       id: :school_teacher_response_decision_no,
-      value: SchoolTeacherResponse.where( decision_year: Date.today.year).maximum("decision_no") + 1
+      value: SchoolTeacherResponse.next_decision_number
     %>
   </div>
 
