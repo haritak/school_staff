@@ -1,5 +1,7 @@
 class PersonelProcessorController < ApplicationController
 
+  skip_before_action :authorize
+
   def pick_school
     @schools = School.all
   end

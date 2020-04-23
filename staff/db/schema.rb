@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171116032011) do
+ActiveRecord::Schema.define(version: 20200423103157) do
 
   create_table "decision_files", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.bigint "school_teacher_response_id"
@@ -366,6 +366,13 @@ ActiveRecord::Schema.define(version: 20171116032011) do
     t.index ["person_id"], name: "index_teachers_on_person_id", unique: true
     t.index ["school_id"], name: "index_teachers_on_school_id"
     t.index ["teacher_working_class_id"], name: "index_teachers_on_teacher_working_class_id"
+  end
+
+  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string "name"
+    t.string "password_digest"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_foreign_key "decision_files", "school_teacher_responses"

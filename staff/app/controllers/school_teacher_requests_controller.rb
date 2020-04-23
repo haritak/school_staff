@@ -2,6 +2,11 @@ class SchoolTeacherRequestsController < ApplicationController
   before_action :set_school_teacher_request, 
     only: [:show, :edit, :update, :destroy, :add_support_document]
 
+  skip_before_action :authorize, 
+    only: [:apply_new, :add_support_document, :create_request, 
+          :download, :show, :new, :edit, :create, :set_school_teacher_request,
+          :school_teacher_request_params, :destroy]
+
   def apply_new
     school_teacher_id = params[ :school_teacher_id ]
     request_specification_id = params[ :request_specification_id ]

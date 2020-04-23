@@ -1,5 +1,13 @@
 Rails.application.routes.draw do
 
+
+  controller :sessions do
+    get 'login' => :new #get 'sessions/new'
+    post 'login' => :create #get 'sessions/create'
+    delete 'logout' => :destroy #get 'sessions/destroy'
+  end
+
+  resources :users
   resources :settings
   resources :decision_files
   get '/create_decision_files/:school_teacher_response',
