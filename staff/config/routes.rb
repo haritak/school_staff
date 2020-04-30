@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     delete 'logout' => :destroy #get 'sessions/destroy'
   end
 
+  get 'login', to: 'sessions#new'
+
   resources :users
   resources :settings
   resources :decision_files
