@@ -1,5 +1,7 @@
 class SchoolTeachersController < ApplicationController
   before_action :set_school_teacher, only: [:show, :edit, :update, :destroy]
+  skip_before_action :authorize,
+     only: [:create_all, :new_all, :new, :create]
 
   # GET /school_teachers
   # GET /school_teachers.json
