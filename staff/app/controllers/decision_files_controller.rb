@@ -128,7 +128,7 @@ class DecisionFilesController < ApplicationController
   # GET /decision_files
   # GET /decision_files.json
   def index
-    @decision_files = DecisionFile.all
+    @decision_files = DecisionFile.order('created_at DESC')
   end
 
   # GET /decision_files/1
