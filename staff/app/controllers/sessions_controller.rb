@@ -9,9 +9,9 @@ class SessionsController < ApplicationController
     user = User.find_by(name: params[:name])
     if user&.authenticate( params[:password] )
       session[:user_id] = user.id
-      redirect_to root_url, notice: "Logged in"
+      redirect_to login_url, notice: "Logged in"
     else
-      redirect_to root_url, alert: "Wrong credentials"
+      redirect_to login_url, alert: "Wrong credentials"
     end
   end
 
